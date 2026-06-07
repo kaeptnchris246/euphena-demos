@@ -1,0 +1,363 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V.I.P Barbershop Eisenstadt – Premium Barbershop & Herrenfriseur</title>
+  <meta name="description" content="V.I.P Barbershop Eisenstadt – Ihr Premium Barbershop in Eisenstadt. Klassische Rasur, moderne Haarschnitte, Bartpflege. 4.8 Sterne aus 199 Google-Bewertungen. Jetzt Termin buchen: 0676 7263377" />
+  <meta property="og:title" content="V.I.P Barbershop Eisenstadt – Premium Barbershop" />
+  <meta property="og:description" content="Premium Barbershop in Eisenstadt mit 4.8 Sterne Bewertung. Klassische Rasur, Haarschnitte & Bartpflege auf höchstem Niveau." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vip-barbershop-eisenstadt.at" />
+  <meta property="og:image" content="https://loremflickr.com/1200/630/barbershop" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "V.I.P Barbershop Eisenstadt",
+    "url": "https://vip-barbershop-eisenstadt.at",
+    "telephone": "+43-676-7263377",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Eisenstadt",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "199",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #B8963E;
+      --gold-light: #D4AF6A;
+      --anthrazit: #1C1C1E;
+      --creme: #F5F0E8;
+      --creme-dark: #EDE6D6;
+    }
+    body { font-family: 'Inter', sans-serif; background-color: var(--creme); color: var(--anthrazit); }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .text-gold { color: var(--gold); }
+    .bg-gold { background-color: var(--gold); }
+    .border-gold { border-color: var(--gold); }
+    .bg-anthrazit { background-color: var(--anthrazit); }
+    .bg-creme { background-color: var(--creme); }
+    .bg-creme-dark { background-color: var(--creme-dark); }
+    .gold-line { display: block; width: 60px; height: 2px; background: var(--gold); margin: 0 auto 1.5rem; }
+    .gold-line-left { display: block; width: 60px; height: 2px; background: var(--gold); margin: 0 0 1.5rem; }
+    .btn-gold {
+      background-color: var(--gold);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid var(--gold);
+      transition: background 0.3s, color 0.3s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background-color: transparent; color: var(--gold); }
+    .btn-outline-light {
+      border: 1px solid rgba(255,255,255,0.7);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      padding: 0.9rem 2.2rem;
+      transition: border-color 0.3s, color 0.3s;
+      display: inline-block;
+    }
+    .btn-outline-light:hover { border-color: var(--gold); color: var(--gold-light); }
+    .card-service {
+      background: #fff;
+      border: 1px solid #e8e0d0;
+      padding: 2.5rem 2rem;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .card-service:hover { box-shadow: 0 12px 40px rgba(184,150,62,0.12); border-color: var(--gold); }
+    .star-gold { color: var(--gold); }
+    .review-card {
+      background: #fff;
+      border: 1px solid #e8e0d0;
+      padding: 2rem 2rem;
+    }
+    .pkg-card {
+      border: 1px solid #e8e0d0;
+      background: #fff;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .pkg-card:hover { box-shadow: 0 16px 50px rgba(184,150,62,0.13); border-color: var(--gold); }
+    .pkg-card-featured {
+      background: var(--anthrazit);
+      border: 1px solid var(--gold);
+    }
+    nav a { transition: color 0.2s; }
+    nav a:hover { color: var(--gold); }
+    .divider-gold { border: none; border-top: 1px solid var(--gold); opacity: 0.3; }
+    .hero-overlay { background: linear-gradient(to bottom, rgba(15,15,15,0.72) 0%, rgba(15,15,15,0.55) 60%, rgba(15,15,15,0.75) 100%); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════ -->
+<nav class="bg-anthrazit fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="font-playfair text-white text-xl font-bold tracking-widest uppercase">
+      V.I.P <span class="text-gold">Barbershop</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#leistungen" class="text-gray-300 text-xs tracking-widest uppercase font-medium">Leistungen</a>
+      <a href="#bewertungen" class="text-gray-300 text-xs tracking-widest uppercase font-medium">Bewertungen</a>
+      <a href="#pakete" class="text-gray-300 text-xs tracking-widest uppercase font-medium">Pakete</a>
+      <a href="#kontakt" class="text-gray-300 text-xs tracking-widest uppercase font-medium">Kontakt</a>
+      <a href="tel:+436767263377" class="btn-gold text-xs py-2 px-5">
+        Termin buchen
+      </a>
+    </div>
+    <a href="tel:+436767263377" class="md:hidden btn-gold text-xs py-2 px-4">Anrufen</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-center justify-center pt-16">
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://loremflickr.com/1600/900/barbershop,barber"
+      alt="V.I.P Barbershop Eisenstadt – Premium Barbershop"
+      class="w-full h-full object-cover"
+    />
+    <div class="hero-overlay absolute inset-0"></div>
+  </div>
+
+  <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
+    <p class="text-xs tracking-[0.35em] uppercase text-gold font-medium mb-6">Eisenstadt · Burgenland</p>
+    <h1 class="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6">
+      V.I.P<br /><span class="font-playfair italic font-normal text-4xl md:text-5xl lg:text-6xl text-gray-200">Barbershop</span>
+    </h1>
+    <span class="gold-line"></span>
+    <p class="text-lg md:text-xl text-gray-200 font-light max-w-xl mx-auto mb-10 leading-relaxed">
+      Wo Tradition auf Präzision trifft. Exklusive Herrenpflege auf höchstem Niveau – im Herzen von Eisenstadt.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="tel:+436767263377" class="btn-gold">Termin buchen</a>
+      <a href="#leistungen" class="btn-outline-light">Leistungen entdecken</a>
+    </div>
+    <div class="mt-14 flex items-center justify-center gap-3">
+      <div class="flex gap-1">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+      </div>
+      <span class="text-white text-sm font-medium">4.8 von 5</span>
+      <span class="text-gray-400 text-sm">· 199 Google-Bewertungen</span>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-0 right-0 flex justify-center z-10">
+    <div class="w-px h-12 bg-gold opacity-60"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     LEISTUNGEN
+═══════════════════════════════════════════════ -->
+<section id="leistungen" class="bg-creme py-28 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <p class="text-xs tracking-[0.35em] uppercase text-gold font-medium mb-4">Unsere Leistungen</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-anthrazit mb-4">Handwerk mit Leidenschaft</h2>
+      <span class="gold-line"></span>
+      <p class="text-gray-500 font-light max-w-xl mx-auto leading-relaxed">Jeder Schnitt ist ein Statement. Wir kombinieren klassische Barbier-Tradition mit modernen Techniken für ein unvergleichliches Erlebnis.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Karte 1 -->
+      <div class="card-service">
+        <div class="mb-5">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B8963E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>
+            <line x1="12" y1="11" x2="12" y2="16"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-3 text-anthrazit">Klassischer Herrenschnitt</h3>
+        <p class="text-gray-500 text-sm font-light leading-relaxed">Präziser Schnitt nach Maß – abgestimmt auf Ihr Gesicht, Ihren Stil und Ihre Persönlichkeit. Inklusive Nackenrasur und Finish.</p>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-gold font-semibold text-sm tracking-wide">ab € 20</span>
+          <span class="text-gray-400 text-xs">ca. 30 Min.</span>
+        </div>
+      </div>
+
+      <!-- Karte 2 -->
+      <div class="card-service">
+        <div class="mb-5">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B8963E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6c1.5-1 3-1.5 5-1 2 .5 3.5 2 5.5 2s3.5-1 5-2"/>
+            <path d="M4 10c1.5-1 3-1.5 5-1 2 .5 3.5 2 5.5 2s3.5-1 5-2"/>
+            <path d="M4 14c1.5-1 3-1.5 5-1 2 .5 3.5 2 5.5 2s3.5-1 5-2"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-3 text-anthrazit">Bart-Design & Rasur</h3>
+        <p class="text-gray-500 text-sm font-light leading-relaxed">Von der präzisen Konturierung bis zur traditionellen Nassrasur mit heißem Handtuch – Ihr Bart in perfekter Form.</p>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-gold font-semibold text-sm tracking-wide">ab € 15</span>
+          <span class="text-gray-400 text-xs">ca. 20 Min.</span>
+        </div>
+      </div>
+
+      <!-- Karte 3 -->
+      <div class="card-service">
+        <div class="mb-5">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B8963E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+            <path d="M8 12s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2"/>
+            <line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-3 text-anthrazit">Schnitt & Bart Kombi</h3>
+        <p class="text-gray-500 text-sm font-light leading-relaxed">Das komplette Paket für den gepflegten Mann: Haarschnitt plus Bartpflege in einer Session – perfekt abgestimmt.</p>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-gold font-semibold text-sm tracking-wide">ab € 30</span>
+          <span class="text-gray-400 text-xs">ca. 50 Min.</span>
+        </div>
+      </div>
+
+      <!-- Karte 4 -->
+      <div class="card-service">
+        <div class="mb-5">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B8963E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2v6l3 3-3 3v6h12v-6l-3-3 3-3V2z"/>
+            <line x1="6" y1="8" x2="18" y2="8"/>
+            <line x1="6" y1="16" x2="18" y2="16"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-3 text-anthrazit">Kinderschnitt</h3>
+        <p class="text-gray-500 text-sm font-light leading-relaxed">Professionelle Haarschnitte für die jüngsten Kunden – entspannt, geduldig und mit Liebe zum Detail.</p>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-gold font-semibold text-sm tracking-wide">ab € 13</span>
+          <span class="text-gray-400 text-xs">ca. 25 Min.</span>
+        </div>
+      </div>
+
+      <!-- Karte 5 -->
+      <div class="card-service">
+        <div class="mb-5">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B8963E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-3 text-anthrazit">Kopfhautpflege</h3>
+        <p class="text-gray-500 text-sm font-light leading-relaxed">Verwöhnende Kopfhautmassage mit hochwertigen Pflegeprodukten – Entspannung und Vitalität für Haar und Geist.</p>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-gold font-semibold text-sm tracking-wide">ab € 12</span>
+          <span class="text-gray-400 text-xs">ca. 15 Min.</span>
+        </div>
+      </div>
+
+      <!-- Karte 6 -->
+      <div class="card-service">
+        <div class="mb-5">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B8963E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-3 text-anthrazit">V.I.P. Deluxe Paket</h3>
+        <p class="text-gray-500 text-sm font-light leading-relaxed">Das Rundum-Wohlfühlpaket: Schnitt, Rasur, Kopfmassage und Styling – für den Mann, der das Beste verdient.</p>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-gold font-semibold text-sm tracking-wide">ab € 45</span>
+          <span class="text-gray-400 text-xs">ca. 75 Min.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ÜBER UNS BANNER
+═══════════════════════════════════════════════ -->
+<section class="bg-anthrazit py-20 px-6">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 text-center">
+    <div>
+      <p class="font-playfair text-5xl font-bold text-gold mb-2">199</p>
+      <span class="text-xs tracking-[0.25em] uppercase text-gray-400">Google-Bewertungen</span>
+    </div>
+    <div>
+      <p class="font-playfair text-5xl font-bold text-gold mb-2">4.8</p>
+      <span class="text-xs tracking-[0.25em] uppercase text-gray-400">Sterne Durchschnitt</span>
+    </div>
+    <div>
+      <p class="font-playfair text-5xl font-bold text-gold mb-2">100%</p>
+      <span class="text-xs tracking-[0.25em] uppercase text-gray-400">Zufriedenheitsgarantie</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     BEWERTUNGEN
+═══════════════════════════════════════════════ -->
+<section id="bewertungen" class="bg-creme-dark py-28 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <p class="text-xs tracking-[0.35em] uppercase text-gold font-medium mb-4">Das sagen unsere Kunden</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-anthrazit mb-4">199 begeisterte Stimmen</h2>
+      <span class="gold-line"></span>
+      <div class="flex items-center justify-center gap-2 mt-2">
+        <div class="flex gap-1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <span class="text-anthrazit font-semibold">4.8 / 5</span>
+        <span class="text-gray-500 text-sm">auf Google</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+      <div class="review-card">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8963E"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,
