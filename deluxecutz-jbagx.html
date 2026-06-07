@@ -1,0 +1,420 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DELUXECUTZ – Premium Friseur in Eisenstadt</title>
+  <meta name="description" content="DELUXECUTZ – Ihr exklusiver Friseur in Eisenstadt. Erleben Sie erstklassige Haarschnitte, Colorationen und Styling. Jetzt Termin buchen!" />
+  <meta property="og:title" content="DELUXECUTZ – Premium Friseur in Eisenstadt" />
+  <meta property="og:description" content="Ihr Friseur der Extraklasse in Eisenstadt. Haarpflege, Schnitte und Styling auf höchstem Niveau." />
+  <meta property="og:image" content="https://loremflickr.com/1200/630/barbershop" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.deluxecutz.at" />
+  <link rel="canonical" href="https://www.deluxecutz.at" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "DELUXECUTZ",
+    "url": "https://www.deluxecutz.at",
+    "telephone": "+436643971187",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Eisenstadt",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "6",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "14:00"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #faf9f7; color: #1a1a1a; }
+    h1, h2, h3, .playfair { font-family: 'Playfair Display', serif; }
+    :root { --gold: #c9a84c; --gold-light: #e8cc82; --anthrazit: #1e1e1e; --creme: #faf9f7; --creme-dark: #f0ece4; }
+
+    html { scroll-behavior: smooth; }
+
+    .gold { color: var(--gold); }
+    .bg-gold { background-color: var(--gold); }
+    .border-gold { border-color: var(--gold); }
+
+    /* Sticky Header */
+    #main-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+      background: rgba(30,30,30,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Nav links */
+    .nav-link {
+      position: relative; font-size: 0.78rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #d4cfc8; transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px; background: var(--gold); transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav-link:hover { color: var(--gold-light); }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* Buttons */
+    .btn-gold {
+      background: var(--gold); color: #1a1a1a; font-family: 'Inter', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 600; padding: 14px 32px; border: none; cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      display: inline-block; text-decoration: none;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(201,168,76,0.35); }
+
+    .btn-outline {
+      background: transparent; color: #faf9f7; font-family: 'Inter', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 600; padding: 13px 32px; border: 1px solid rgba(201,168,76,0.7);
+      cursor: pointer; transition: all 0.3s; display: inline-block; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold-light); }
+
+    /* Service Cards */
+    .service-card {
+      background: #fff; border: 1px solid #e8e4dc;
+      transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: var(--gold); }
+
+    /* Review Stars */
+    .star { color: var(--gold); }
+
+    /* Package Cards */
+    .pkg-card {
+      background: #fff; border: 1px solid #e8e4dc;
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .pkg-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+    .pkg-card.featured { background: var(--anthrazit); border-color: var(--gold); }
+
+    /* Mobile Menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Popup */
+    #sales-popup {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,8,6,0.75);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    #sales-popup.visible { display: flex; }
+
+    .popup-box {
+      background: #faf9f7; max-width: 480px; width: 92%;
+      border-top: 3px solid var(--gold);
+      position: relative; padding: 48px 40px 40px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.4);
+    }
+
+    /* Divider */
+    .gold-divider {
+      width: 60px; height: 1px; background: var(--gold); margin: 16px auto;
+    }
+
+    /* Scroll indicator hero */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    .scroll-indicator { animation: bounce 2s infinite; }
+
+    /* Contact big number */
+    .big-phone {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      transition: color 0.3s;
+    }
+    .big-phone:hover { color: var(--gold-light); }
+
+    /* Hours table */
+    .hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e8e4dc; font-size: 0.88rem; }
+    .hours-row:last-child { border-bottom: none; }
+
+    /* Textarea & Input */
+    input, textarea, select {
+      font-family: 'Inter', sans-serif;
+      background: #fff; border: 1px solid #ddd8d0; color: #1a1a1a;
+      padding: 12px 16px; width: 100%; font-size: 0.9rem;
+      transition: border-color 0.3s; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--gold); }
+
+    /* Section label */
+    .section-label {
+      font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); font-weight: 600;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+<!-- ═══════════════════════════════════════════════
+     HEADER / NAVIGATION
+═══════════════════════════════════════════════ -->
+<header id="main-header">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-3">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 22L14 6L22 22" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8.5 17H19.5" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="14" cy="5" r="1.5" fill="#c9a84c"/>
+      </svg>
+      <span class="playfair text-white text-lg tracking-wider font-semibold">DELUXECUTZ</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-8">
+      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#bewertungen" class="nav-link">Bewertungen</a>
+      <a href="#buchung" class="nav-link">Buchung</a>
+      <a href="#pakete" class="nav-link">Pakete</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+    </nav>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="tel:+436643971187" class="hidden lg:flex items-center gap-2 text-xs text-gray-400 hover:text-gold transition-colors" style="letter-spacing:0.06em;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 010 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        0664 3971187
+      </a>
+      <a href="#buchung" class="btn-gold hidden lg:inline-block text-sm py-3 px-6">Termin buchen</a>
+
+      <!-- Hamburger -->
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2 focus:outline-none" aria-label="Menü öffnen">
+        <span class="block w-6 h-0.5 bg-gray-300 transition-all duration-300" id="hb1"></span>
+        <span class="block w-6 h-0.5 bg-gray-300 transition-all duration-300" id="hb2"></span>
+        <span class="block w-4 h-0.5 bg-gray-300 transition-all duration-300" id="hb3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden" style="background:rgba(20,18,16,0.97); border-top:1px solid rgba(201,168,76,0.2);">
+    <nav class="flex flex-col px-6 py-6 gap-5">
+      <a href="#leistungen" class="nav-link text-sm" onclick="closeMobileMenu()">Leistungen</a>
+      <a href="#bewertungen" class="nav-link text-sm" onclick="closeMobileMenu()">Bewertungen</a>
+      <a href="#buchung" class="nav-link text-sm" onclick="closeMobileMenu()">Buchung</a>
+      <a href="#pakete" class="nav-link text-sm" onclick="closeMobileMenu()">Pakete</a>
+      <a href="#kontakt" class="nav-link text-sm" onclick="closeMobileMenu()">Kontakt</a>
+      <hr style="border-color:rgba(201,168,76,0.2);" />
+      <a href="tel:+436643971187" class="text-gray-400 text-sm flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 010 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        0664 3971187
+      </a>
+      <a href="#buchung" class="btn-gold text-center mt-2" onclick="closeMobileMenu()">Termin buchen</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background:#0d0b09;">
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img
+      src="https://loremflickr.com/1600/900/barbershop"
+      alt="DELUXECUTZ Friseur Eisenstadt"
+      class="w-full h-full object-cover"
+      style="opacity:0.45;"
+      loading="eager"
+    />
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(10,8,6,0.5) 0%, rgba(10,8,6,0.15) 50%, rgba(10,8,6,0.85) 100%);"></div>
+  </div>
+
+  <!-- Gold top line decoration -->
+  <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(to right, transparent, var(--gold), transparent);"></div>
+
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto pt-24">
+    <p class="section-label mb-6 opacity-90">Eisenstadt · Premium Friseur</p>
+    <h1 class="playfair text-white leading-tight mb-6" style="font-size:clamp(2.8rem,7vw,5.5rem); text-shadow:0 2px 40px rgba(0,0,0,0.5);">
+      Erstklassige Haarkunst.<br />
+      <em class="gold" style="font-style:italic;">Ihr Auftritt beginnt hier.</em>
+    </h1>
+
+    <div class="gold-divider" style="margin:20px auto;"></div>
+
+    <p class="text-gray-300 max-w-xl mx-auto mb-10 leading-relaxed" style="font-size:clamp(0.95rem,2vw,1.1rem); font-weight:300;">
+      DELUXECUTZ steht für Präzision, Stil und Persönlichkeit. Erleben Sie Friseurkunst auf höchstem Niveau – mitten in Eisenstadt.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="#buchung" class="btn-gold text-sm w-full sm:w-auto text-center" style="min-width:200px;">
+        Termin buchen
+      </a>
+      <a href="#leistungen" class="btn-outline text-sm w-full sm:w-auto text-center" style="min-width:200px;">
+        Unsere Leistungen
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-col sm:flex-row gap-8 justify-center mt-16 pt-10" style="border-top:1px solid rgba(201,168,76,0.2);">
+      <div class="text-center">
+        <p class="playfair text-3xl text-white font-semibold">4.8</p>
+        <p class="text-xs text-gray-400 mt-1 tracking-widest uppercase">Google Rating</p>
+      </div>
+      <div class="hidden sm:block w-px" style="background:rgba(201,168,76,0.25);"></div>
+      <div class="text-center">
+        <p class="playfair text-3xl text-white font-semibold">6</p>
+        <p class="text-xs text-gray-400 mt-1 tracking-widest uppercase">Bewertungen</p>
+      </div>
+      <div class="hidden sm:block w-px" style="background:rgba(201,168,76,0.25);"></div>
+      <div class="text-center">
+        <p class="playfair text-3xl text-white font-semibold">100%</p>
+        <p class="text-xs text-gray-400 mt-1 tracking-widest uppercase">Zufriedenheit</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <a href="#leistungen" class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator opacity-60 hover:opacity-100 transition-opacity">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </a>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     LEISTUNGEN
+═══════════════════════════════════════════════ -->
+<section id="leistungen" class="py-24 lg:py-32" style="background:#faf9f7;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <p class="section-label mb-4">Was wir anbieten</p>
+      <h2 class="playfair text-4xl lg:text-5xl" style="color:#1a1a1a;">Unsere Leistungen</h2>
+      <div class="gold-divider"></div>
+      <p class="text-gray-500 max-w-lg mx-auto mt-4 text-sm leading-relaxed">
+        Von klassischen Schnitten bis zu modernen Styles – jede Dienstleistung wird mit Hingabe und Expertise ausgeführt.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div class="service-card p-8">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center" style="background:#f5f0e8; border:1px solid #e8dcc8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="3" r="2"/><circle cx="11" cy="12" r="2"/>
+            <path d="M11 5v5"/><path d="M7 21l4-9 4 9"/><path d="M8.5 18h5"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl mb-2" style="color:#1a1a1a;">Herrenhaarschnitt</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Klassisch oder modern – präzise Schnitte für jeden Anlass, angepasst an Ihre Persönlichkeit.</p>
+        <div class="flex items-center justify-between" style="border-top:1px solid #f0ece4; padding-top:16px;">
+          <span class="text-xs tracking-widest uppercase text-gray-400">ab</span>
+          <span class="playfair text-2xl gold">€ 18</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card p-8">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center" style="background:#f5f0e8; border:1px solid #e8dcc8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6s2-2 5-2 5 4 8 4 5-2 5-2v12s-2 2-5 2-5-4-8-4-5 2-5 2z"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl mb-2" style="color:#1a1a1a;">Damenhaarschnitt</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Frische Schnitte mit Struktur und Stil – für einen Look, der begeistert und begeisternd bleibt.</p>
+        <div class="flex items-center justify-between" style="border-top:1px solid #f0ece4; padding-top:16px;">
+          <span class="text-xs tracking-widest uppercase text-gray-400">ab</span>
+          <span class="playfair text-2xl gold">€ 28</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card p-8">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center" style="background:#f5f0e8; border:1px solid #e8dcc8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M8 21H5a2 2 0 01-2-2v-3m18 0v3a2 2 0 01-2 2h-3"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl mb-2" style="color:#1a1a1a;">Bart-Styling</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Professionelle Bartpflege, -formung und klassische Nassrasur für den gepflegten Gentleman.</p>
+        <div class="flex items-center justify-between" style="border-top:1px solid #f0ece4; padding-top:16px;">
+          <span class="text-xs tracking-widest uppercase text-gray-400">ab</span>
+          <span class="playfair text-2xl gold">€ 12</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card p-8">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center" style="background:#f5f0e8; border:1px solid #e8dcc8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl mb-2" style="color:#1a1a1a;">Coloration & Highlights</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Von natürlichen Nuancen bis zu kühnen Akzenten – Farbe, die Ihre Persönlichkeit widerspiegelt.</p>
+        <div class="flex items-center justify-between" style="border-top:1px solid #f0ece4; padding-top:16px;">
+          <span class="text-xs tracking-widest uppercase text-gray-400">ab</span>
+          <span class="playfair text-2xl gold">€ 45</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card p-8">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center" style="background:#f5f0e8; border:1px solid #e8dcc8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl mb-2" style="color:#1a1a1a;">Keratin-Behandlung</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Intensive Haarpflege für glattes, glänzendes Haar mit langanhaltender Wirkung und Feuchtigkeit.</p>
+        <div class="flex items-center justify-between" style="border-top:1px solid #f0ece4; padding-top:16px;">
+          <span class="text-xs tracking-widest uppercase text-gray-400">ab</span>
+          <span class="playfair text-2xl gold">€ 65</span>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card p-8">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center" style="background:#f5f0e8; border:1px solid #e8dcc8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5
