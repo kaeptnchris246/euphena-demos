@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V.I.P Barbershop Eisenstadt – Premium Friseur & Barbershop</title>
+  <meta name="description" content="V.I.P Barbershop Eisenstadt – Ihr Premium Barbershop für klassische Herrenschnitte, Rasuren und Bartpflege. Jetzt Termin buchen! 0676 7263377" />
+  <meta property="og:title" content="V.I.P Barbershop Eisenstadt – Premium Friseur & Barbershop" />
+  <meta property="og:description" content="Erstklassige Herrenpflege in Eisenstadt. Haarschnitt, Bartpflege, klassische Rasur. 4.8 Sterne bei 199 Google-Bewertungen." />
+  <meta property="og:image" content="https://loremflickr.com/1200/630/barbershop" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_AT" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "V.I.P Barbershop Eisenstadt",
+    "description": "Premium Barbershop in Eisenstadt für klassische Herrenschnitte, Bartpflege und Rasur.",
+    "url": "https://vip-barbershop-eisenstadt.at",
+    "telephone": "+436767263377",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Hauptstraße 1",
+      "addressLocality": "Eisenstadt",
+      "postalCode": "7000",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "199",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "image": "https://loremflickr.com/1200/630/barbershop"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            anthrazit: '#1a1a1a',
+            'anthrazit-light': '#2a2a2a',
+            creme: '#f5f0e8',
+            'creme-dark': '#ede7d9',
+            gold: '#c9a84c',
+            'gold-light': '#e0c070',
+            'gold-dark': '#a8883a',
+          },
+          fontFamily: {
+            playfair: ['"Playfair Display"', 'serif'],
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #1a1a1a;
+      color: #f5f0e8;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .font-playfair { font-family: 'Playfair Display', serif; }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes lineGrow {
+      from { width: 0; }
+      to   { width: 80px; }
+    }
+
+    .hero-animate { animation: fadeInUp 1s ease forwards; }
+    .hero-animate-delay { animation: fadeInUp 1s ease 0.3s forwards; opacity: 0; }
+    .hero-animate-delay2 { animation: fadeInUp 1s ease 0.6s forwards; opacity: 0; }
+    .hero-animate-delay3 { animation: fadeInUp 1s ease 0.9s forwards; opacity: 0; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Gold line */
+    .gold-line::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: #c9a84c;
+      margin: 1.2rem auto 0;
+      animation: lineGrow 1s ease forwards;
+      width: 80px;
+    }
+
+    /* Card hover */
+    .service-card {
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: #c9a84c;
+      box-shadow: 0 20px 60px rgba(201,168,76,0.12);
+    }
+
+    /* CTA button */
+    .btn-gold {
+      background: #c9a84c;
+      color: #1a1a1a;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .btn-gold:hover {
+      background: #e0c070;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      border: 1px solid #c9a84c;
+      color: #c9a84c;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-outline:hover {
+      background: #c9a84c;
+      color: #1a1a1a;
+      transform: translateY(-2px);
+    }
+
+    /* Package cards */
+    .pkg-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pkg-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+    }
+
+    /* Star fill */
+    .star-filled { fill: #c9a84c; }
+
+    /* Horizontal rule gold */
+    .hr-gold {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a84c, transparent);
+    }
+
+    /* Nav scroll effect */
+    nav.scrolled {
+      background: rgba(26,26,26,0.97) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Testimonial quote */
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: #c9a84c;
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-5 px-6 md:px-12"
+       style="background: rgba(26,26,26,0.0);">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 border border-gold flex items-center justify-center">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" class="w-4 h-4">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="font-playfair text-creme tracking-widest text-sm font-semibold uppercase">V.I.P Barbershop</span>
+      </div>
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#leistungen" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest transition-colors duration-300 font-inter">Leistungen</a>
+        <a href="#bewertungen" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest transition-colors duration-300 font-inter">Bewertungen</a>
+        <a href="#pakete" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest transition-colors duration-300 font-inter">Pakete</a>
+        <a href="#kontakt" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest transition-colors duration-300 font-inter">Kontakt</a>
+        <a href="#buchen" class="btn-gold px-5 py-2.5 text-xs uppercase tracking-widest font-semibold font-inter">
+          Termin buchen
+        </a>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="md:hidden text-creme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6">
+          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t border-creme/10">
+      <div class="flex flex-col gap-4 pt-4 px-2">
+        <a href="#leistungen" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest">Leistungen</a>
+        <a href="#bewertungen" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest">Bewertungen</a>
+        <a href="#pakete" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest">Pakete</a>
+        <a href="#kontakt" class="text-creme/70 hover:text-gold text-xs uppercase tracking-widest">Kontakt</a>
+        <a href="#buchen" class="btn-gold px-5 py-3 text-xs uppercase tracking-widest font-semibold text-center">Termin buchen</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════ -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img
+        src="https://loremflickr.com/1600/900/barbershop,interior"
+        alt="V.I.P Barbershop Eisenstadt"
+        class="w-full h-full object-cover"
+      />
+      <!-- Multi-layer overlay for depth -->
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.70) 50%, rgba(26,26,26,0.85) 100%);"></div>
+      <!-- Gold shimmer at bottom -->
+      <div class="absolute bottom-0 left-0 right-0 h-64" style="background: linear-gradient(to top, rgba(26,26,26,1) 0%, transparent 100%);"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <!-- Eyebrow -->
+      <div class="hero-animate flex items-center justify-center gap-4 mb-8">
+        <div class="h-px w-12 bg-gold opacity-60"></div>
+        <span class="text-gold text-xs uppercase tracking-[0.35em] font-inter font-medium">Eisenstadt · Premium Barbershop</span>
+        <div class="h-px w-12 bg-gold opacity-60"></div>
+      </div>
+
+      <!-- Main headline -->
+      <h1 class="hero-animate-delay font-playfair text-5xl md:text-7xl lg:text-8xl font-900 text-creme leading-none mb-6">
+        V.I.P<br/>
+        <span class="italic text-gold" style="font-weight:400;">Barbershop</span>
+      </h1>
+
+      <!-- Subline -->
+      <p class="hero-animate-delay2 font-inter text-creme/60 text-base md:text-lg tracking-widest uppercase mb-12 font-light">
+        Wo Stil auf Tradition trifft
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-animate-delay3 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#buchen" class="btn-gold px-10 py-4 text-sm uppercase tracking-widest font-semibold font-inter w-full sm:w-auto">
+          Termin buchen
+        </a>
+        <a href="#leistungen" class="btn-outline px-10 py-4 text-sm uppercase tracking-widest font-semibold font-inter w-full sm:w-auto">
+          Leistungen entdecken
+        </a>
+      </div>
+
+      <!-- Trust badge -->
+      <div class="hero-animate-delay3 flex items-center justify-center gap-2 mt-12">
+        <div class="flex gap-0.5">
+          <svg class="w-4 h-4 star-filled" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="w-4 h-4 star-filled" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="w-4 h-4 star-filled" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="w-4 h-4 star-filled" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="w-4 h-4 star-filled" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        </div>
+        <span class="text-creme/50 text-xs font-inter tracking-wider">4.8 von 5 · 199 Google-Bewertungen</span>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      <span class="text-creme text-xs uppercase tracking-widest font-inter">Scroll</span>
+      <div class="w-px h-12 bg-gradient-to-b from-creme to-transparent animate-pulse"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       DIVIDER
+  ═══════════════════════════════════════════════════ -->
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <hr class="hr-gold" />
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       LEISTUNGEN
+  ═══════════════════════════════════════════════════ -->
+  <section id="leistungen" class="py-28 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Section header -->
+      <div class="text-center mb-20 reveal">
+        <span class="text-gold text-xs uppercase tracking-[0.35em] font-inter font-medium">Unser Handwerk</span>
+        <h2 class="font-playfair text-4xl md:text-5xl text-creme mt-4 mb-0 gold-line text-center">
+          Unsere Leistungen
+        </h2>
+      </div>
+
+      <!-- Service Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 1: Haarschnitt -->
+        <div class="service-card reveal border border-creme/10 bg-anthrazit-light p-8 group cursor-default">
+          <div class="mb-6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.343 6.343a8 8 0 1011.314 0M12 2v10M9 9l3-3 3 3"/>
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-creme mb-3">Herrenhaarschnitt</h3>
+          <p class="text-creme/50 text-sm font-inter leading-relaxed">Klassische und moderne Herrenschnitte, präzise ausgeführt von erfahrenen Barbieren. Jedes Detail zählt.</p>
+          <div class="mt-6 pt-6 border-t border-creme/5 flex items-center justify-between">
+            <span class="text-gold text-sm font-inter tracking-wider">ab € 18</span>
+            <div class="w-6 h-px bg-gold/40 group-hover:w-12 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Card 2: Bartschnitt -->
+        <div class="service-card reveal border border-creme/10 bg-anthrazit-light p-8 group cursor-default" style="transition-delay: 0.1s">
+          <div class="mb-6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 8c0 0-1 5 0 8s4 4 5 4 4-1 5-4 0-8 0-8M5 8h14M9 4l-2 4M15 4l2 4"/>
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-creme mb-3">Bartpflege & Trimmen</h3>
+          <p class="text-creme/50 text-sm font-inter leading-relaxed">Professionelles Konturieren und Formen Ihres Bartes. Für einen gepflegten Look, der Persönlichkeit zeigt.</p>
+          <div class="mt-6 pt-6 border-t border-creme/5 flex items-center justify-between">
+            <span class="text-gold text-sm font-inter tracking-wider">ab € 12</span>
+            <div class="w-6 h-px bg-gold/40 group-hover:w-12 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Card 3: Rasur -->
+        <div class="service-card reveal border border-creme/10 bg-anthrazit-light p-8 group cursor-default" style="transition-delay: 0.2s">
+          <div class="mb-6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 3l8 0M10 3l-2 18M14 3l2 18M6 21h12"/>
+              <path stroke-linecap="round" d="M8 10h8"/>
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-creme mb-3">Klassische Nassrasur</h3>
+          <p class="text-creme/50 text-sm font-inter leading-relaxed">Ein rituelles Erlebnis: Heißes Tuch, feiner Schaum, präzise Rasur. Zeitlos, entspannend, perfekt.</p>
+          <div class="mt-6 pt-6 border-t border-creme/5 flex items-center justify-between">
+            <span class="text-gold text-sm font-inter tracking-wider">ab € 22</span>
+            <div class="w-6 h-px bg-gold/40 group-hover:w-12 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Card 4: Kinder -->
+        <div class="service-card reveal border border-creme/10 bg-anthrazit-light p-8 group cursor-default" style="transition-delay: 0.3s">
+          <div class="mb-6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2" class="w-10 h-10">
+              <circle cx="12" cy="7" r="4" stroke-linecap="round"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7"/>
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-creme mb-3">Kinderhaarschnitt</h3>
+          <p class="text-creme/50 text-sm font-inter leading-relaxed">Geduldig und einfühlsam – wir sorgen dafür, dass sich auch die Kleinsten bei uns wohlfühlen.</p>
+          <div class="mt-6 pt-6 border-t border-creme/5 flex items-center justify-between">
+            <span class="text-gold text-sm font-inter tracking-wider">ab € 13</span>
+            <div class="w-6 h-px bg-gold/40 group-hover:w-12 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Card 5: Kombi -->
+        <div class="service-card reveal border border-gold/30 bg-anthrazit-light p-8 group cursor-default relative overflow-hidden" style="transition-delay: 0.4s">
+          <div class="absolute top-4 right-4 bg-gold px-2 py-1">
+            <span class="text-anthrazit text-xs font-inter font-semibold uppercase tracking-wider">Beliebt</span>
+          </div>
+          <div class="mb-6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-creme mb-3">Kombi-Paket</h3>
+          <p class="text-creme/50 text-sm font-inter leading-relaxed">Haarschnitt + Bartpflege in einer Session. Das perfekte Rundum-Ergebnis für den modernen Gentleman.</p>
+          <div class="mt-6 pt-6 border-t border-creme/5 flex items-center justify-between">
+            <span class="text-gold text-sm font-inter tracking-wider">ab € 28</span>
+            <div class="w-6 h-px bg-gold/40 group-hover:w-12 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Card 6: Pflege -->
+        <div class="service-card reveal border border-creme/10 bg-anthrazit-light p-8 group cursor-default" style="transition-delay: 0.5s">
+          <div class="mb-6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-creme mb-3">Gesichtsbehandlung</h3>
+          <p class="text-creme/50 text-sm font-inter leading-relaxed">Pflegende Masken und Treatments für ein frisches, gepflegtes Hautbild. Entspannung inklusive.</p>
+          <div class="mt-6 pt-6 border-t border-creme/5 flex items-center justify-between">
+            <span class="text-gold text-sm font-inter tracking-wider">ab € 20</span>
+            <div class="w-6 h-px bg-gold/40 group-hover:w-12 transition-all duration-500"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       DIVIDER
+  ═══════════════════════════════════════════════════ -->
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <hr class="hr-gold" />
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       BEWERTUNGEN / TRUST
+  ═══════════════════════════════════════════════════ -->
+  <section id="bewertungen" class="py-28 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Section header -->
+      <div class="text-center mb-20 reveal">
+        <span class="text-gold text-xs uppercase tracking-[0.35em] font-inter font-medium">Was Kunden sagen</span>
+        <h2 class="font-playfair text-4xl md:text-5xl text-creme mt-4 mb-0 gold-line text-center">
+          Vertrauen, das spricht
+        </h2>
+      </div>
+
+      <!-- Rating summary -->
+      <div class="reveal flex flex-col md:flex-row items-center justify-center gap-12 mb-20">
+        <div class="text-center">
+          <div class="font-playfair text-8xl text-gold leading-none">4.8</div>
+          <div class="flex gap-1 justify-center mt-3">
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l
