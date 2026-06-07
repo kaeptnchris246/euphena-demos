@@ -1,0 +1,467 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intercoiffeur Strassl – Premium Friseur in Eisenstadt</title>
+  <meta name="description" content="Intercoiffeur Strassl in Eisenstadt – Ihr exklusiver Friseursalon mit erstklassigem Service, Styling und Haarpflege. Jetzt Termin buchen!" />
+  <meta property="og:title" content="Intercoiffeur Strassl – Premium Friseur in Eisenstadt" />
+  <meta property="og:description" content="Erstklassige Haarkunst in Eisenstadt. Termin online oder telefonisch unter 0670 3564532." />
+  <meta property="og:image" content="https://loremflickr.com/1200/630/hairdresser" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://intercoiffeur-strassl.at" />
+  <link rel="canonical" href="https://intercoiffeur-strassl.at" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Intercoiffeur Strassl",
+    "url": "https://intercoiffeur-strassl.at",
+    "telephone": "+436703564532",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Eisenstadt",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "70",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday"],"opens":"08:00","closes":"13:00"}
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: #faf9f6; color: #1a1a1a; }
+
+    /* ── Fonts ── */
+    .font-playfair { font-family: 'Playfair Display', serif; }
+
+    /* ── Colours ── */
+    :root {
+      --gold: #b8975a;
+      --gold-light: #d4b07a;
+      --anthrazit: #1e1e1e;
+      --creme: #faf9f6;
+      --creme2: #f2efe8;
+      --text-muted: #6b6560;
+    }
+
+    /* ── Gold accent ── */
+    .text-gold { color: var(--gold); }
+    .bg-gold { background-color: var(--gold); }
+    .border-gold { border-color: var(--gold); }
+
+    /* ── Sticky Header ── */
+    #site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    #site-header.scrolled {
+      background: rgba(30,30,30,0.97);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.35);
+    }
+
+    /* ── Hero ── */
+    .hero-bg {
+      background-image: url('https://loremflickr.com/1600/900/hairdresser,salon');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* ── Gold divider ── */
+    .gold-line {
+      width: 60px; height: 2px;
+      background: var(--gold);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      padding: 0.85rem 2.2rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none; cursor: pointer;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid rgba(255,255,255,0.8);
+      color: #fff;
+      padding: 0.85rem 2.2rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(184,151,90,0.15); transform: translateY(-2px); }
+
+    /* ── Cards ── */
+    .service-card {
+      background: #fff;
+      border: 1px solid #ede9e0;
+      padding: 2.5rem 2rem;
+      transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+    }
+    .service-card:hover {
+      box-shadow: 0 12px 40px rgba(184,151,90,0.15);
+      transform: translateY(-6px);
+      border-color: var(--gold);
+    }
+
+    .package-card {
+      background: #fff;
+      border: 1px solid #ede9e0;
+      padding: 2.8rem 2.2rem;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+      position: relative;
+    }
+    .package-card.featured {
+      border-color: var(--gold);
+      background: var(--anthrazit);
+      color: #fff;
+    }
+    .package-card:hover {
+      box-shadow: 0 16px 50px rgba(0,0,0,0.12);
+      transform: translateY(-8px);
+    }
+
+    /* ── Star rating ── */
+    .star { color: var(--gold); font-size: 1.15rem; }
+
+    /* ── Mobile nav ── */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* ── Popup ── */
+    #sales-popup {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    #sales-popup.visible { display: flex; }
+    .popup-inner {
+      background: #fff;
+      max-width: 480px; width: 100%;
+      padding: 3rem 2.5rem 2.5rem;
+      position: relative;
+      border-top: 3px solid var(--gold);
+      animation: popIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.88) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .popup-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted); font-size: 1.4rem; line-height: 1;
+      transition: color 0.2s;
+    }
+    .popup-close:hover { color: var(--anthrazit); }
+
+    /* ── Scroll indicator ── */
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+      margin: 1rem auto 0;
+    }
+
+    /* ── Smooth transitions ── */
+    a { transition: color 0.25s; }
+
+    /* ── Section padding ── */
+    .section-pad { padding: 6rem 1.5rem; }
+    @media(max-width:768px){ .section-pad { padding: 4rem 1.25rem; } }
+
+    /* ── Hover tel link ── */
+    .tel-link { color: var(--gold); text-decoration: none; }
+    .tel-link:hover { color: var(--gold-light); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     STICKY HEADER
+════════════════════════════════════════════════════ -->
+<header id="site-header">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex flex-col leading-tight">
+      <span class="font-playfair text-white text-xl font-semibold tracking-wide">Intercoiffeur</span>
+      <span class="text-gold text-xs tracking-[0.25em] uppercase font-medium mt-0.5">Strassl · Eisenstadt</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#leistungen" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition">Leistungen</a>
+      <a href="#bewertungen" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition">Bewertungen</a>
+      <a href="#pakete" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition">Pakete</a>
+      <a href="#kontakt" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition">Kontakt</a>
+      <a href="#buchung" class="btn-gold text-xs px-5 py-3">Termin buchen</a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menü öffnen" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <span class="w-6 h-0.5 bg-white block transition"></span>
+      <span class="w-6 h-0.5 bg-white block transition"></span>
+      <span class="w-6 h-0.5 bg-white block transition"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-zinc-900 border-t border-white/10">
+    <nav class="flex flex-col px-6 py-6 gap-5">
+      <a href="#leistungen" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition" onclick="document.getElementById('mobile-menu').classList.remove('open')">Leistungen</a>
+      <a href="#bewertungen" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition" onclick="document.getElementById('mobile-menu').classList.remove('open')">Bewertungen</a>
+      <a href="#pakete" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition" onclick="document.getElementById('mobile-menu').classList.remove('open')">Pakete</a>
+      <a href="#kontakt" class="text-white/80 hover:text-gold text-sm tracking-wide font-medium uppercase transition" onclick="document.getElementById('mobile-menu').classList.remove('open')">Kontakt</a>
+      <a href="#buchung" class="btn-gold text-center text-xs" onclick="document.getElementById('mobile-menu').classList.remove('open')">Termin buchen</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════ -->
+<section id="hero" class="hero-bg min-h-screen flex items-center relative">
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black/62"></div>
+  <!-- Gold grain texture overlay -->
+  <div class="absolute inset-0 opacity-5" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%221%22/%3E%3C/svg%3E')"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center pt-32 pb-20">
+    <p class="text-gold text-xs tracking-[0.35em] uppercase font-medium mb-6">Eisenstadt · Burgenland</p>
+    <h1 class="font-playfair text-white text-5xl md:text-7xl lg:text-8xl font-semibold leading-tight mb-6">
+      Haarpflege<br /><em class="text-gold">auf höchstem Niveau.</em>
+    </h1>
+    <p class="text-white/70 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+      Willkommen bei Intercoiffeur Strassl – Ihrem exklusiven Friseursalon in Eisenstadt. Wir vereinen Handwerk, Stil und Leidenschaft für außergewöhnliche Ergebnisse.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#buchung" class="btn-gold text-sm px-8 py-4">Termin buchen</a>
+      <a href="#leistungen" class="btn-outline text-sm px-8 py-4">Unsere Leistungen</a>
+    </div>
+    <!-- scroll indicator -->
+    <div class="scroll-line mt-14"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INTRO STRIP
+════════════════════════════════════════════════════ -->
+<section style="background:var(--anthrazit)">
+  <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+    <div>
+      <p class="font-playfair text-gold text-3xl font-semibold">70+</p>
+      <p class="text-white/60 text-sm mt-1 tracking-wide">Google-Bewertungen</p>
+    </div>
+    <div>
+      <p class="font-playfair text-gold text-3xl font-semibold">4,8 ★</p>
+      <p class="text-white/60 text-sm mt-1 tracking-wide">Durchschnittliche Bewertung</p>
+    </div>
+    <div>
+      <p class="font-playfair text-gold text-3xl font-semibold">Intercoiffeur</p>
+      <p class="text-white/60 text-sm mt-1 tracking-wide">Zertifiziertes Qualitätsnetzwerk</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     LEISTUNGEN
+════════════════════════════════════════════════════ -->
+<section id="leistungen" class="section-pad" style="background:var(--creme)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-gold text-xs tracking-[0.3em] uppercase font-medium mb-3">Was wir bieten</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-semibold text-zinc-900 mb-4">Unsere Leistungen</h2>
+      <div class="gold-line"></div>
+      <p class="text-zinc-500 max-w-xl mx-auto text-base leading-relaxed">Professionelle Haarpflege und Styling für jeden Anlass – maßgeschneidert auf Ihre Wünsche.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div class="service-card">
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3v18M18 3v18M3 6h18M3 18h18"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-2 text-zinc-900">Damen-Schnitt</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed mb-4">Präziser Haarschnitt inkl. Waschen, Styling und Föhnen – perfekt auf Ihre Gesichtsform abgestimmt.</p>
+        <p class="text-gold font-semibold text-sm tracking-wide">Ab 38 €</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card">
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-2 text-zinc-900">Herren-Schnitt</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed mb-4">Klassischer oder moderner Herrenschnitt – stets präzise ausgeführt für einen gepflegten Auftritt.</p>
+        <p class="text-gold font-semibold text-sm tracking-wide">Ab 22 €</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card">
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 12h8M12 8v8"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-2 text-zinc-900">Colorationen</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed mb-4">Tönung, Balayage, Highlights oder Vollcoloration – wir bringen Farbe und Leuchtkraft in Ihr Haar.</p>
+        <p class="text-gold font-semibold text-sm tracking-wide">Ab 55 €</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card">
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-2 text-zinc-900">Hochsteckfrisuren</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed mb-4">Elegante Hochsteckfrisuren für Braut, Abendveranstaltung oder besondere Anlässe.</p>
+        <p class="text-gold font-semibold text-sm tracking-wide">Ab 65 €</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card">
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-2 text-zinc-900">Haarkuren &amp; Pflege</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed mb-4">Intensive Haarkuren, Keratin-Behandlungen und Pflegeprogramme für glänzendes, gesundes Haar.</p>
+        <p class="text-gold font-semibold text-sm tracking-wide">Ab 28 €</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card">
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="font-playfair text-xl font-semibold mb-2 text-zinc-900">Brautservice</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed mb-4">Ihr unvergesslicher Tag verdient das Beste – von der Probe bis zum großen Auftritt begleiten wir Sie.</p>
+        <p class="text-gold font-semibold text-sm tracking-wide">Auf Anfrage</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     BEWERTUNGEN
+════════════════════════════════════════════════════ -->
+<section id="bewertungen" class="section-pad" style="background:var(--creme2)">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="text-gold text-xs tracking-[0.3em] uppercase font-medium mb-3">Was Kunden sagen</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-semibold text-zinc-900 mb-4">Bewertungen</h2>
+      <div class="gold-line"></div>
+      <!-- Stars & rating -->
+      <div class="flex items-center justify-center gap-2 mt-6 mb-2">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <span class="font-playfair text-2xl font-semibold text-zinc-800 ml-2">4,8</span>
+      </div>
+      <p class="text-zinc-500 text-sm">Basierend auf <strong>70 Google-Bewertungen</strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Review 1 -->
+      <div class="bg-white border border-zinc-200 p-8" style="border-top:3px solid var(--gold)">
+        <div class="flex gap-1 mb-4">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="text-zinc-600 leading-relaxed italic mb-6 font-playfair text-lg">
+          „Absolut begeistert! Das Team von Intercoiffeur Strassl hat mein Haar komplett transformiert. Die Beratung war einfühlsam und das Ergebnis überraschend schön. Ich komme sehr gerne wieder!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;">
+            <span class="font-playfair text-white font-semibold text-base">M</span>
+          </div>
+          <div>
+            <p class="font-semibold text-zinc-800 text-sm">Maria K.</p>
+            <p class="text-zinc-400 text-xs">Google-Bewertung · Eisenstadt</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="bg-white border border-zinc-200 p-8" style="border-top:3px solid var(--gold)">
+        <div class="flex gap-1 mb-4">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="text-zinc-600 leading-relaxed italic mb-6 font-playfair text-lg">
+          „Professionell, freundlich und immer pünktlich. Meine Coloration ist jedes Mal ein Highlight – perfekte Farben, tolle Qualität. Ich empfehle Intercoiffeur Strassl wärmstens weiter!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--anthrazit);display:flex;align-items:center;justify-content:center;">
+            <span class="font-playfair text-white font-semibold text-base">T</span>
+          </div>
+          <div>
+            <p class="font-semibold text-zinc-800 text-sm">Thomas B.</p>
+            <p class="text-zinc-400 text-xs">Google-Bewertung · Eisenstadt</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="https://g.co/kgs/intercoiffeur-strassl" target="_blank" rel="noopener" class="text-gold text-sm tracking-wide hover:underline font-medium">
+        Alle 70 Bewertungen auf Google ansehen →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     BUCHUNG
+════════════════════════════════════════════════════ -->
+<section id="buchung" style="background:var(--anthrazit)" class="section-pad">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="text-gold text-xs tracking-[0.35em] uppercase font-medium mb-4">Schnell &amp; unkompliziert</p>
+    <h2 class="font-playfair text-4xl md:text-6xl font-semibold text-white mb-6">
+      In 30 Sekunden<br /><em class="text-gold">Termin buchen.</em>
+    </h2>
+    <div class="w-12 h-px mx-auto mb-
