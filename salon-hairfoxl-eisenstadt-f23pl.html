@@ -1,0 +1,464 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Hairfoxl Eisenstadt – Ihr Premium-Friseur in Eisenstadt</title>
+  <meta name="description" content="Salon Hairfoxl in Eisenstadt – Ihr exklusiver Friseur für Damen & Herren. Haarschnitte, Colorationen, Styling & mehr. Jetzt Termin buchen: 02682 63312." />
+  <meta property="og:title" content="Salon Hairfoxl Eisenstadt – Premium Friseur" />
+  <meta property="og:description" content="Erleben Sie erstklassige Haarpflege im Salon Hairfoxl Eisenstadt. Bewertung 4.8 Sterne. Jetzt Termin vereinbaren." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.hairfoxl-eisenstadt.at" />
+  <meta property="og:image" content="https://loremflickr.com/1200/630/hairdresser" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Salon Hairfoxl Eisenstadt",
+    "url": "https://www.hairfoxl-eisenstadt.at",
+    "telephone": "+43268263312",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Eisenstadt",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "42",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "15:00" }
+    ]
+  }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #faf9f7; color: #1a1a1a; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* Gold accent */
+    .gold { color: #b8982a; }
+    .gold-bg { background: #b8982a; }
+    .gold-border { border-color: #b8982a; }
+
+    /* Sticky header */
+    #main-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,15,0.97);
+      backdrop-filter: blur(8px);
+      transition: box-shadow 0.3s;
+    }
+
+    /* Nav links */
+    .nav-link {
+      position: relative;
+      color: #d4c9b0;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: #b8982a;
+      transition: width 0.3s;
+    }
+    .nav-link:hover { color: #b8982a; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Hero */
+    .hero-bg {
+      background-image: linear-gradient(to bottom, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.75) 100%),
+        url('https://loremflickr.com/1600/900/hairdresser,salon');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Buttons */
+    .btn-gold {
+      background: #b8982a;
+      color: #fff;
+      border: 2px solid #b8982a;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { background: #9a7e22; border-color: #9a7e22; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.6);
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #b8982a; color: #b8982a; transform: translateY(-1px); }
+
+    /* Service cards */
+    .service-card {
+      background: #fff;
+      border: 1px solid #e8e0d0;
+      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+    }
+    .service-card:hover {
+      box-shadow: 0 12px 40px rgba(184,152,42,0.12);
+      transform: translateY(-4px);
+      border-color: #b8982a;
+    }
+
+    /* Review stars */
+    .star-gold { color: #b8982a; }
+
+    /* Package cards */
+    .package-card {
+      background: #fff;
+      border: 1px solid #e8e0d0;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .package-card:hover { box-shadow: 0 16px 50px rgba(0,0,0,0.1); transform: translateY(-5px); }
+    .package-card.featured {
+      background: #0f0f0f;
+      border-color: #b8982a;
+    }
+
+    /* Divider line */
+    .gold-line { width: 60px; height: 2px; background: #b8982a; margin: 0 auto; }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Popup */
+    #popup-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(10,10,10,0.7);
+      backdrop-filter: blur(4px);
+    }
+    #popup-overlay.show { display: flex; align-items: center; justify-content: center; }
+    #popup-box {
+      background: #faf9f7;
+      border: 1px solid #b8982a;
+      max-width: 480px; width: 90%;
+      position: relative;
+      animation: fadeInUp 0.4s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Booking section */
+    .booking-section { background: #0f0f0f; }
+
+    /* Footer */
+    footer { background: #0a0a0a; }
+
+    /* Smooth icon hover */
+    .icon-wrap {
+      transition: color 0.3s;
+    }
+    .service-card:hover .icon-wrap { color: #b8982a; }
+
+    /* Contact card */
+    .contact-card { background: #fff; border: 1px solid #e8e0d0; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER / NAV
+═══════════════════════════════════════════════════ -->
+<header id="main-header">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-3">
+      <div class="gold-bg w-8 h-8 flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round">
+          <path d="M9 3C9 3 8 8 12 10C16 8 15 3 15 3"/>
+          <path d="M12 10V21"/>
+          <path d="M8 14H16"/>
+        </svg>
+      </div>
+      <div>
+        <span class="font-['Playfair_Display'] text-white text-lg font-600 tracking-wide">Hairfoxl</span>
+        <span class="block text-xs text-gray-400 tracking-[0.15em] uppercase" style="font-size:0.6rem; letter-spacing:0.15em;">Eisenstadt</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#bewertungen" class="nav-link">Bewertungen</a>
+      <a href="#pakete" class="nav-link">Pakete</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+      <a href="#buchen" class="btn-gold px-5 py-2 rounded-none inline-block">Termin buchen</a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button id="hamburger-btn" class="md:hidden text-white p-2 focus:outline-none" aria-label="Menü öffnen">
+      <svg id="ham-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-black border-t border-gray-800">
+    <div class="flex flex-col px-6 py-4 gap-5">
+      <a href="#leistungen" class="nav-link" onclick="closeMobileMenu()">Leistungen</a>
+      <a href="#bewertungen" class="nav-link" onclick="closeMobileMenu()">Bewertungen</a>
+      <a href="#pakete" class="nav-link" onclick="closeMobileMenu()">Pakete</a>
+      <a href="#kontakt" class="nav-link" onclick="closeMobileMenu()">Kontakt</a>
+      <a href="#buchen" class="btn-gold px-5 py-3 text-center inline-block" onclick="closeMobileMenu()">Termin buchen</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section id="hero" class="hero-bg min-h-screen flex items-center justify-center text-center px-6">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-xs tracking-[0.3em] uppercase text-yellow-400 mb-6 font-['Inter'] font-500">Ihr Premium-Friseur in Eisenstadt</p>
+    <h1 class="text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-tight mb-6">
+      Salon<br/><span class="gold italic">Hairfoxl</span>
+    </h1>
+    <div class="gold-line mb-6"></div>
+    <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-10 font-light max-w-xl mx-auto">
+      Wo Handwerk auf Leidenschaft trifft. Erstklassige Haarkunst für Damen &amp; Herren in Eisenstadt.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#buchen" class="btn-gold px-8 py-4 inline-block rounded-none">Termin vereinbaren</a>
+      <a href="#leistungen" class="btn-outline px-8 py-4 inline-block rounded-none">Unsere Leistungen</a>
+    </div>
+    <!-- Trust badges -->
+    <div class="mt-14 flex flex-wrap justify-center gap-8 text-gray-400">
+      <div class="flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8982a" stroke-width="1.8" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span class="text-sm">4.8 von 5</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8982a" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="text-sm">42 Google-Bewertungen</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8982a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="text-sm">Mo–Fr 9–18:30 Uhr</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     LEISTUNGEN
+═══════════════════════════════════════════════════ -->
+<section id="leistungen" class="py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs tracking-[0.3em] uppercase gold mb-4 font-500">Was wir für Sie tun</p>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Unsere Leistungen</h2>
+      <div class="gold-line mb-5"></div>
+      <p class="text-gray-500 max-w-xl mx-auto leading-relaxed">Jede Dienstleistung wird mit höchster Sorgfalt und erstklassigen Produkten ausgeführt.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div class="service-card p-8">
+        <div class="icon-wrap text-gray-400 mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 3L6 14C6 17.31 8.69 20 12 20C15.31 20 18 17.31 18 14L18 3"/>
+            <line x1="6" y1="8" x2="18" y2="8"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Damenschnitt</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Präziser Haarschnitt inkl. Waschen, Schneiden und Föhnen – maßgeschneidert für Ihren Look.</p>
+        <p class="gold font-600 text-lg">ab 38 €</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card p-8">
+        <div class="icon-wrap text-gray-400 mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="8" r="5"/>
+            <path d="M3 21c0-4 4-7 9-7s9 3 9 7"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Herrenschnitt</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Klassisch oder modern – Ihr Herrenschnitt inkl. Stylingberatung und Finish.</p>
+        <p class="gold font-600 text-lg">ab 22 €</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card p-8">
+        <div class="icon-wrap text-gray-400 mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M12 2L12 8"/>
+            <path d="M5 5L9 9"/>
+            <path d="M19 5L15 9"/>
+            <circle cx="12" cy="14" r="6"/>
+            <path d="M9 14C9 12.34 10.34 11 12 11"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Coloration</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Vollfarbe, Highlights oder Balayage – leuchtende Farbergebnisse mit Pflegegarantie.</p>
+        <p class="gold font-600 text-lg">ab 55 €</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card p-8">
+        <div class="icon-wrap text-gray-400 mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+            <line x1="4" y1="22" x2="4" y2="15"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Balayage &amp; Strähnchen</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Natürliche Lichtreflexe und handgemalte Strähnchen für einen modernen, strahlenden Effekt.</p>
+        <p class="gold font-600 text-lg">ab 80 €</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card p-8">
+        <div class="icon-wrap text-gray-400 mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4"/>
+            <line x1="12" y1="16" x2="12" y2="16.01"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Keratin-Glättung</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Professionelle Keratinbehandlung für glattes, glänzendes und pflegeleichtes Haar.</p>
+        <p class="gold font-600 text-lg">ab 120 €</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card p-8">
+        <div class="icon-wrap text-gray-400 mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Braut &amp; Anlass-Styling</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Hochzeitsfrisuren, Abend-Styling und festliche Looks – damit Ihr Tag unvergesslich wird.</p>
+        <p class="gold font-600 text-lg">ab 95 €</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     BEWERTUNGEN
+═══════════════════════════════════════════════════ -->
+<section id="bewertungen" class="py-24 px-6" style="background:#f5f2ec;">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs tracking-[0.3em] uppercase gold mb-4 font-500">Was Kunden sagen</p>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Bewertungen</h2>
+      <div class="gold-line mb-5"></div>
+
+      <!-- Star display -->
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="star-gold text-3xl">★★★★★</span>
+      </div>
+      <p class="text-5xl font-bold text-gray-900 mb-1" style="font-family:'Playfair Display',serif;">4.8</p>
+      <p class="text-gray-500 text-sm tracking-wide">aus 42 Google-Bewertungen</p>
+    </div>
+
+    <!-- Review Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Review 1 -->
+      <div class="bg-white p-8 border border-gray-100 shadow-sm" style="box-shadow:0 4px 30px rgba(0,0,0,0.06);">
+        <div class="flex items-center gap-1 mb-4">
+          <span class="star-gold">★★★★★</span>
+        </div>
+        <p class="text-gray-700 leading-relaxed italic mb-6 text-base">
+          „Ich bin seit Jahren Kundin bei Hairfoxl und bin jedes Mal begeistert. Das Team versteht genau, was ich mir vorstelle, und das Ergebnis übertrifft immer meine Erwartungen. Top Beratung, Top Ergebnis!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 gold-bg flex items-center justify-center text-white font-bold text-sm" style="font-family:'Playfair Display',serif;">M</div>
+          <div>
+            <p class="font-600 text-gray-900 text-sm">Maria S.</p>
+            <p class="text-xs text-gray-400">Google-Bewertung · Eisenstadt</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="bg-white p-8 border border-gray-100" style="box-shadow:0 4px 30px rgba(0,0,0,0.06);">
+        <div class="flex items-center gap-1 mb-4">
+          <span class="star-gold">★★★★★</span>
+        </div>
+        <p class="text-gray-700 leading-relaxed italic mb-6 text-base">
+          „Wunderbarer Salon mit einer sehr angenehmen Atmosphäre. Meine Balayage ist einfach perfekt geworden – natürlich, strahlend und genau so, wie ich es mir gewünscht hatte. Sehr empfehlenswert!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 gold-bg flex items-center justify-center text-white font-bold text-sm" style="font-family:'Playfair Display',serif;">K</div>
+          <div>
+            <p class="font-600 text-gray-900 text-sm">Katharina R.</p>
+            <p class="text-xs text-gray-400">Google-Bewertung · Eisenstadt</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Google badge -->
+    <div class="text-center mt-10">
+      <a href="tel:+43268263312" class="inline-flex items-center gap-2 text-gray-500 text-sm hover:text-gray-800 transition-colors">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Alle 42 Bewertungen auf Google ansehen
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     BUCHUNG
+═══════════════════════════════════════════════════ -->
+<section id="buchen" class="booking-section py-24 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="text-xs tracking-[0.3em] uppercase text-yellow-400 mb-4 font-500">Schnell &amp; unkompliziert</p>
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">In 30 Sekunden<br/><span class="gold italic">Termin buchen</span></h2>
+    <div class="gold-line mb-6"></div>
+    <p class="text-gray-400 max-w-xl mx-auto leading-relaxed mb-12">
+      Rufen Sie uns einfach an oder schreiben Sie uns – wir finden gemeinsam den perfekten Termin für Sie.
+    </p>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="text-center">
+        <div class="gold-bg w-12 h-12 flex items-center justify-center mx-auto mb-4">
+          <span class="text-white font-bold text-lg" style="font-family:'Playfair Display',serif;">1</span>
+        </div>
+        <h4 class="text-white font-600 mb-2">Anrufen</h4>
+        <p class="text-gray-500 text-sm
