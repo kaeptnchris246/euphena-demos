@@ -1,0 +1,448 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Hairfoxl Eisenstadt – Ihr Friseur in der Kirchengasse</title>
+  <meta name="description" content="Salon Hairfoxl in Eisenstadt – Erstklassiger Damen-, Herren- und Kinderfriseur. Kirchengasse 1a, 7000 Eisenstadt. Tel. 02682 63312. Jetzt Termin buchen." />
+  <meta name="keywords" content="Friseur Eisenstadt, Salon Hairfoxl, Damenfriseur Eisenstadt, Herrenfriseur Eisenstadt, Kinderfriseur Eisenstadt, Kirchengasse" />
+  <meta property="og:title" content="Salon Hairfoxl Eisenstadt" />
+  <meta property="og:description" content="Ihr Friseur für Damen, Herren und Kinder in Eisenstadt – Kirchengasse 1a" />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Salon Hairfoxl",
+    "url": "https://salon-hairfoxl-eisenstadt.at",
+    "telephone": "+43268263312",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Kirchengasse 1a",
+      "addressLocality": "Eisenstadt",
+      "postalCode": "7000",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "42"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "08:00",
+        "closes": "14:00"
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #b8973a;
+      --gold-light: #d4af5a;
+      --anthrazit: #1a1a1a;
+      --creme: #f7f3ed;
+      --creme-dark: #efe9df;
+    }
+    * { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--creme); color: var(--anthrazit); }
+    h1, h2, h3, .playfair { font-family: 'Playfair Display', serif; }
+    .gold { color: var(--gold); }
+    .bg-gold { background-color: var(--gold); }
+    .border-gold { border-color: var(--gold); }
+    .bg-anthrazit { background-color: var(--anthrazit); }
+    .bg-creme { background-color: var(--creme); }
+    .bg-creme-dark { background-color: var(--creme-dark); }
+
+    /* Header */
+    #main-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(26,26,26,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(184,151,58,0.25);
+      transition: box-shadow 0.3s;
+    }
+    #main-header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+
+    /* Nav links */
+    .nav-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c8bfb0;
+      transition: color 0.25s;
+    }
+    .nav-link:hover { color: var(--gold); }
+
+    /* Hero */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    #hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://loremflickr.com/1600/900/hairstyle,salon');
+      background-size: cover; background-position: center;
+    }
+    #hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,10,10,0.82) 0%, rgba(26,20,10,0.68) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Gold line decoration */
+    .gold-line {
+      display: block; width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto;
+    }
+    .gold-line-left {
+      display: block; width: 60px; height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    /* CTA Buttons */
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: 1px solid var(--gold);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { background: transparent; color: var(--gold); transform: translateY(-2px); }
+    .btn-outline-gold {
+      display: inline-block;
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 36px;
+      border: 1px solid var(--gold);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-outline-gold:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
+    .btn-outline-light {
+      display: inline-block;
+      background: transparent;
+      color: #f7f3ed;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 36px;
+      border: 1px solid rgba(247,243,237,0.5);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-outline-light:hover { background: rgba(247,243,237,0.1); transform: translateY(-2px); }
+
+    /* Service Cards */
+    .service-card {
+      background: #fff;
+      border: 1px solid rgba(184,151,58,0.15);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-color: rgba(184,151,58,0.4); }
+    .service-card:hover::before { opacity: 1; }
+
+    /* Stars */
+    .star { color: var(--gold); }
+
+    /* Booking section */
+    .booking-highlight {
+      background: linear-gradient(135deg, var(--anthrazit) 0%, #2a2015 100%);
+    }
+
+    /* Package Cards */
+    .pkg-card {
+      border: 1px solid rgba(184,151,58,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.15); }
+    .pkg-card.featured { border-color: var(--gold); }
+
+    /* Popup */
+    #popup-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(15,12,8,0.75);
+      backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center;
+    }
+    #popup-overlay.active { display: flex; }
+    #popup-box {
+      background: #fff;
+      max-width: 440px; width: 90%;
+      border-top: 3px solid var(--gold);
+      position: relative;
+      animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.88) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--creme-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* Section label */
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Opening hours tag */
+    .hours-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(184,151,58,0.12);
+      border: 1px solid rgba(184,151,58,0.3);
+      padding: 6px 14px;
+      font-size: 0.75rem; color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+<!-- ═══════════════════════════════════════════ HEADER ═══ -->
+<header id="main-header">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex flex-col leading-none">
+      <span class="playfair text-white text-xl font-semibold tracking-wide">Hairfoxl</span>
+      <span style="font-size:0.6rem;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;font-family:'Inter',sans-serif;">Eisenstadt</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#bewertungen" class="nav-link">Bewertungen</a>
+      <a href="#pakete" class="nav-link">Pakete</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+    </nav>
+
+    <!-- CTA + Burger -->
+    <div class="flex items-center gap-4">
+      <a href="tel:+43268263312" class="hidden md:inline-block btn-gold text-xs">Termin buchen</a>
+      <!-- Hamburger -->
+      <button id="burger-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menü öffnen">
+        <span class="block w-6 h-px bg-white transition-all" id="b1"></span>
+        <span class="block w-6 h-px bg-white transition-all" id="b2"></span>
+        <span class="block w-6 h-px bg-white transition-all" id="b3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-anthrazit border-t border-gray-800">
+    <nav class="flex flex-col px-6 py-5 gap-5">
+      <a href="#leistungen" class="nav-link" onclick="closeMobile()">Leistungen</a>
+      <a href="#bewertungen" class="nav-link" onclick="closeMobile()">Bewertungen</a>
+      <a href="#pakete" class="nav-link" onclick="closeMobile()">Pakete</a>
+      <a href="#kontakt" class="nav-link" onclick="closeMobile()">Kontakt</a>
+      <a href="tel:+43268263312" class="btn-gold text-center mt-2">Termin buchen</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ HERO ═══ -->
+<section id="hero">
+  <div id="hero-bg"></div>
+  <div id="hero-overlay"></div>
+  <div class="hero-content text-center px-6 max-w-4xl mx-auto">
+    <p class="section-label mb-6 tracking-widest">Kirchengasse 1a · Eisenstadt</p>
+    <span class="gold-line mb-8"></span>
+    <h1 class="playfair text-white text-5xl md:text-7xl font-semibold leading-tight mb-6 mt-6">
+      Ihr Friseur<br/><em class="font-normal" style="color:var(--gold-light);">mit Leidenschaft</em>
+    </h1>
+    <p class="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-10">
+      Salon Hairfoxl in Eisenstadt steht für erstklassige Haarpflege und persönliche Beratung –
+      für Damen, Herren und Kinder mit Stil.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="tel:+43268263312" class="btn-gold">Jetzt Termin buchen</a>
+      <a href="#leistungen" class="btn-outline-light">Unsere Leistungen</a>
+    </div>
+    <!-- Rating badge -->
+    <div class="mt-12 inline-flex items-center gap-3 bg-black bg-opacity-40 border border-gray-700 px-5 py-3">
+      <div class="flex gap-0.5">
+        <svg class="w-4 h-4 star fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="w-4 h-4 star fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="w-4 h-4 star fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="w-4 h-4 star fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="w-4 h-4 star fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span class="text-white font-semibold text-sm">4,8</span>
+      <span class="text-gray-400 text-xs">· 42 Google-Bewertungen</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ÜBER / INTRO ═══ -->
+<section class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <p class="section-label mb-4">Willkommen</p>
+      <h2 class="playfair text-4xl md:text-5xl font-semibold text-anthrazit leading-tight mb-6">
+        Wo Handwerk<br/><em class="font-normal gold">auf Stil trifft</em>
+      </h2>
+      <span class="gold-line-left mb-8 block"></span>
+      <p class="text-gray-600 leading-relaxed text-lg mb-6">
+        Im Herzen Eisenstadts, in der charmanten Kirchengasse 1a, erwartet Sie ein Friseursalon,
+        der Qualität, Herzlichkeit und Individualität vereint. Ob klassischer Herrenschnitt,
+        moderner Damenlook oder der erste Haarschnitt Ihres Kindes – bei Salon Hairfoxl
+        stehen Sie im Mittelpunkt.
+      </p>
+      <p class="text-gray-500 leading-relaxed mb-10">
+        Faire Preise, adäquate Räumlichkeiten und eine ausgezeichnete Beratung haben uns zu
+        einem der beliebtesten Salons im Burgenland gemacht.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <span class="hours-badge">Mo–Fr: 09:00–18:00</span>
+        <span class="hours-badge">Sa: 08:00–14:00</span>
+      </div>
+    </div>
+    <div class="relative">
+      <img src="https://loremflickr.com/700/500/hairdresser,interior" alt="Salon Hairfoxl Innenansicht" class="w-full object-cover" style="aspect-ratio:7/5;" loading="lazy" />
+      <div class="absolute -bottom-6 -left-6 bg-anthrazit text-white p-6 hidden md:block">
+        <p class="playfair text-3xl font-semibold gold">654</p>
+        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Zufriedene Kunden</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ LEISTUNGEN ═══ -->
+<section id="leistungen" class="py-28 bg-creme">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="section-label mb-4">Unser Angebot</p>
+      <h2 class="playfair text-4xl md:text-5xl font-semibold text-anthrazit mb-4">Leistungen & Preise</h2>
+      <span class="gold-line"></span>
+      <p class="text-gray-500 mt-6 max-w-xl mx-auto">Ausgewählte Behandlungen für ein außergewöhnliches Salon-Erlebnis – abgestimmt auf Ihre persönlichen Wünsche.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Card 1: Damen -->
+      <div class="service-card p-8">
+        <div class="mb-5">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C8 2 5 5 5 9c0 2.5 1.2 4.7 3 6.1V18h8v-2.9c1.8-1.4 3-3.6 3-6.1 0-4-3-7-7-7z"/>
+            <path d="M9 18v3M15 18v3M9 21h6"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl font-semibold mb-3 text-anthrazit">Damen · Schnitt & Styling</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Waschen, Schneiden, Föhnen – individuell auf Ihre Haarstruktur und Ihren Lifestyle abgestimmt. Inkl. Kopfhautmassage.</p>
+        <div class="border-t border-gray-100 pt-5 space-y-2">
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Schnitt & Föhnen</span><span class="gold font-medium">ab € 38</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Schnitt & Eindrehen</span><span class="gold font-medium">ab € 48</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Hochsteckfrisur</span><span class="gold font-medium">ab € 55</span></div>
+        </div>
+      </div>
+
+      <!-- Card 2: Herren -->
+      <div class="service-card p-8">
+        <div class="mb-5">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="7" r="4"/>
+            <path d="M6 20v-1a6 6 0 0112 0v1"/>
+            <path d="M8 20h8"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl font-semibold mb-3 text-anthrazit">Herren · Schnitt & Pflege</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Klassische und moderne Herrenschnitte mit höchster Präzision. Inkl. Styling-Beratung und Finishing.</p>
+        <div class="border-t border-gray-100 pt-5 space-y-2">
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Haarschnitt</span><span class="gold font-medium">ab € 22</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Haarschnitt & Waschen</span><span class="gold font-medium">ab € 28</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Bart trimmen</span><span class="gold font-medium">ab € 12</span></div>
+        </div>
+      </div>
+
+      <!-- Card 3: Kinder -->
+      <div class="service-card p-8">
+        <div class="mb-5">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12c0 1.66 1.34 3 3 3s3-1.34 3-3"/>
+            <path d="M12 3C8.13 3 5 6.13 5 10c0 2.38 1.19 4.47 3 5.74V18h8v-2.26A6.96 6.96 0 0019 10c0-3.87-3.13-7-7-7z"/>
+            <path d="M10 18v2h4v-2"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl font-semibold mb-3 text-anthrazit">Kinder · Erster Schnitt</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Einfühlsame Betreuung für die kleinen Gäste – ob erster Haarschnitt oder regelmäßige Pflege. Liebevoll und geduldig.</p>
+        <div class="border-t border-gray-100 pt-5 space-y-2">
+          <div class="flex justify-between text-sm"><span class="text-gray-600">bis 6 Jahre</span><span class="gold font-medium">ab € 14</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">6–12 Jahre</span><span class="gold font-medium">ab € 18</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Erster Haarschnitt</span><span class="gold font-medium">ab € 18</span></div>
+        </div>
+      </div>
+
+      <!-- Card 4: Färben -->
+      <div class="service-card p-8">
+        <div class="mb-5">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 3l10 10-4 4-1.5-1.5"/>
+            <path d="M3 21s2-1 4-4l-2-2c-2 3-2 6-2 6z"/>
+            <circle cx="18" cy="18" r="3"/>
+            <path d="M18 15v-2M18 21v-2M15 18h-2M21 18h-2"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl font-semibold mb-3 text-anthrazit">Colorationen & Tönung</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Von subtilen Nuancen bis hin zu kühnen Verwandlungen – professionelle Farbtechnik mit schonenden Produkten.</p>
+        <div class="border-t border-gray-100 pt-5 space-y-2">
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Ansatzfarbe</span><span class="gold font-medium">ab € 35</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Komplettfärbung</span><span class="gold font-medium">ab € 55</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-600">Strähnentechnik</span><span class="gold font-medium">ab € 65</span></div>
+        </div>
+      </div>
+
+      <!-- Card 5: Pflege -->
+      <div class="service-card p-8">
+        <div class="mb-5">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="playfair text-xl font-semibold mb-3 text-anthrazit">Haarpflege & Behandlungen</h3>
