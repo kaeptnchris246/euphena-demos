@@ -1,0 +1,486 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WoMen Hairstyling – Friseursalon Eisenstadt | Premiumfriseur</title>
+  <meta name="description" content="WoMen Hairstyling in Eisenstadt – Ihr Premiumfriseur für Damen & Herren. Schnitt, Farbe, Styling & mehr. Jetzt Termin buchen: 0660 9119080." />
+  <meta property="og:title" content="WoMen Hairstyling – Friseursalon Eisenstadt" />
+  <meta property="og:description" content="Ihr Premiumfriseur in Eisenstadt für Damen & Herren. Schnitt, Farbe, Styling & mehr. Jetzt Termin buchen!" />
+  <meta property="og:image" content="https://loremflickr.com/1200/630/hairstyling" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://women-hairstyling-eisenstadt.at" />
+  <link rel="canonical" href="https://women-hairstyling-eisenstadt.at" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "WoMen Hairstyling",
+    "url": "https://women-hairstyling-eisenstadt.at",
+    "telephone": "+436609119080",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Eisenstadt",
+      "addressCountry": "AT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "64",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "14:00"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #E8D5A3;
+      --anthrazit: #1C1C1E;
+      --creme: #FAF7F2;
+      --creme-dark: #F0EBE1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--creme);
+      color: var(--anthrazit);
+      overflow-x: hidden;
+    }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+
+    /* Gold Underline */
+    .gold-line::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1rem auto 0;
+    }
+    .gold-line-left::after {
+      margin-left: 0;
+    }
+
+    /* Header */
+    #main-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      background: transparent;
+    }
+    #main-header.scrolled {
+      background: rgba(28, 28, 30, 0.97);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Mobile Menu */
+    #mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(28,28,30,0.99);
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-top: 1px solid rgba(201,169,110,0.2);
+    }
+    #mobile-menu.open { display: flex; }
+
+    /* Hero */
+    .hero-bg {
+      background-image: url('https://loremflickr.com/1600/900/hairstyling,salon');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(28,28,30,0.82) 0%, rgba(28,28,30,0.55) 100%);
+    }
+
+    /* Buttons */
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      padding: 0.9rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-gold:hover {
+      background: #b8924d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201,169,110,0.35);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.7);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      padding: 0.9rem 2.2rem;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: rgba(201,169,110,0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Cards */
+    .service-card {
+      background: #fff;
+      border: 1px solid rgba(201,169,110,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      padding: 2.5rem 2rem;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(28,28,30,0.1);
+      border-color: var(--gold);
+    }
+
+    /* Paket Cards */
+    .paket-card {
+      background: #fff;
+      border: 1px solid rgba(201,169,110,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .paket-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 70px rgba(28,28,30,0.12);
+    }
+    .paket-card.featured {
+      border-color: var(--gold);
+      background: var(--anthrazit);
+      color: #fff;
+    }
+    .paket-badge {
+      position: absolute;
+      top: 1.2rem; right: -2rem;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 3rem;
+      transform: rotate(45deg);
+      transform-origin: center;
+    }
+
+    /* Stars */
+    .star-filled { fill: var(--gold); color: var(--gold); }
+    .star-empty { fill: #ddd; color: #ddd; }
+
+    /* Popup */
+    #verkaufs-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(28,28,30,0.65);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    #verkaufs-popup.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .popup-inner {
+      background: #fff;
+      max-width: 480px;
+      width: 90%;
+      padding: 3rem 2.5rem 2.5rem;
+      position: relative;
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    }
+    .popup-close {
+      position: absolute;
+      top: 1rem; right: 1.2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #999;
+      font-size: 1.4rem;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .popup-close:hover { color: var(--anthrazit); }
+
+    /* Divider */
+    .gold-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto;
+    }
+
+    /* Scroll animations kept as hover only, everything visible */
+    .nav-link {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav-link:hover { color: var(--gold); }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* Section padding */
+    .section-pad { padding: 6rem 0; }
+
+    /* Booking form */
+    .form-input {
+      width: 100%;
+      background: var(--creme);
+      border: 1px solid rgba(201,169,110,0.3);
+      padding: 0.9rem 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--anthrazit);
+      transition: border-color 0.3s;
+      outline: none;
+    }
+    .form-input:focus { border-color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .section-pad { padding: 4rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     STICKY HEADER
+     ============================================================ -->
+<header id="main-header">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex flex-col leading-none">
+      <span class="font-playfair text-white text-xl font-bold tracking-wide">WoMen</span>
+      <span style="color:var(--gold); font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; font-family:'Inter',sans-serif; font-weight:500;">Hairstyling · Eisenstadt</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#bewertungen" class="nav-link">Bewertungen</a>
+      <a href="#buchung" class="nav-link">Termin</a>
+      <a href="#pakete" class="nav-link">Pakete</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+      <a href="tel:06609119080" class="btn-gold" style="padding:0.65rem 1.5rem;">
+        Anrufen
+      </a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button id="hamburger-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menü öffnen">
+      <span class="block w-6 h-px bg-white transition-all duration-300" id="h1"></span>
+      <span class="block w-6 h-px bg-white transition-all duration-300" id="h2"></span>
+      <span class="block w-4 h-px bg-white transition-all duration-300 ml-auto" id="h3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav id="mobile-menu" role="navigation" aria-label="Mobile Navigation">
+    <a href="#leistungen" class="nav-link" onclick="closeMobileMenu()">Leistungen</a>
+    <a href="#bewertungen" class="nav-link" onclick="closeMobileMenu()">Bewertungen</a>
+    <a href="#buchung" class="nav-link" onclick="closeMobileMenu()">Termin buchen</a>
+    <a href="#pakete" class="nav-link" onclick="closeMobileMenu()">Pakete</a>
+    <a href="#kontakt" class="nav-link" onclick="closeMobileMenu()">Kontakt</a>
+    <a href="tel:06609119080" class="btn-gold text-center mt-2" onclick="closeMobileMenu()">0660 9119080</a>
+  </nav>
+</header>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative">
+  <div class="hero-overlay"></div>
+  <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto pt-24">
+
+    <p style="color:var(--gold); font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; font-family:'Inter',sans-serif; font-weight:500;" class="mb-6">Premiumfriseur · Eisenstadt</p>
+
+    <h1 class="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6">
+      Haare, die<br/><em style="color:var(--gold-light);">begeistern.</em>
+    </h1>
+
+    <div class="gold-divider mb-8"></div>
+
+    <p style="font-family:'Inter',sans-serif; font-size:1.05rem; color:rgba(255,255,255,0.82); font-weight:300; line-height:1.9;" class="mb-12 max-w-xl mx-auto">
+      WoMen Hairstyling – Ihr Salon für zeitlose Eleganz in Eisenstadt. Wir schneiden, färben und stylen mit Leidenschaft und Präzision.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#buchung" class="btn-gold">Termin buchen</a>
+      <a href="#leistungen" class="btn-outline">Unsere Leistungen</a>
+    </div>
+
+    <!-- Trust Badge -->
+    <div class="mt-16 flex items-center justify-center gap-6 flex-wrap">
+      <div class="flex items-center gap-2">
+        <div class="flex gap-0.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A96E"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A96E"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A96E"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A96E"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A96E"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span style="color:rgba(255,255,255,0.8); font-size:0.82rem;">4,8 von 5</span>
+      </div>
+      <div style="width:1px; height:24px; background:rgba(255,255,255,0.2);"></div>
+      <span style="color:rgba(255,255,255,0.8); font-size:0.82rem;">64 Google-Bewertungen</span>
+      <div style="width:1px; height:24px; background:rgba(255,255,255,0.2);"></div>
+      <span style="color:rgba(255,255,255,0.8); font-size:0.82rem;">Eisenstadt seit Jahren</span>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+    <span style="color:rgba(255,255,255,0.5); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase;">Entdecken</span>
+    <svg width="20" height="30" viewBox="0 0 20 30" fill="none" style="color:var(--gold);">
+      <rect x="1" y="1" width="18" height="28" rx="9" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="10" cy="8" r="3" fill="currentColor" class="animate-bounce"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     INTRO STRIP
+     ============================================================ -->
+<section style="background:var(--anthrazit);">
+  <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/10">
+    <div class="flex items-center gap-4 py-6 md:py-0 md:px-10 first:md:pl-0 last:md:pr-0">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div>
+        <div class="font-playfair text-white text-base font-semibold">Mo–Fr 09–18 Uhr</div>
+        <div style="color:rgba(255,255,255,0.5); font-size:0.78rem;">Sa 09–14 Uhr</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-4 py-6 md:py-0 md:px-10">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 17z"/></svg>
+      <div>
+        <div class="font-playfair text-white text-base font-semibold">0660 9119080</div>
+        <div style="color:rgba(255,255,255,0.5); font-size:0.78rem;">Direkt anrufen</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-4 py-6 md:py-0 md:px-10">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div>
+        <div class="font-playfair text-white text-base font-semibold">Eisenstadt</div>
+        <div style="color:rgba(255,255,255,0.5); font-size:0.78rem;">Burgenland, Österreich</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LEISTUNGEN
+     ============================================================ -->
+<section id="leistungen" class="section-pad" style="background:var(--creme);">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16">
+      <p style="color:var(--gold); font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; font-family:'Inter',sans-serif; font-weight:500;" class="mb-4">Unser Angebot</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold gold-line">Unsere Leistungen</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Karte 1 -->
+      <div class="service-card">
+        <div class="mb-6" style="color:var(--gold);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v6a6 6 0 006 6 6 6 0 006-6V2"/><line x1="6" y1="14" x2="6" y2="22"/><line x1="18" y1="14" x2="18" y2="22"/></svg>
+        </div>
+        <h3 class="font-playfair text-xl font-bold mb-2" style="color:var(--anthrazit);">Damenschnitt</h3>
+        <p style="color:#666; font-size:0.88rem; line-height:1.8;" class="mb-5">Präziser Schnitt, angepasst an Ihre Gesichtsform und Ihren Lebensstil. Inkl. Waschen & Föhnen.</p>
+        <div class="flex items-center justify-between">
+          <span class="font-playfair text-2xl font-bold" style="color:var(--gold);">ab 45 €</span>
+          <a href="#buchung" class="text-xs uppercase tracking-widest font-semibold" style="color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:1px; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Buchen →</a>
+        </div>
+      </div>
+
+      <!-- Karte 2 -->
+      <div class="service-card">
+        <div class="mb-6" style="color:var(--gold);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.85"/></svg>
+        </div>
+        <h3 class="font-playfair text-xl font-bold mb-2" style="color:var(--anthrazit);">Herrenschnitt</h3>
+        <p style="color:#666; font-size:0.88rem; line-height:1.8;" class="mb-5">Klassisch oder modern – unser Team gestaltet Ihren Look präzise und stilsicher. Inkl. Pflege.</p>
+        <div class="flex items-center justify-between">
+          <span class="font-playfair text-2xl font-bold" style="color:var(--gold);">ab 28 €</span>
+          <a href="#buchung" class="text-xs uppercase tracking-widest font-semibold" style="color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:1px; text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Buchen →</a>
+        </div>
+      </div>
+
+      <!-- Karte 3 -->
+      <div class="service-card">
+        <div class="mb-6" style="color:var(--gold);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3 class="font-playfair text-xl font-bold mb-2" style="color:var(--anthrazit);">Colorationen</h3>
+        <p style="color:#666; font-size:0.88rem; line-height:1.8;" class="mb-5">Highlights, Balayage, Vollcoloration – für strahlende Farben mit Tiefe und Natürlichkeit.</p>
+        <div class="flex items-center justify-between">
+          <span class="font-playfair text-2xl font-bold" style="color:var(--gold);">ab 60 €</span>
+          <a href="#buchung" class="text-xs uppercase tracking-widest font-semibold" style="color:var(--gold); border-bottom:1px solid var(--gold);
