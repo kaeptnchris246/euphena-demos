@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Divine Beauty & Nails Studio - Ihr Schönheits- und Nagelstudio in Wien. Erleben Sie edle Nail-Art und Makeup-Services in luxuriösem Ambiente.">
+    <title>Divine Beauty & Nails Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(() => {
+                document.getElementById('popup').style.display = 'flex';
+            }, 7000);
+        });
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            background-color: #000;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            padding: 10px 20px;
+            z-index: 100;
+        }
+
+        .hero {
+            background-image: url('https://loremflickr.com/1600/900/nails');
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .services .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Divine Beauty & Nails Studio</h1>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="#leistungen" class="hover:text-gold">Leistungen</a></li>
+                <li><a href="#bewertungen" class="hover:text-gold">Bewertungen</a></li>
+                <li><a href="#pakete" class="hover:text-gold">Pakete</a></li>
+                <li><a href="#kontakt" class="hover:text-gold">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="overlay"></div>
+        <h2 class="text-4xl text-white z-10">Träumen Sie von wunderschönen Nägeln?</h2>
+        <p class="text-lg text-white z-10 mt-4">Ihr Schönheits- und Nagelstudio in Wien</p>
+        <a href="#kontakt" class="mt-6 bg-gold text-white py-3 px-6 rounded hover:bg-opacity-75">Jetzt Termin buchen</a>
+    </div>
+
+    <section id="leistungen" class="section">
+        <h2 class="text-3xl mb-6">Unsere Leistungen</h2>
+        <div class="services flex flex-wrap justify-center">
+            <div class="card">
+                <h3 class="font-bold">Nageldesign</h3>
+                <p>ab 30€</p>
+            </div>
+            <div class="card">
+                <h3 class="font-bold">Makeup-Service</h3>
+                <p>ab 50€</p>
+            </div>
+            <div class="card">
+                <h3 class="font-bold">Wimpernlifting</h3>
+                <p>ab 40€</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="bewertungen" class="section">
+        <h2 class="text-3xl mb-6">Bewertungen</h2>
+        <p>⭐️⭐️⭐️⭐️⭐️ (4.8 aus 5, 114 Google-Bewertungen)</p>
+        <p>"Ich liebe mein neues Nageldesign! Absolut empfehlenswert!" - Anna J.</p>
+        <p>"Wunderschönes Ambiente und tolle Mitarbeiter." - Maria K.</p>
+    </section>
+
+    <section id="pakete" class="section">
+        <h2 class="text-3xl mb-6">Unsere Pakete</h2>
+        <div class="services flex flex-wrap justify-center">
+            <div class="card">
+                <h3 class="font-bold">Premium Webseite</h3>
+                <p>500€ (inkl. 3 Anpassungen)</p>
+            </div>
+            <div class="card">
+                <h3 class="font-bold">KI-Terminbuchung 24/7</h3>
+                <p>19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege)</p>
+            </div>
+            <div class="card">
+                <h3 class="font-bold">KI-Concierge</h3>
+                <p>20€/Monat</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="section">
+        <h2 class="text-3xl mb-6">Kontaktieren Sie uns</h2>
+        <p>Telefon: <strong>0676 3633721</strong></p>
+        <p>Adresse: Klosterneuburger Str. 98, 1200 Wien</p>
+    </section>
+
+    <footer class="section">
+        <p>&copy; 2026 Divine Beauty & Nails Studio</p>
+    </footer>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()" style="cursor: pointer; float: right;">&times;</span>
+            <h4>Von Euphena</h4>
+            <p>Gefällt Ihnen Ihre neue Webseite?</p>
+            <p>Diese professionelle Webseite gehört Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+            <button onclick="alert('Jetzt sichern!')" class="bg-gold text-white py-2 px-4 rounded">Jetzt sichern</button>
+        </div>
+    </div>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HairSalon",
+            "name": "Divine Beauty & Nails Studio",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Wien"
+            },
+            "telephone": "0676 3633721",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "114"
+            },
+            "priceRange": "€€",
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "09:00",
+                "closes": "19:00"
+            },
+            "url": "https://divinebeautystudio.at"
+        }
+    </script>
+
+</body>
+
+</html>
