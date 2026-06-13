@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Royal Nails by Cristina: Ihr Nagelstudio in Wien für hochwertige Gel- und Gel-Acrylnägel.">
+    <meta name="keywords" content="Nagelstudio, Wien, Gel-Nägel, Acrylnägel, Schönheit, Royal Nails by Cristina">
+    <meta name="author" content="Royal Nails by Cristina">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Royal Nails by Cristina - Nagelstudio in Wien</title>
+    <script>
+        setTimeout(() => {
+            document.getElementById('popup').style.display = 'flex';
+        }, 7000);
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .header {
+            transition: all 0.3s ease;
+        }
+        .fixed {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="header p-5 shadow-lg">
+        <nav class="flex justify-between items-center">
+            <div class="font-playfair text-xl">Royal Nails by Cristina</div>
+            <button id="menu-btn" class="md:hidden">☰</button>
+            <ul class="hidden md:flex space-x-5">
+                <li><a href="#leistungen" class="hover:text-red-600">Leistungen</a></li>
+                <li><a href="#bewertungen" class="hover:text-red-600">Bewertungen</a></li>
+                <li><a href="#pakete" class="hover:text-red-600">Pakete</a></li>
+                <li><a href="#kontakt" class="hover:text-red-600">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="relative h-screen">
+        <img src="https://loremflickr.com/1600/900/nails" alt="Nagelstudio" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="absolute inset-0 flex flex-col justify-center items-center">
+            <h1 class="text-4xl font-playfair text-white mb-4">Willkommen bei Royal Nails</h1>
+            <p class="text-lg text-white mb-8">Hochwertige Gel- und Gel-Acrylnägel in Wien</p>
+            <a href="#buchung" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-500 transition">Jetzt Termin Buchen</a>
+        </div>
+    </section>
+
+    <section id="leistungen" class="my-20">
+        <div class="text-center">
+            <h2 class="text-3xl font-playfair mb-6">Unsere Leistungen</h2>
+        </div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg shadow-lg p-5">
+                <h3 class="font-playfair text-xl mb-3">Gel-Nägel</h3>
+                <p>Preis: 50€</p>
+                <svg class="w-6 h-6 fill-current text-gray-600 mb-2" viewBox="0 0 20 20"><path d="M10 0a10 10 0 100 20A10 10 0 0010 0zm0 18a8 8 0 110-16 8 8 0 010 16z"/></svg>
+                <p>Professionelle Gel-Nägel in verschiedenen Designs.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-5">
+                <h3 class="font-playfair text-xl mb-3">Gel-Acrylnägel</h3>
+                <p>Preis: 60€</p>
+                <svg class="w-6 h-6 fill-current text-gray-600 mb-2" viewBox="0 0 20 20"><path d="M10 0a10 10 0 100 20A10 10 0 0010 0zm0 18a8 8 0 110-16 8 8 0 010 16z"/></svg>
+                <p>Hochwertige Gel-Acrylnägel mit langer Haltbarkeit.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-5">
+                <h3 class="font-playfair text-xl mb-3">Nageldesign</h3>
+                <p>Preis: ab 20€</p>
+                <svg class="w-6 h-6 fill-current text-gray-600 mb-2" viewBox="0 0 20 20"><path d="M10 0a10 10 0 100 20A10 10 0 0010 0zm0 18a8 8 0 110-16 8 8 0 010 16z"/></svg>
+                <p>Kreatives Nageldesign nach Ihren Wünschen.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="bewertungen" class="my-20">
+        <div class="text-center">
+            <h2 class="text-3xl font-playfair mb-6">Bewertungen</h2>
+            <p class="text-xl mb-2">4.8 von 5 | 32 Bewertungen</p>
+            <div class="max-w-2xl mx-auto">
+                <p class="italic mb-4">"Ich bin mit jedem Ergebnis zufrieden! Ich empfehle es allen, die perfekte Nägel wollen!" - Alina</p>
+                <p class="italic">"Toller Service und wunderschöne Nägel!" - Graça</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="buchung" class="text-center my-20">
+        <h2 class="text-3xl font-playfair mb-6">In 30 Sekunden Termin buchen</h2>
+        <a href="#" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-500 transition">Termin Jetzt Buchen</a>
+    </section>
+
+    <section id="pakete" class="my-20">
+        <div class="text-center">
+            <h2 class="text-3xl font-playfair mb-6">Unsere Pakete</h2>
+        </div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg shadow-lg p-5">
+                <h3 class="font-playfair text-xl mb-3">Premium-Website</h3>
+                <p>Professionelle Webseite für Ihr Nagelstudio.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-5">
+                <h3 class="font-playfair text-xl mb-3">KI-Terminbuchung 24/7</h3>
+                <p>Automatisierte Buchungen zu jeder Zeit.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-5">
+                <h3 class="font-playfair text-xl mb-3">KI-Concierge</h3>
+                <p>Persönlicher digitaler Helfer für Ihre Anliegen.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="my-20 text-center">
+        <h2 class="text-3xl font-playfair mb-6">Kontakt</h2>
+        <p class="text-lg">Kleistgasse 6, 1030 Wien</p>
+        <p class="text-lg">Telefon: <a href="tel:+43123456789" class="text-red-600">+43 1 23456789</a></p>
+    </section>
+
+    <footer class="bg-gray-900 text-white text-center p-5">
+        <p>&copy; 2026 Royal Nails by Cristina. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2>Von Euphena</h2>
+            <p>Gefaellt Ihnen Ihre neue Webseite?</p>
+            <p>Diese professionelle Webseite gehoert Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+            <button onclick="document.getElementById('popup').style.display='none'" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition">Jetzt sichern</button>
+        </div>
+    </div>
+</body>
+</html>
