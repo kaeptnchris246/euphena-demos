@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karina NAILS - Professionelles Nagelstudio in Wien mit Spezialisation auf Nageldesign, Wimpernverlängerungen und Spraytanning.">
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        // Minimal JS für das Popup
+        setTimeout(function () {
+            document.getElementById('sales-popup').style.display = 'block';
+        }, 7000);
+
+        function togglePopup() {
+            const popup = document.getElementById('sales-popup');
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+    <title>Karina NAILS - Nagelstudio in Wien</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Smooth Scroll für das Menü
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: white;
+        }
+
+        .hero {
+            background-image: url('https://loremflickr.com/1600/900/nail');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 100vh;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .card {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #sales-popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .close-popup {
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <header class="p-4 shadow">
+        <nav class="flex justify-between items-center">
+            <div class="text-2xl font-playfair">Karina NAILS</div>
+            <div class="space-x-4">
+                <a href="#leistungen" class="text-gray-800 hover:text-gold">Leistungen</a>
+                <a href="#bewertungen" class="text-gray-800 hover:text-gold">Bewertungen</a>
+                <a href="#pakete" class="text-gray-800 hover:text-gold">Pakete</a>
+                <a href="#kontakt" class="text-gray-800 hover:text-gold">Kontakt</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-overlay">
+            <h1 class="text-5xl font-playfair">Willkommen bei Karina NAILS</h1>
+            <p class="mt-4 text-lg">Ihr professionelles Nagelstudio in Wien</p>
+            <a href="#buchung" class="mt-6 text-lg bg-gold text-white px-6 py-3 rounded">Jetzt Termin buchen</a>
+        </div>
+    </div>
+
+    <section id="leistungen" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-playfair mb-10">Unsere Leistungen</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">Nageldesign</h3>
+                    <p>Individuelles Nageldesign, das zu Ihrem Stil passt.</p>
+                    <p class="font-semibold mt-2">Preis: 40€</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">Wimpernverlängerungen</h3>
+                    <p>Verlängern Sie Ihre Wimpern für einen atemberaubenden Blick.</p>
+                    <p class="font-semibold mt-2">Preis: 60€</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">Spraytanning</h3>
+                    <p>Für einen strahlenden Teint, der langeanhaltend ist.</p>
+                    <p class="font-semibold mt-2">Preis: 30€</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bewertungen" class="py-20 bg-gray-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-playfair mb-10">Bewertungen</h2>
+            <p class="text-lg mb-4">Durchschnittliche Bewertung: <strong>4.8</strong> (58 Bewertungen bei Google)</p>
+            <blockquote class="mb-4">
+                <p>„Tolle Atmosphäre und exzellente Betreuung! Ich komme immer wieder gerne!“ - Lisa M.</p>
+            </blockquote>
+            <blockquote>
+                <p>„Die besten Nägel in Wien! Ich kann Karina NAILS nur empfehlen.“ - Anna S.</p>
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="buchung" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-playfair mb-10">In 30 Sek. Termin buchen</h2>
+            <a href="tel:06607406006" class="block text-center bg-gold text-white px-6 py-3 rounded">Jetzt anrufen: 0660 7406006</a>
+        </div>
+    </section>
+
+    <section id="pakete" class="py-20 bg-gray-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-playfair mb-10">Unsere Pakete</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">Premium-Website</h3>
+                    <p>Professionelle Online-Präsenz für Ihr Nagelstudio.</p>
+                    <p class="font-semibold mt-2">Preis: 500€</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">KI-Terminbuchung 24/7</h3>
+                    <p>Immer erreichbar, jederzeit buchen.</p>
+                    <p class="font-semibold mt-2">Preis: 19€/Monat</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">KI-Concierge</h3>
+                    <p>Ihr persönlicher Assistent für Terminmanagement.</p>
+                    <p class="font-semibold mt-2">Preis: Inkludiert</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-playfair mb-10">Kontaktieren Sie uns</h2>
+            <p class="text-lg">Telefon: <strong>0660 7406006</strong></p>
+            <p class="text-lg mt-4">Besuchen Sie uns im 17. Bezirk, Wien.</p>
+        </div>
+    </section>
+
+    <footer class="py-10 bg-gray-800 text-white text-center">
+        <p>&copy; 2026 Karina NAILS. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <!-- Verkaufs-Popup -->
+    <div id="sales-popup" class="rounded-md p-5">
+        <span class="close-popup" onclick="togglePopup()">✖</span>
+        <h3>Von Euphena</h3>
+        <p>Gefällt Ihnen Ihre neue Webseite?</p>
+        <p>Diese professionelle Webseite gehört Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+        <a href="#" class="mt-4 inline-block bg-gold text-white px-4 py-2 rounded">Jetzt sichern</a>
+    </div>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HairSalon",
+            "name": "Karina NAILS",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Wien"
+            },
+            "telephone": "0660 7406006",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "58"
+            },
+            "priceRange": "€€",
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "09:00",
+                "closes": "18:00"
+            },
+            "url": "https://www.karinanails.at"
+        }
+    </script>
+</body>
+
+</html>
