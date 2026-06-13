@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapsalon Verdie - Ihr Friseur in Tilburg</title>
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Kapsalon Verdie in Tilburg bietet eine Vielzahl von Haarschnitt- und Färbeservices mit umweltfreundlichen Produkten.">
+    
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HairSalon",
+            "name": "Kapsalon Verdie",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Verdiplein 101",
+                "addressLocality": "Tilburg",
+                "addressRegion": "Noord-Brabant"
+            },
+            "telephone": "013 590 7431",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "93"
+            },
+            "priceRange": "€",
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Montag",
+                    "Dienstag",
+                    "Mittwoch",
+                    "Donnerstag",
+                    "Freitag",
+                    "Samstag"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+            },
+            "url": "https://example.com"
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-white font-Inter">
+
+    <header class="sticky top-0 bg-gray-800">
+        <nav class="container mx-auto flex justify-between items-center p-6">
+            <a href="#" class="text-3xl font-playfair">Kapsalon Verdie</a>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+            <div id="menu" class="hidden md:flex space-x-6">
+                <a href="#leistungen" class="hover:text-gold">Leistungen</a>
+                <a href="#bewertungen" class="hover:text-gold">Bewertungen</a>
+                <a href="#pakete" class="hover:text-gold">Pakete</a>
+                <a href="#kontakt" class="hover:text-gold">Kontakt</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="relative h-screen bg-cover bg-center" style="background-image: url('https://loremflickr.com/1600/900/hair');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="container mx-auto flex items-center h-full justify-center">
+            <div class="text-center">
+                <h1 class="text-5xl font-playfair mb-4">Ihr Friseur in Tilburg</h1>
+                <p class="text-xl mb-8">Erleben Sie exklusive Haarservices mit einem Umweltbewusstsein.</p>
+                <a href="#leistungen" class="bg-gold text-gray-900 px-6 py-2 rounded hover:bg-opacity-75">Jetzt
+                    Termin buchen</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="leistungen" class="container mx-auto py-20">
+        <h2 class="text-4xl font-playfair text-center mb-10">Unsere Leistungen</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-2xl font-playfair mb-4">Haarfarben</h3>
+                <p>Verschönern Sie Ihr Haar mit unseren umweltfreundlichen Farbprodukten.</p>
+                <p class="mt-4 text-gold">Preis: 50€</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-2xl font-playfair mb-4">Haarschnitte</h3>
+                <p>Moderne Schnitte für jeden Stil und jedes Alter.</p>
+                <p class="mt-4 text-gold">Preis: 30€</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-2xl font-playfair mb-4">Styling</h3>
+                <p>Professionelles Föhnen und Stylen für jeden Anlass.</p>
+                <p class="mt-4 text-gold">Preis: 20€</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="bewertungen" class="bg-gray-800 py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-playfair mb-10">Bewertungen</h2>
+            <p class="text-xl">Durchschnittliche Bewertung: <strong>4.8/5</strong> basierend auf <strong>93
+                Google Bewertungen</strong></p>
+            <div class="flex justify-center mt-8 space-x-4">
+                <div class="bg-gray-700 p-6 rounded-lg w-72">
+                    <p>"Super freundliche Atmosphäre und hervorragende Haarschnitte!"</p>
+                    <p class="mt-2 text-gold">- Max</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg w-72">
+                    <p>"Die besten Stylisten, die ich je hatte!"</p>
+                    <p class="mt-2 text-gold">- Anna</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pakete" class="container mx-auto py-20">
+        <h2 class="text-4xl font-playfair text-center mb-10">Unsere Pakete</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-2xl font-playfair mb-4">Premium-Website</h3>
+                <p>Erhalten Sie eine individuelle Website für Ihren Salon.</p>
+                <p class="mt-4 text-gold">Preis: 500€</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-2xl font-playfair mb-4">KI-Terminbuchung 24/7</h3>
+                <p>Nutzen Sie unsere KI-gestützte Terminbuchung rund um die Uhr.</p>
+                <p class="mt-4 text-gold">Preis: 19€/Monat</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-2xl font-playfair mb-4">KI-Concierge</h3>
+                <p>Ein digitaler Concierge für Ihre Kundenanfragen.</p>
+                <p class="mt-4 text-gold">Preis: Inklusive</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="bg-gray-900 py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-playfair mb-10">Kontakt</h2>
+            <p class="text-xl">Rufen Sie uns an: <strong>013 590 7431</strong></p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 py-10 text-center">
+        <p>&copy; 2023 Kapsalon Verdie. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <div id="popup" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-900 rounded-lg p-6 max-w-md text-center">
+            <h3 class="text-2xl font-playfair mb-4">Von Euphena</h3>
+            <p class="mb-4">Gefaellt Ihnen Ihre neue Webseite?</p>
+            <p>Diese professionelle Webseite gehoert Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+            <button id="close-popup" class="bg-gold text-gray-900 px-4 py-2 rounded mt-4">Jetzt sichern</button>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('popup').classList.remove('hidden');
+        }, 7000);
+
+        document.getElementById('close-popup').onclick = function () {
+            document.getElementById('popup').classList.add('hidden');
+        };
+
+        document.getElementById('menu-toggle').onclick = function () {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        };
+    </script>
+</body>
+
+</html>
