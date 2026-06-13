@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kapper Muro in Tilburg bietet professionelle Herrenfrisuren und Pflegeleistungen. Besuchen Sie uns für einen frischen Look.">
+    <title>Kapper Muro - Herrenfrisuren in Tilburg</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        setTimeout(function() {
+            document.getElementById('popup').style.display = 'block';
+        }, 7000);
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .hero {
+            height: 100vh;
+            background-image: url('https://loremflickr.com/1600/900/haircut');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .cta-button {
+            background-color: #f8c94d;
+            color: #333;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            margin: 10px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background: #444;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close-popup {
+            color: #f8c94d;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <nav>
+        <h1>Kapper Muro</h1>
+        <a href="#leistungen" class="cta-button">Leistungen</a>
+        <a href="#bewertungen" class="cta-button">Bewertungen</a>
+        <a href="#pakete" class="cta-button">Pakete</a>
+        <a href="#kontakt" class="cta-button">Kontakt</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h2 class="text-5xl font-bold">DREAM YOUR LOOK</h2>
+        <p class="text-2xl">Professionelle Herrenfrisuren und Pflege</p>
+        <button class="cta-button" onclick="document.getElementById('popup').style.display='flex'">Jetzt Termin buchen</button>
+    </div>
+</section>
+
+<section id="leistungen" class="p-10">
+    <h2 class="text-4xl font-playfair">Unsere Leistungen</h2>
+    <div class="flex justify-center">
+        <div class="card">
+            <h3>Herrenhaarschnitt</h3>
+            <p>Ab €25</p>
+            <svg><!-- SVG Icon --></svg>
+        </div>
+        <div class="card">
+            <h3>Rasur & Bartpflege</h3>
+            <p>Ab €20</p>
+            <svg><!-- SVG Icon --></svg>
+        </div>
+        <div class="card">
+            <h3>Haarschnitt & Bart</h3>
+            <p>Ab €40</p>
+            <svg><!-- SVG Icon --></svg>
+        </div>
+    </div>
+</section>
+
+<section id="bewertungen" class="p-10">
+    <h2 class="text-4xl font-playfair">Bewertungen</h2>
+    <p>4.8 von 5 auf Google, basierend auf 947 Bewertungen.</p>
+    <blockquote>
+        <p>"Beste Friseure in Tilburg! Super Atmosphäre und hohe Qualität!" - Max</p>
+        <p>"Immer zufrieden mit meinem Haarschnitt!" - Daniel</p>
+    </blockquote>
+</section>
+
+<section id="pakete" class="p-10">
+    <h2 class="text-4xl font-playfair">Pakete</h2>
+    <div class="flex justify-center">
+        <div class="card">
+            <h3>Premium-Website</h3>
+            <p>Einmalig €500 (inkl. 3 Anpassungen)</p>
+        </div>
+        <div class="card">
+            <h3>KI-Terminbuchung 24/7</h3>
+            <p>plus €19/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege)</p>
+        </div>
+        <div class="card">
+            <h3>KI-Concierge</h3>
+            <p>Personalisierte Unterstützung</p>
+        </div>
+    </div>
+</section>
+
+<section id="kontakt" class="p-10">
+    <h2 class="text-4xl font-playfair">Kontakt</h2>
+    <p>Telefon: <a href="tel:0638098200" class="text-yellow-500">06 38098200</a></p>
+</section>
+
+<footer class="p-10 bg-gray-800 text-white">
+    <p>&copy; 2026 Kapper Muro. Alle Rechte vorbehalten.</p>
+</footer>
+
+<div id="popup" class="popup" onclick="this.style.display='none'">
+    <div class="popup-content">
+        <span class="close-popup" onclick="document.getElementById('popup').style.display='none'">&times;</span>
+        <p>Gefällt Ihnen Ihre neue Webseite?</p>
+        <p>Diese professionelle Webseite gehört Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+        <button class="cta-button">Jetzt sichern</button>
+    </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "HairSalon",
+  "name": "Kapper Muro",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Tilburg"
+  },
+  "telephone": "06 38098200",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "947"
+  },
+  "priceRange": "€",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "opens": "08:00",
+    "closes": "20:00"
+  },
+  "url": "https://www.kappermuro.nl/"
+}
+</script>
+
+</body>
+</html>
