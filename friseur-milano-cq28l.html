@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Friseur Milano in Wien - Ihr Meisterfriseur mit modernsten Haarschnitten und exzellentem Service.">
+    
+    <title>Friseur Milano - Ihr Meisterfriseur in Wien</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        function togglePopup() {
+            const popup = document.getElementById('popup');
+            popup.classList.toggle('hidden');
+        }
+        
+        setTimeout(togglePopup, 7000);
+    </script>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HairSalon",
+            "name": "Friseur Milano",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Wien"
+            },
+            "telephone": "0681 81459605",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "189"
+            },
+            "priceRange": "€€",
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "opens": "09:00",
+                "closes": "19:00",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            },
+            "url": "https://www.friseurmilano.at"
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .hero {
+            background-image: url('https://loremflickr.com/1600/900/hair');
+            background-size: cover;
+            height: 100vh;
+            position: relative;
+            color: white;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .btn {
+            background-color: gold;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #f0d600;
+        }
+
+        .popup {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+    <header class="sticky top-0 bg-black z-50">
+        <nav class="flex justify-between p-4">
+            <h1 class="text-xl font-playfair">Friseur Milano</h1>
+            <button class="focus:outline-none sm:hidden" onclick="toggleMenu()">☰</button>
+            <div id="menu" class="hidden">
+                <ul class="flex flex-col sm:flex-row space-x-4">
+                    <li><a href="#services" class="hover:text-gold">Leistungen</a></li>
+                    <li><a href="#reviews" class="hover:text-gold">Bewertungen</a></li>
+                    <li><a href="#booking" class="hover:text-gold">Buchung</a></li>
+                    <li><a href="#contact" class="hover:text-gold">Kontakt</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <h2 class="text-4xl font-playfair">Ihr Meisterfriseur in Wien</h2>
+            <p class="mt-4">Friseur Milano - Modernste Haarschnitte in eleganter Atmosphäre</p>
+            <a href="#booking" class="btn mt-6">Jetzt Termin buchen</a>
+        </div>
+    </section>
+
+    <section id="services" class="p-10">
+        <h2 class="text-3xl font-playfair text-center mb-6">Unsere Leistungen</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-playfair">Damenhaarschnitt</h3>
+                <p>Moderne Schnitte und individuelle Beratung.</p>
+                <span class="text-gold">€45</span>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-playfair">Herrenhaarschnitt</h3>
+                <p>Trendy Looks für jeden Stil.</p>
+                <span class="text-gold">€35</span>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-playfair">Farbe & Strähnen</h3>
+                <p>Hochwertige Produkte für strahlende Farben.</p>
+                <span class="text-gold">ab €55</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="p-10 bg-gray-700">
+        <h2 class="text-3xl font-playfair text-center mb-6">Kundenbewertungen</h2>
+        <div class="text-center">
+            <p>Durchschnittliche Bewertung: <strong>4.8</strong> aus <strong>189</strong> Bewertungen</p>
+            <blockquote class="mt-4">„Ich hatte einen tollen Besuch bei Friseur Milano. Die Atmosphäre war wunderbar und mein Haarschnitt ist perfekt!“ – Anna S.</blockquote>
+            <blockquote class="mt-4">„Die besten Haarschnitte in Wien! Dragan ist ein wahrer Meister seines Fachs.“ – Max H.</blockquote>
+        </div>
+    </section>
+
+    <section id="booking" class="p-10">
+        <h2 class="text-3xl font-playfair text-center mb-6">In 30 Sek. Termin buchen</h2>
+        <a href="#" class="btn">Jetzt buchen</a>
+    </section>
+
+    <section id="packages" class="p-10 bg-gray-700">
+        <h2 class="text-3xl font-playfair text-center mb-6">Unsere Pakete</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-playfair">Premium-Website</h3>
+                <p>Attraktive Gestaltung und Benutzerfreundlichkeit.</p>
+                <span class="text-gold">€500</span>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-playfair">+ KI-Terminbuchung 24/7</h3>
+                <p>Vereinbaren Sie jederzeit Termine automatisch.</p>
+                <span class="text-gold">+ €50</span>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-playfair">+ KI-Concierge</h3>
+                <p>Durchgängiger Kundenservice.</p>
+                <span class="text-gold">+ €70</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="p-10">
+        <h2 class="text-3xl font-playfair text-center mb-6">Kontakt</h2>
+        <p class="text-center">Telefon: <span class="text-gold">0681 81459605</span></p>
+    </section>
+
+    <footer class="bg-black p-4 text-center">
+        <p>&copy; 2026 Friseur Milano – Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <div id="popup" class="popup hidden">
+        <p>Von Euphena</p>
+        <p>Gefällt Ihnen Ihre neue Webseite?</p>
+        <p>Diese professionelle Webseite gehört Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+        <button class="btn" onclick="togglePopup()">Jetzt sichern</button>
+    </div>
+
+</body>
+
+</html>
