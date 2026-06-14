@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windobona Indoor Skydiving Wien</title>
+    <meta name="description" content="Erleben Sie Indoor-Skydiving im Herzen Wiens bei Windobona. Ein unvergessliches Erlebnis ohne Risiko. Jetzt Termin buchen!">
+    <meta property="og:title" content="Windobona Indoor Skydiving Wien">
+    <meta property="og:description" content="Erleben Sie Indoor-Skydiving im Herzen Wiens bei Windobona. Ein unvergessliches Erlebnis ohne Risiko. Jetzt Termin buchen!">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {font-family: 'Inter', sans-serif; color: #f5f5f5; background-color: #1a1a1a;}
+        h1 {font-family: 'Playfair Display', serif; color: #d4af37;}
+        .hero {background: url('https://loremflickr.com/1600/900/skydiving') center/cover no-repeat, linear-gradient(hsla(0, 0%, 0%, 0.7), hsla(0, 0%, 0%, 0.7)); height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; color: white;}
+        .cta {margin-top: 20px;}
+        .bento-grid {display: grid; grid-template-columns: 1fr; gap: 20px; padding: 40px 20px;}
+        .card {background: rgba(255, 255, 255, 0.2); border-radius: 16px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); backdrop-filter: blur(4px); padding: 20px;}
+        .sticky-header {position: sticky; top: 0; background: #000; padding: 10px 0; transition: all 0.3s ease-in-out; z-index: 50;}
+        .sticky-header.scrolled {padding: 5px 0;}
+        .highlight {color: #d4af37;}
+        .icon {width: 24px; height: 24px; fill: #d4af37;}
+        .counter {font-size: 2rem; color: #d4af37;}
+        .phone-link {font-size: 2rem; color: #d4af37; display: block; margin: 10px 0;}
+        @media (prefers-reduced-motion: no-preference) {
+            .hover-lift:hover {transform: translateY(-5px); transition: all 0.3s;}
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center px-4">
+            <div class="text-2xl text-white">Windobona</div>            
+            <div class="space-x-4 hidden md:block">
+                <a href="#leistungen" class="text-white hover:text-highlight">Leistungen</a>
+                <a href="#uber-uns" class="text-white hover:text-highlight">Über uns</a>
+                <a href="#bewertungen" class="text-white hover:text-highlight">Bewertungen</a>
+                <a href="#kontakt" class="text-white hover:text-highlight">Kontakt</a>
+            </div>
+            <button class="md:hidden text-white">☰</button>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl">Windobona Indoor Skydiving Wien</h1>
+            <p class="mt-4 text-lg">Erleben Sie den Traum vom Fliegen im Herzen von Wien!</p>
+            <div class="cta">
+                <a href="#kontakt" class="bg-highlight text-white rounded-full px-6 py-2 hover-lift">Termin buchen</a>
+                <a href="#leistungen" class="bg-highlight text-white rounded-full px-6 py-2 hover-lift ml-4">Leistungen</a>
+            </div>
+        </div>
+    </div>
+
+    <section id="leistungen" class="bento-grid">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div class="card hover-lift">
+                    <svg class="icon"><circle cx="12" cy="12" r="10"></circle></svg>
+                    <h2 class="text-xl mt-2">Einsteigerkurs</h2>
+                    <p>Perfekt für Anfänger, erleben Sie Ihre erste Flugstunde.</p>
+                </div>
+                <div class="card hover-lift">
+                    <svg class="icon"><rect x="2" y="2" width="20" height="20"></rect></svg>
+                    <h2 class="text-xl mt-2">Erlebnisflug</h2>
+                    <p>Unser beliebtester Flug mit voller Betreuung.</p>
+                </div>
+                <div class="card hover-lift">
+                    <svg class="icon"><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+                    <h2 class="text-xl mt-2">Fortgeschrittene</h2>
+                    <p>Optimieren Sie Ihre Technik mit unseren Experten.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="uber-uns" class="my-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl text-center">Über Windobona</h2>
+            <p class="mt-4 text-center">Windobona ist Ihre Top-Adresse für Indoor-Skydiving in Wien. Bei uns erleben Sie das wunderbar befreiende Gefühl des Fliegens ohne jegliche Gefahr.</p>
+        </div>
+    </section>
+
+    <section id="bewertungen" class="my-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl">Bewertungen</h2>
+            <p class="mt-4">Bewertung: <span class="highlight">4.8</span> Sterne - <span class="highlight">20 Google Bewertungen</span></p>
+            <div class="mt-8">
+                <div class="inline-block text-left">
+                    <p>„Unglaubliches Erlebnis, es war atemberaubend!“ - <span class="highlight">Sarah M.</span></p>
+                    <p class="mt-2">„Die beste Möglichkeit, das Fliegen sicher zu erleben!“ - <span class="highlight">Lukas B.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="my-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl">Kontakt & Buchung</h2>
+            <p class="mt-4">Rufen Sie uns an und sichern Sie sich Ihr unvergessliches Flugerlebnis!</p>
+            <a href="tel:+43XXXXXXXXX" class="phone-link hover-lift">(Telefonnummer fehlt)</a>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p>Windobona - Indoor Skydiving Wien</p>
+            <p>Prater, Wien, Österreich</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Windobona",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wien",
+            "addressCountry": "AT"
+        },
+        "telephone": "+43XXXXXXXXX",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "20"
+        },
+        "priceRange": "$$$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "10:00",
+            "closes": "22:00"
+        },
+        "url": "https://www.windobona.at"
+    }
+    </script>
+
+<div id="euphena-pop" style="position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(10,10,12,.55);backdrop-filter:blur(6px)">
+<div style="max-width:440px;margin:20px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);font-family:Inter,system-ui,sans-serif;animation:euPop .5s cubic-bezier(.16,1,.3,1)">
+<div style="height:5px;background:linear-gradient(90deg,#c9a227,#f4e4a6,#c9a227)"></div>
+<div style="padding:30px">
+<div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c9a227;font-weight:700;margin-bottom:10px">Präsentiert von Euphena</div>
+<div style="font-family:'Playfair Display',serif;font-size:25px;line-height:1.2;color:#15151a;margin-bottom:10px">Gefällt Ihnen Ihre neue Webseite?</div>
+<p style="font-size:14.5px;line-height:1.6;color:#4b4b55;margin:0 0 18px">Diese professionelle Webseite für <b>Windobona</b> gehört Ihnen: <b>einmalig 500€</b> (inkl. 3 Anpassungen) + <b>19€/Monat</b> (Hosting, Pflege &amp; 1 Anpassung pro Quartal).</p>
+<a href="mailto:aurelia@euphena.com?subject=Webseite%20sichern%20-%20Windobona" style="display:block;text-align:center;background:#15151a;color:#fff;padding:14px;border-radius:12px;text-decoration:none;font-weight:600;letter-spacing:.02em">Jetzt sichern</a>
+<button onclick="document.getElementById('euphena-pop').style.display='none'" style="display:block;width:100%;margin-top:10px;background:none;border:none;color:#9a9aa5;font-size:13px;cursor:pointer">Später</button>
+</div></div></div>
+<style>@keyframes euPop{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}</style>
+<script>setTimeout(function(){var e=document.getElementById('euphena-pop');if(e)e.style.display='flex';},7000);</script>
+</body>
+</html>
