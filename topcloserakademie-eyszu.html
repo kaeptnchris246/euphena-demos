@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topcloserakademie | Erfolgreicher Closer werden</title>
+  <meta name="description" content="Die Topcloserakademie bietet erstklassige Ausbildung, um ein erfolgreicher Closer zu werden, mit mehr Freiheit und höherem Einkommen.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:ital,wght@0,600;1,400|Inter:ital,wght@0,400;1,300&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; color: #333; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    .hero { background-image: url('https://loremflickr.com/1600/900/business'); background-size: cover; background-position: center; }
+    .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; border: 1px solid #ccc; padding: 1rem; display: none; z-index: 1000; }
+    .dark-overlay { background-color: rgba(0, 0, 0, 0.6); }
+    .header { position: sticky; top: 0; background-color: #000; color: #FFF; }
+  </style>
+</head>
+<body class="bg-gray-100">
+  
+  <div class="header px-4 py-2 flex justify-between items-center">
+    <h1 class="text-lg font-bold">Topcloserakademie</h1>
+    <nav>
+      <ul class="hidden sm:flex space-x-4">
+        <li><a href="#services" class="hover:text-gold">Leistungen</a></li>
+        <li><a href="#reviews" class="hover:text-gold">Bewertungen</a></li>
+        <li><a href="#booking" class="hover:text-gold">Buchung</a></li>
+        <li><a href="#packages" class="hover:text-gold">Pakete</a></li>
+        <li><a href="#contact" class="hover:text-gold">Kontakt</a></li>
+      </ul>
+      <div class="sm:hidden cursor-pointer"><span>☰</span></div>
+    </nav>
+  </div>
+
+  <section class="hero dark-overlay h-screen flex justify-center items-center text-white text-center p-4">
+    <div>
+      <h2 class="text-4xl sm:text-5xl mb-4">Werden Sie ein erfolgreicher Closer</h2>
+      <p>Erleben Sie mehr Freiheit und höheres Einkommen durch unsere führende Ausbildung.</p>
+      <button class="mt-4 px-8 py-2 bg-gold text-black rounded">Jetzt mehr erfahren</button>
+    </div>
+  </section>
+
+  <section id="services" class="py-16 px-4 bg-white text-center">
+    <h2 class="text-3xl mb-8">Unsere Leistungen</h2>
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div class="border p-4 rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="mx-auto h-12"><path d="M12 0C5.4 0 0 5.4 0 12 0 18.6 5.4 24 12 24 18.6 24 24 18.6 24 12 24 5.4 18.6 0 12 0zm0 22C6.5 22 2 17.5 2 12 2 6.5 6.5 2 12 2c5.5 0 10 4.5 10 10 0 5.5-4.5 10-10 10z"></path></svg>
+        <h3 class="text-xl mt-4">Professionelle Closer Ausbildung</h3>
+        <p class="mt-2">Erlernen Sie die bestbezahlte Fähigkeit der Welt in nur 90 Tagen.</p>
+        <strong class="block mt-4 text-gold">€3000</strong>
+      </div>
+      <div class="border p-4 rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="mx-auto h-12"><path d="M4 3h14v3h2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h6v-2H4V3z"></path></svg>
+        <h3 class="text-xl mt-4">Partnervermittlung mit über 200 Unternehmen</h3>
+        <p class="mt-2">Nutzen Sie unser Netzwerk, um Ihre Karriere zu starten.</p>
+        <strong class="block mt-4 text-gold">€500</strong>
+      </div>
+      <div class="border p-4 rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="mx-auto h-12"><path d="M21 11h-6V6h4V0H9v6h4v5H7v7h14zm-13 7v-5H5v5H2v6h10v-1H9v-5H8z"></path></svg>
+        <h3 class="text-xl mt-4">Fortgeschrittene Techniken und KI-Nutzung</h3>
+        <p class="mt-2">Erhöhen Sie Ihr Einkommen und Ihre Freizeit durch innovative Methoden.</p>
+        <strong class="block mt-4 text-gold">€1500</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="py-16 px-4 bg-gray-100 text-center">
+    <h2 class="text-3xl mb-8">Bewertungen</h2>
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 space-x-0 sm:space-x-12">
+      <div class="max-w-sm">
+        <p>"Diese Ausbildung hat meine Karriere transformiert. Ich verdiene jetzt mehr und habe mehr Zeit." - Anna M.</p>
+        <strong class="block mt-2 text-gold">★★★★★</strong>
+      </div>
+      <div class="max-w-sm">
+        <p>"Die Netzwerkmöglichkeiten haben mich direkt zu einem neuen Job geführt. Unglaublich wertvoll!" - Markus T.</p>
+        <strong class="block mt-2 text-gold">★★★★★</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="py-16 px-4 text-center bg-white">
+    <h2 class="text-3xl mb-8">In 30 Sek. Termin buchen</h2>
+    <a href="#" class="inline-block mt-4 px-8 py-2 bg-gold text-black rounded hover:bg-gold-darker transition">Jetzt buchen</a>
+  </section>
+
+  <section id="packages" class="py-16 px-4 bg-gray-100 text-center">
+    <h2 class="text-3xl mb-8">Unsere Pakete</h2>
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div class="border p-4 rounded">
+        <h3 class="text-xl mt-4">Premium-Website</h3>
+        <p class="mt-2">Eine professionelle und maßgeschneiderte Webseite für Ihren Erfolg.</p>
+        <strong class="block mt-4 text-gold">€2000</strong>
+      </div>
+      <div class="border p-4 rounded">
+        <h3 class="text-xl mt-4">+ KI-Terminbuchung 24/7</h3>
+        <p class="mt-2">Ermöglicht eine nahtlose Planung und erhöhte Kundenzufriedenheit.</p>
+        <strong class="block mt-4 text-gold">€1000</strong>
+      </div>
+      <div class="border p-4 rounded">
+        <h3 class="text-xl mt-4">+ KI-Concierge</h3>
+        <p class="mt-2">Ihr persönlicher Assistent für effizientere Kommunikation und Planung.</p>
+        <strong class="block mt-4 text-gold">€1500</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-16 px-4 bg-white text-center">
+    <h2 class="text-3xl mb-8">Kontakt</h2>
+    <p class="text-xl mb-4">Rufen Sie uns an:</p>
+    <strong class="block text-3xl text-gold">[Telefonnummer]</strong>
+  </section>
+
+  <footer class="bg-black text-white py-4 text-center">
+    <p>&copy; 2026 Topcloserakademie. Alle Rechte vorbehalten.</p>
+  </footer>
+
+  <div id="popup" class="popup">
+    <p>Gefaellt Ihnen Ihre neue Webseite?</p>
+    <p>Diese professionelle Webseite gehört Ihnen: einmalig 500€ (inkl. 3 Anpassungen) + 19€/Monat (inkl. 1 Anpassung pro Quartal, Hosting & Pflege).</p>
+    <button class="mt-4 px-8 py-2 bg-gold text-black rounded">Jetzt sichern</button>
+    <button onclick="document.getElementById('popup').style.display='none'" class="mt-2 block text-gray-500 text-sm">Schließen</button>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'block';
+    }, 7000);
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Topcloserakademie",
+    "address": {
+      "addressLocality": "",
+      "addressCountry": "DE"
+    },
+    "telephone": "",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "0"
+    },
+    "priceRange": "€€€",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "url": "https://top-closer.com"
+  }
+  </script>
+  
+</body>
+</html>
