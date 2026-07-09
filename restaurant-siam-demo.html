@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ครัวสยาม · Siam Kitchen — Authentic Thai</title>
+<style>
+  :root{--bg:#0c0805;--gold:#e8b563;--gold2:#f6d79b;--red:#c8482f;--ink:#fdf6ec;--mut:#c9b49a;--line:rgba(232,181,99,.18);--card:rgba(255,255,255,.03)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Helvetica Neue",Arial,"Thonburi","Leelawadee UI",sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.6}
+  .serif{font-family:"Georgia","Times New Roman",serif}
+  #bg{position:fixed;inset:0;z-index:0}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:3px 3px}
+  .wrap{position:relative;z-index:3;max-width:1120px;margin:0 auto;padding:0 24px}
+  nav{position:fixed;top:0;left:0;right:0;z-index:20;backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(12,8,5,.9),rgba(12,8,5,.2));border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:800;letter-spacing:1px;font-size:19px}.logo b{color:var(--gold)}
+  .nlinks{display:flex;gap:24px;font-size:13px;letter-spacing:1px}
+  .nlinks a{color:var(--mut);text-decoration:none;transition:.2s}.nlinks a:hover{color:var(--gold)}
+  .book{background:linear-gradient(135deg,var(--gold),var(--red));color:#1a0f06;font-weight:800;padding:9px 18px;border-radius:999px;text-decoration:none;font-size:13px}
+  @media(max-width:760px){.nlinks{display:none}}
+  header{min-height:100vh;display:flex;align-items:center;position:relative;z-index:3;padding:120px 0 60px}
+  .kick{color:var(--gold);letter-spacing:5px;text-transform:uppercase;font-size:12px;margin-bottom:20px}
+  h1{font-size:clamp(46px,10vw,110px);line-height:.98;font-weight:800;letter-spacing:-1px}
+  h1 .g{background:linear-gradient(90deg,var(--gold2),var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hsub{font-size:clamp(16px,2.4vw,21px);color:var(--mut);max-width:560px;margin-top:24px}
+  .hcta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .btn{font-weight:800;font-size:14px;padding:15px 28px;border-radius:12px;text-decoration:none;transition:.25s;letter-spacing:.5px}
+  .btn.p{background:linear-gradient(135deg,var(--gold),var(--red));color:#1a0f06;box-shadow:0 14px 40px rgba(200,72,47,.3)}
+  .btn.p:hover{transform:translateY(-3px)}
+  .btn.o{border:1px solid var(--line);color:var(--ink)}.btn.o:hover{border-color:var(--gold);color:var(--gold)}
+  .scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--mut);font-size:11px;letter-spacing:2px;z-index:3}
+  section{padding:90px 0;position:relative;z-index:3}
+  .eye{color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:12px;font-weight:700}
+  h2{font-size:clamp(30px,5vw,52px);font-weight:800;margin-top:10px;letter-spacing:-.5px}
+  .lead{color:var(--mut);max-width:640px;margin-top:16px;font-size:17px}
+  .reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+  .dishes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+  @media(max-width:820px){.dishes{grid-template-columns:1fr}}
+  .dish{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card);transition:.35s}
+  .dish:hover{transform:translateY(-6px);border-color:rgba(232,181,99,.5)}
+  .dish .img{height:190px;position:relative;overflow:hidden}
+  .dish .img span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:74px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
+  .d1{background:radial-gradient(circle at 30% 30%,#7a1f12,#160a06)}
+  .d2{background:radial-gradient(circle at 60% 40%,#8a5a12,#160a06)}
+  .d3{background:radial-gradient(circle at 40% 60%,#2f6d3a,#0c1408)}
+  .dish .body{padding:20px}
+  .dish h3{font-size:20px;font-weight:800}
+  .dish p{color:var(--mut);font-size:14px;margin-top:6px}
+  .dish .price{color:var(--gold);font-weight:800;margin-top:12px;font-size:15px}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+  @media(max-width:820px){.strip{grid-template-columns:1fr 1fr}}
+  .tile{height:150px;border-radius:16px;display:flex;align-items:flex-end;padding:14px;font-weight:700;font-size:14px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+  .t1{background:linear-gradient(160deg,#b3401f,#2a0f08)}.t2{background:linear-gradient(160deg,#caa02e,#2a1c08)}
+  .t3{background:linear-gradient(160deg,#2e7d46,#0c1a10)}.t4{background:linear-gradient(160deg,#8e3bbf,#1a0c2a)}
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  @media(max-width:820px){.split{grid-template-columns:1fr}}
+  .story-img{height:340px;border-radius:22px;background:radial-gradient(circle at 60% 30%,#7a3312,#160a06);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:110px}
+  .book-band{background:linear-gradient(135deg,rgba(232,181,99,.14),rgba(200,72,47,.16));border:1px solid var(--line);border-radius:26px;padding:56px 30px;text-align:center;margin:20px 0}
+  .book-band h2{font-size:clamp(30px,5vw,48px)}
+  .book-band p{color:var(--mut);max-width:520px;margin:14px auto 0}
+  .info{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  @media(max-width:760px){.info{grid-template-columns:1fr}}
+  .info div{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--card)}
+  .info h4{color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+  .info p{margin-top:8px;font-size:15px}
+  footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;color:var(--mut);font-size:14px;position:relative;z-index:3}
+  /* Euphena sales badge */
+  #euph{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:40;max-width:520px;width:calc(100% - 32px);background:#fff;color:#1a1206;border-radius:18px;padding:18px 20px;box-shadow:0 20px 60px rgba(0,0,0,.5);display:flex;gap:14px;align-items:center}
+  #euph .k{font-size:11px;letter-spacing:2px;color:var(--red);font-weight:800;text-transform:uppercase}
+  #euph b{font-size:16px}#euph p{font-size:13px;color:#4a3d2e;margin-top:2px}
+  #euph a{background:#1a1206;color:#fff;border-radius:10px;padding:11px 16px;text-decoration:none;font-weight:800;font-size:13px;white-space:nowrap}
+  #euph .x{position:absolute;top:8px;right:12px;color:#aa9;cursor:pointer;font-size:18px;background:none;border:0}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><div class="grain"></div>
+
+<nav><div class="nav-in">
+  <div class="logo">ครัว<b>สยาม</b> · Siam Kitchen</div>
+  <div class="nlinks"><a href="#menu">เมนู</a><a href="#gallery">แกลเลอรี</a><a href="#story">เรื่องราว</a><a href="#book">จอง</a></div>
+  <a href="#book" class="book">จองโต๊ะ</a>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="kick">Authentic Thai · Bangkok Soul</div>
+  <h1 class="serif">รสชาติแท้<br><span class="g">แห่งสยาม</span></h1>
+  <p class="hsub">อาหารไทยต้นตำรับ วัตถุดิบสดใหม่ทุกวัน ปรุงด้วยหัวใจ — ประสบการณ์ที่คุณจะจดจำ Authentic Thai cuisine, made fresh with heart.</p>
+  <div class="hcta"><a href="#book" class="btn p">จองโต๊ะเลย · Reserve</a><a href="#menu" class="btn o">ดูเมนู · View Menu</a></div>
+</div>
+<div class="scroll">เลื่อนลง ↓ SCROLL</div>
+</header>
+
+<section id="menu"><div class="wrap">
+  <div class="reveal"><div class="eye">Signature Dishes</div><h2 class="serif">เมนูเด็ดของเรา</h2>
+  <p class="lead">คัดสรรวัตถุดิบชั้นดี ปรุงสดใหม่ตามสูตรต้นตำรับ</p></div>
+  <div class="dishes">
+    <div class="dish reveal"><div class="img d1"><span>🍜</span></div><div class="body"><h3>ต้มยำกุ้ง</h3><p>Tom Yum Goong — spicy & sour prawn soup, lemongrass & lime.</p><div class="price">฿ 220</div></div></div>
+    <div class="dish reveal"><div class="img d2"><span>🍤</span></div><div class="body"><h3>ผัดไทยกุ้งสด</h3><p>Pad Thai — wok-fried rice noodles, fresh prawns, tamarind.</p><div class="price">฿ 180</div></div></div>
+    <div class="dish reveal"><div class="img d3"><span>🥥</span></div><div class="body"><h3>แกงเขียวหวาน</h3><p>Green Curry — coconut, Thai basil, tender chicken.</p><div class="price">฿ 190</div></div></div>
+  </div>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+  <div class="reveal"><div class="eye">Gallery</div><h2 class="serif">บรรยากาศร้าน</h2></div>
+  <div class="strip">
+    <div class="tile t1 reveal">รสจัดจ้าน</div><div class="tile t2 reveal">วัตถุดิบสด</div><div class="tile t3 reveal">สมุนไพรไทย</div><div class="tile t4 reveal">บรรยากาศอบอุ่น</div>
+  </div>
+</div></section>
+
+<section id="story"><div class="wrap split">
+  <div class="reveal"><div class="eye">Our Story</div><h2 class="serif">จากครัวสู่หัวใจคุณ</h2>
+  <p class="lead">เราเริ่มต้นจากสูตรของคุณยาย ส่งต่อความอร่อยแบบไทยแท้มากว่า 20 ปี ทุกจานปรุงด้วยความใส่ใจ เพื่อให้ทุกมื้อของคุณพิเศษ From grandma's recipes to your table — 20 years of authentic Thai taste.</p>
+  <div class="info">
+    <div><h4>เปิดบริการ</h4><p>ทุกวัน 11:00–22:00</p></div>
+    <div><h4>โทร / LINE</h4><p>@siamkitchen</p></div>
+    <div><h4>ที่ตั้ง</h4><p>Sukhumvit, Bangkok</p></div>
+  </div></div>
+  <div class="story-img reveal">🧑‍🍳</div>
+</div></section>
+
+<section id="book"><div class="wrap">
+  <div class="book-band reveal">
+    <div class="eye" style="text-align:center">Reservations</div>
+    <h2 class="serif">จองโต๊ะของคุณวันนี้</h2>
+    <p>ให้เราดูแลทุกมื้อพิเศษของคุณ — จองง่าย ๆ ผ่าน LINE หรือโทรหาเราได้เลย</p>
+    <div style="margin-top:26px"><a href="#" class="btn p">จองผ่าน LINE · Book via LINE</a></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">ครัวสยาม · Siam Kitchen — Authentic Thai Cuisine · Sukhumvit, Bangkok · @siamkitchen</div></footer>
+
+<div id="euph">
+  <button class="x" onclick="document.getElementById('euph').remove()">×</button>
+  <div><div class="k">Präsentiert von Euphena</div><b>Gefällt Ihnen Ihre neue Webseite?</b><p>Diese professionelle Seite gehört Ihnen — jetzt sichern.</p></div>
+  <a href="mailto:christian@euphena.com">Jetzt sichern</a>
+</div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// warm ember particle background
+(function(){
+  const c=document.getElementById('bg'),x=c.getContext('2d');let w,h,P;
+  function rs(){w=c.width=innerWidth;h=c.height=innerHeight;P=Array.from({length:70},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+.4,s:Math.random()*.5+.15,o:Math.random()*.5+.2}));}
+  rs();addEventListener('resize',rs);
+  (function loop(){x.clearRect(0,0,w,h);const g=x.createRadialGradient(w*.5,h*.1,0,w*.5,h*.1,h);g.addColorStop(0,'rgba(120,50,18,.35)');g.addColorStop(1,'rgba(12,8,5,0)');x.fillStyle=g;x.fillRect(0,0,w,h);
+    P.forEach(p=>{p.y-=p.s;if(p.y<-5){p.y=h+5;p.x=Math.random()*w;}x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fillStyle='rgba(232,181,99,'+p.o+')';x.fill();});
+    requestAnimationFrame(loop);})();
+})();
+</script>
+</body>
+</html>
