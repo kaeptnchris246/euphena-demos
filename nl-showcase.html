@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uw website + AI-assistent — BlackUnicorn</title>
+<style>
+  :root{
+    --bg:#0a0b10; --bg2:#0f1118; --panel:#151824; --line:#242838; --fg:#f2f4f9; --mut:#9aa4b8;
+    --gold:#e7c07b; --acc:#6f8cff; --good:#37d39a;
+    --font:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  .badge{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(231,192,123,.35);border-radius:20px;padding:5px 13px}
+  h1{font-family:var(--serif);font-size:clamp(34px,6vw,66px);line-height:1.04;letter-spacing:-.01em;font-weight:600;margin:20px 0 0}
+  h1 .g{color:var(--gold)}
+  h2{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:clamp(16px,2.1vw,20px);max-width:620px;margin-top:18px}
+  .cta{display:inline-flex;gap:10px;align-items:center;margin-top:30px;background:var(--gold);color:#161209;font-weight:700;padding:14px 26px;border-radius:12px;text-decoration:none;font-size:15px}
+  .cta.ghost{background:transparent;color:var(--fg);border:1px solid var(--line);margin-left:10px}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  .hero{padding:70px 0 60px;border:none;position:relative;overflow:hidden}
+  .glow{position:absolute;inset:-40% 30% auto -10%;height:520px;background:radial-gradient(closed,rgba(111,140,255,.18),transparent 70%);filter:blur(30px);z-index:0}
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{color:var(--mut);font-size:13px;margin-bottom:8px;letter-spacing:.02em}
+  .grid{display:grid;gap:18px}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{color:var(--mut);font-size:14px}
+  .ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:#1c2130;border:1px solid var(--line);margin-bottom:12px}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 40px}
+  .sec-head p{color:var(--mut);margin-top:10px}
+  /* branche mini-mockups */
+  .demos{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+  .demo{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .mock{height:196px;position:relative;overflow:hidden}
+  .mock .bar{height:26px;background:rgba(0,0,0,.35);display:flex;align-items:center;gap:6px;padding:0 12px}
+  .mock .bar i{width:9px;height:9px;border-radius:50%;background:#3a4152;display:block}
+  .mock .body{padding:16px 18px}
+  .mock .kh{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.1}
+  .mock .ks{font-size:11.5px;opacity:.8;margin-top:5px}
+  .mock .kb{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;padding:6px 12px;border-radius:8px}
+  .mock .row{display:flex;gap:7px;margin-top:14px}
+  .mock .chip{flex:1;height:34px;border-radius:8px;background:rgba(255,255,255,.06)}
+  .demo .meta{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line)}
+  .demo .meta b{font-size:15px}.demo .meta span{color:var(--mut);font-size:12.5px}
+  .demo .meta a{color:var(--acc);text-decoration:none;font-size:13px;font-weight:600}
+  /* horeca */ .t-horeca{background:linear-gradient(160deg,#1a1410,#0d0b08)} .t-horeca .kh{color:#f3d9a6} .t-horeca .kb{background:#c9992f;color:#191203}
+  /* kapper */ .t-kapper{background:linear-gradient(160deg,#0e1418,#080b0d)} .t-kapper .kh{color:#cfe8ea} .t-kapper .kb{background:#2ba7b3;color:#04191b}
+  /* tandarts */ .t-tand{background:linear-gradient(160deg,#0d1220,#080a12)} .t-tand .kh{color:#cdd8ff} .t-tand .kb{background:#4f7cff;color:#fff}
+  /* cafe */ .t-cafe{background:linear-gradient(160deg,#17110f,#0b0807)} .t-cafe .kh{color:#f0cdb0} .t-cafe .kb{background:#b5623a;color:#fff}
+  /* chat */
+  .chatwrap{max-width:460px;margin:0 auto;background:var(--bg2);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .chat-top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .chat-top .av{width:34px;height:34px;border-radius:50%;background:var(--gold);color:#161209;display:grid;place-items:center;font-weight:800}
+  .chat-top .on{margin-left:auto;color:var(--good);font-size:12px}
+  .chat-body{padding:16px;min-height:150px}
+  .bub{background:#20263a;padding:11px 14px;border-radius:12px;font-size:14px;max-width:85%}
+  .quick{display:flex;gap:8px;padding:0 16px 16px;flex-wrap:wrap}
+  .quick span{border:1px solid var(--gold);color:var(--gold);border-radius:20px;padding:7px 14px;font-size:13px}
+  /* prijzen */
+  .prijs{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .plan{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center}
+  .plan.pop{border-color:var(--gold);box-shadow:0 0 0 1px rgba(231,192,123,.3)}
+  .plan .br{font-size:13px;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+  .plan .pr{font-family:var(--serif);font-size:46px;font-weight:600;margin:8px 0 2px}
+  .plan .pm{color:var(--mut);font-size:13px}
+  .plan ul{list-style:none;margin:16px 0 0;text-align:left;font-size:14px}
+  .plan li{padding:7px 0;border-top:1px solid var(--line);color:#dfe4ef}
+  .plan li:before{content:"✓";color:var(--good);margin-right:8px}
+  .incl{text-align:center;color:var(--mut);font-size:14px;margin-top:22px}
+  .incl b{color:var(--fg)}
+  footer{padding:40px 0;text-align:center;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<div class="hero"><div class="glow"></div><div class="wrap">
+  <span class="badge">Website + AI · voor lokale bedrijven</span>
+  <h1>Meer klanten,<br><span class="g">minder telefoon.</span></h1>
+  <p class="lead">Wij bouwen uw complete website én een AI-assistent die 24/7 boekingen aanneemt, aanvragen opvolgt en op elke review antwoordt. U ziet alleen het resultaat.</p>
+  <div><a class="cta" href="#voorbeelden">Bekijk de voorbeelden ↓</a><a class="cta ghost" href="#prijzen">Wat kost het?</a></div>
+</div></div>
+
+<section id="watucrijgt"><div class="wrap">
+  <div class="sec-head"><h2>Wat de AI vanaf dag 1 overneemt</h2><p>Geen extra werk — de AI draait op de achtergrond, u ziet alleen meer afspraken.</p></div>
+  <div class="grid g4">
+    <div class="card"><div class="ico">🌐</div><h3>Professionele website</h3><p>Snel, mobiel-first en modern. Inbegrepen, opzet €0.</p></div>
+    <div class="card"><div class="ico">📅</div><h3>24/7 online afspraken</h3><p>Boekingen ook buiten openingstijden — automatisch in uw agenda.</p></div>
+    <div class="card"><div class="ico">💬</div><h3>Aanvragen opgevolgd</h3><p>De AI beantwoordt vragen en volgt open aanvragen zelf na.</p></div>
+    <div class="card"><div class="ico">⭐</div><h3>Reviews beheerd</h3><p>Antwoordt op elke Google-review en verzamelt automatisch 5 sterren.</p></div>
+  </div>
+</div></section>
+
+<section id="voorbeelden"><div class="wrap">
+  <div class="sec-head"><h2>Bekijk voorbeelden per branche</h2><p>Zo kan het er voor úw zaak uitzien — vier stijlen, allemaal aanpasbaar aan uw huisstijl.</p></div>
+  <div class="demos">
+    <div class="demo"><div class="mock t-horeca"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="kh">Restaurant Cornelis</div><div class="ks">Rotterdam · reserveren in 20 seconden</div><span class="kb">Reserveer een tafel</span><div class="row"><span class="chip"></span><span class="chip"></span><span class="chip"></span></div></div></div><div class="meta"><div><b>Horeca</b><br><span>restaurant · café · bar</span></div><a href="#">stijl-voorbeeld</a></div></div>
+    <div class="demo"><div class="mock t-kapper"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="kh">Kapsalon Overtoom</div><div class="ks">Amsterdam · online een plek boeken</div><span class="kb">Boek een afspraak</span><div class="row"><span class="chip"></span><span class="chip"></span><span class="chip"></span></div></div></div><div class="meta"><div><b>Kapper &amp; beauty</b><br><span>kapsalon · barbier · nagels</span></div><a href="#">stijl-voorbeeld</a></div></div>
+    <div class="demo"><div class="mock t-tand"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="kh">Tandarts Utrecht</div><div class="ks">Utrecht · afspraak &amp; controle-herinnering</div><span class="kb">Maak een afspraak</span><div class="row"><span class="chip"></span><span class="chip"></span><span class="chip"></span></div></div></div><div class="meta"><div><b>Praktijk</b><br><span>tandarts · huisarts · fysio</span></div><a href="#">stijl-voorbeeld</a></div></div>
+    <div class="demo"><div class="mock t-cafe"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="kh">Café River</div><div class="ks">Rotterdam · groepen &amp; events aanvragen</div><span class="kb">Vraag beschikbaarheid</span><div class="row"><span class="chip"></span><span class="chip"></span><span class="chip"></span></div></div></div><div class="meta"><div><b>Café &amp; lunchroom</b><br><span>koffie · lunch · borrel</span></div><a href="#">stijl-voorbeeld</a></div></div>
+  </div>
+</div></section>
+
+<section id="assistent"><div class="wrap">
+  <div class="sec-head"><h2>De AI-assistent in actie</h2><p>Uw gast boekt in 20 seconden — dag en nacht, zonder dat u de telefoon opneemt.</p></div>
+  <div class="chatwrap">
+    <div class="chat-top"><div class="av">U</div><div><b>Uw zaak</b></div><div class="on">● online</div></div>
+    <div class="chat-body"><div class="bub">Hallo 👋 Ik ben de AI-assistent van uw zaak. Waarmee kan ik u helpen?</div></div>
+    <div class="quick"><span>Afspraak maken</span><span>Openingstijden</span><span>Een vraag stellen</span></div>
+  </div>
+</div></section>
+
+<section id="prijzen"><div class="wrap">
+  <div class="sec-head"><h2>Eén duidelijk pakket per branche</h2><p>Website inbegrepen · opzetkosten €0 · eerste maand geen binding.</p></div>
+  <div class="prijs">
+    <div class="plan"><div class="br">Kapper &amp; beauty</div><div class="pr">€49</div><div class="pm">per maand</div><ul><li>Complete website</li><li>Online afspraken 24/7</li><li>Herinneringen voor vaste klanten</li><li>Reviews beheerd</li></ul></div>
+    <div class="plan pop"><div class="br">Horeca</div><div class="pr">€59</div><div class="pm">per maand</div><ul><li>Complete website</li><li>Tafelreservering 24/7</li><li>Vaste gasten uitgenodigd</li><li>Reviews beheerd</li></ul></div>
+    <div class="plan"><div class="br">Praktijk</div><div class="pr">€69</div><div class="pm">per maand</div><ul><li>Complete website</li><li>Online afspraken 24/7</li><li>AI-controle­herinnering (recall)</li><li>Reviews beheerd</li></ul></div>
+  </div>
+  <p class="incl"><b>Alles inbegrepen:</b> website, AI-assistent, opzet €0 — en de eerste maand zit u nergens aan vast.</p>
+  <div style="text-align:center"><a class="cta" href="#" style="margin-top:26px">Ja, ik wil dit voor mijn zaak</a></div>
+  <p class="incl" style="margin-top:14px">Een collega van ons belt u de komende dagen even kort — vrijblijvend.</p>
+</div></section>
+
+<footer>BlackUnicorn · Website &amp; AI voor lokale bedrijven · <span style="opacity:.7">demovoorbeeld, geen echte boeking</span></footer>
+
+<script>
+// kleine levendigheid: chat-bubbels na klik op quick-reply
+const replies={'Afspraak maken':'Top! Voor welke dag en hoe laat wilt u langskomen? Ik zet het meteen in de agenda.','Openingstijden':'We zijn open di–za 09:00–18:00. Wilt u meteen een afspraak inplannen?','Een vraag stellen':'Natuurlijk — stel gerust uw vraag, ik help u direct verder.'};
+document.querySelectorAll('.quick span').forEach(s=>s.addEventListener('click',()=>{
+  const b=document.querySelector('.chat-body');
+  const u=document.createElement('div');u.className='bub';u.style.cssText='margin-left:auto;background:#2a3350;margin-top:10px';u.textContent=s.textContent;b.appendChild(u);
+  setTimeout(()=>{const a=document.createElement('div');a.className='bub';a.style.marginTop='10px';a.textContent=replies[s.textContent]||'Ik help u graag verder.';b.appendChild(a);b.scrollTop=b.scrollHeight;},450);
+}));
+</script>
+</body>
+</html>
