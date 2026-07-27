@@ -125,6 +125,49 @@
   footer{border-top:1px solid var(--line);padding:40px 0;color:var(--dim);font-size:13.5px}
   .fx{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
   .fx .brand{color:var(--mut)}
+
+  /* clickable product cards */
+  .card{cursor:pointer}
+  .card .more{position:relative;z-index:2;margin-top:14px;font-size:12px;color:var(--g);opacity:.55;transition:.4s}
+  .card:hover .more{opacity:1}
+
+  /* Euphena ONE crypto section */
+  .eo{overflow:hidden}
+  .eo-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  @media(max-width:900px){.eo-grid{grid-template-columns:1fr;gap:40px}}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chips span{border:1px solid var(--line);border-radius:30px;padding:9px 15px;font-size:13px;color:var(--mut);background:rgba(255,255,255,.02)}
+  .chips span b{color:var(--g);font-weight:500}
+  .orb{position:relative;aspect-ratio:1;max-width:380px;margin:0 auto;width:100%}
+  .orb i{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(192,75,255,.25)}
+  .orb i:nth-child(1){inset:0;animation:spin 26s linear infinite}
+  .orb i:nth-child(2){inset:13%;border-color:rgba(226,180,92,.28);animation:spin 18s linear infinite reverse}
+  .orb i:nth-child(3){inset:28%;border-color:rgba(124,92,255,.4);animation:spin 12s linear infinite}
+  .orb .core{position:absolute;inset:40%;border-radius:50%;background:var(--grad);box-shadow:0 0 60px rgba(160,90,255,.6);display:grid;place-items:center;font-family:"Fraunces",serif;color:#120c1c;font-weight:600;font-size:15px;text-align:center;line-height:1}
+  .orb .dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--g);box-shadow:0 0 16px var(--g);top:-5px;left:calc(50% - 5px)}
+  .orb i:nth-child(2) .dot{background:var(--m);box-shadow:0 0 16px var(--m)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* modals */
+  .modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:22px;
+    background:rgba(4,4,10,.74);backdrop-filter:blur(9px)}
+  .modal.open{display:flex}
+  .sheet{background:#0d101b;border:1px solid var(--line);border-radius:22px;max-width:540px;width:100%;padding:clamp(26px,4vw,38px);position:relative;max-height:90vh;overflow:auto}
+  .sheet .glyph{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:18px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:22px}
+  .sheet h3{font-size:27px;margin-bottom:12px}
+  .sheet p.mtxt{color:var(--mut);font-size:15px;line-height:1.6;margin-bottom:22px}
+  .sheet .x{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--mut);font-size:24px;background:none;border:0;line-height:1}
+  .sheet .x:hover{color:var(--ink)}
+  .field{margin-bottom:14px}
+  .field.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .field label{display:block;font-size:12px;color:var(--mut);margin-bottom:6px;letter-spacing:.03em}
+  .field input,.field select,.field textarea{width:100%;background:#080a12;border:1px solid var(--line);border-radius:10px;padding:12px 13px;color:var(--ink);font-family:inherit;font-size:14.5px;transition:.25s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:rgba(192,75,255,.55)}
+  .field textarea{min-height:84px;resize:vertical}
+  .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+  .sheet .btn{width:100%;justify-content:center;margin-top:6px}
+  .okmsg{text-align:center;padding:14px 0 6px}
+  .okmsg .big{font-size:44px;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -136,10 +179,9 @@
 <nav id="nav">
   <div class="brand"><span class="logo"></span> BlackUnicorn</div>
   <div class="navlinks">
-    <a href="#studio" data-i18n="nav_studio">Studio</a>
     <a href="#producten" data-i18n="nav_products">Produkte</a>
+    <a href="#euphena">Euphena ONE</a>
     <a href="#werkwijze" data-i18n="nav_approach">Ansatz</a>
-    <a href="#contact" data-i18n="nav_contact">Kontakt</a>
   </div>
   <div class="navright">
     <div class="langsw">
@@ -147,7 +189,7 @@
       <button data-l="nl" onclick="__setLang('nl')">NL</button>
       <button data-l="en" onclick="__setLang('en')">EN</button>
     </div>
-    <a href="#contact" class="navcta" data-i18n="nav_cta">Projekt starten</a>
+    <a href="#" class="navcta" data-i18n="nav_cta" onclick="openForm(event)">Projekt starten</a>
   </div>
 </nav>
 
@@ -161,7 +203,7 @@
       <p class="lede" data-i18n="hero_lede">BlackUnicorn ist die Digital- und KI-Agentur der Euphena-Gruppe. Wir entwerfen Websites mit Tiefe, KI-Assistenten, die Kunden gewinnen, und autonome Systeme, die im Hintergrund arbeiten.</p>
       <div class="row">
         <a href="#producten" class="btn p" data-i18n="hero_btn1">Produkte ansehen →</a>
-        <a href="#contact" class="btn s" data-i18n="hero_btn2">Gespräch anfragen</a>
+        <a href="#" class="btn s" data-i18n="hero_btn2" onclick="openForm(event)">Gespräch anfragen</a>
       </div>
     </div>
     <div class="scrollcue" data-i18n="hero_scroll">Scroll</div>
@@ -230,6 +272,34 @@
     </div>
   </section>
 
+  <!-- EUPHENA ONE (Krypto) -->
+  <section id="euphena" class="pad eo">
+    <div class="container">
+      <div class="eo-grid">
+        <div class="reveal">
+          <div class="stag" data-i18n="eo_tag">Eigenes Produkt · Krypto-Infrastruktur</div>
+          <h2 style="font-size:clamp(30px,5vw,58px);line-height:1.03;letter-spacing:-.02em" data-i18n-html="eo_h2">Euphena ONE — unsere eigene <span class="grad">tokenisierte Asset-Plattform</span>.</h2>
+          <p style="margin-top:20px;color:var(--mut);font-size:17px;line-height:1.6;max-width:560px" data-i18n="eo_p">Wir bauen nicht nur für andere. Euphena ONE ist unsere eigene Plattform, um reale Vermögenswerte zu tokenisieren — mit Dual-Token-Architektur (ERC-3643), rechtssicher und investorbereit. Der Beweis, dass wir komplette Krypto-Infrastruktur end-to-end selbst bauen.</p>
+          <div class="chips">
+            <span data-i18n-html="eo_f1"><b>Dual-Token</b> · ERC-3643</span>
+            <span data-i18n-html="eo_f2"><b>Tokenisierung</b> realer Assets</span>
+            <span data-i18n-html="eo_f3"><b>Eigene</b> Exchange-Infrastruktur</span>
+            <span data-i18n-html="eo_f4"><b>Compliance-first</b></span>
+          </div>
+          <p style="margin-top:24px;color:var(--dim);font-size:13px" data-i18n="eo_note">Euphena ONE zeigt unsere Tiefe als Studio — von der Idee bis zur eigenen Plattform.</p>
+        </div>
+        <div class="reveal">
+          <div class="orb">
+            <i><span class="dot"></span></i>
+            <i><span class="dot"></span></i>
+            <i></i>
+            <div class="core">Euphena<br>ONE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- STATS -->
   <section class="pad">
     <div class="container">
@@ -264,7 +334,7 @@
       <h2 class="reveal" data-i18n-html="cta_h2">Lassen Sie uns<br><span class="grad">etwas Schönes</span> bauen.</h2>
       <p class="reveal" data-i18n="cta_p">Eine Website mit Tiefe, ein KI-Assistent, ein ganzes Produkt — erzählen Sie uns, wovon Sie träumen.</p>
       <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn p" id="mailcta" data-i18n="cta_btn1">Projekt starten →</a>
+        <a href="#" class="btn p" data-i18n="cta_btn1" onclick="openForm(event)">Projekt starten →</a>
         <a href="#producten" class="btn s" data-i18n="cta_btn2">Nochmal ansehen</a>
       </div>
     </div>
@@ -277,6 +347,59 @@
       <div data-i18n="foot2">© 2026 · gebaut mit WebGL & KI</div>
     </div>
   </footer>
+</div>
+
+<!-- Product detail modal -->
+<div class="modal" id="prodModal">
+  <div class="sheet">
+    <button class="x" onclick="closeModal('prodModal')" aria-label="close">×</button>
+    <div class="glyph" id="pmGlyph">✨</div>
+    <h3 id="pmTitle"></h3>
+    <p class="mtxt" id="pmDesc"></p>
+    <a href="#" class="btn p" data-i18n="prod_cta" onclick="openForm(event, document.getElementById('pmTitle').textContent)">Dieses Produkt anfragen →</a>
+  </div>
+</div>
+
+<!-- Contact form modal -->
+<div class="modal" id="formModal">
+  <div class="sheet">
+    <button class="x" onclick="closeModal('formModal')" aria-label="close">×</button>
+    <div id="formWrap">
+      <h3 data-i18n="form_title">Projekt starten</h3>
+      <p class="mtxt" data-i18n="form_sub">Erzählen Sie uns kurz, worum es geht — wir melden uns persönlich.</p>
+      <form id="leadForm" onsubmit="return submitLead(event)">
+        <div class="field two">
+          <div><label data-i18n="form_name">Name</label><input name="name" required></div>
+          <div><label data-i18n="form_company">Firma</label><input name="company"></div>
+        </div>
+        <div class="field"><label data-i18n="form_email">E-Mail</label><input type="email" name="email" required></div>
+        <div class="field two">
+          <div><label data-i18n="form_market">Markt</label>
+            <select name="market" id="fMarket">
+              <option value="AT" data-i18n="form_market_at">Österreich</option>
+              <option value="NL" data-i18n="form_market_nl">Niederlande</option>
+              <option value="INT" data-i18n="form_market_int">International</option>
+            </select></div>
+          <div><label data-i18n="form_interest">Interesse</label>
+            <select name="interest" id="fInterest">
+              <option data-i18n="form_int_web">Website</option>
+              <option data-i18n="form_int_ai">KI-Assistent</option>
+              <option data-i18n="form_int_crypto">Euphena ONE / Krypto</option>
+              <option data-i18n="form_int_other">Sonstiges</option>
+            </select></div>
+        </div>
+        <div class="field"><label data-i18n="form_msg">Nachricht (optional)</label><textarea name="message"></textarea></div>
+        <input class="hp" name="website2" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn p" id="formSubmit" data-i18n="form_send">Anfrage senden →</button>
+      </form>
+    </div>
+    <div id="formOk" class="okmsg" style="display:none">
+      <div class="big grad">✓</div>
+      <h3 data-i18n="form_ok_title">Danke — angekommen!</h3>
+      <p class="mtxt" data-i18n="form_ok_body">Ihre Anfrage ist bei uns. Ein:e Kolleg:in meldet sich in Kürze persönlich bei Ihnen.</p>
+      <button class="btn s" onclick="closeModal('formModal')" data-i18n="form_close">Schließen</button>
+    </div>
+  </div>
 </div>
 
 <!-- i18n (classic script, runs before deferred module) -->
@@ -310,7 +433,19 @@ const I18N = {
     cta_h2:'Lassen Sie uns<br><span class="grad">etwas Schönes</span> bauen.',
     cta_p:"Eine Website mit Tiefe, ein KI-Assistent, ein ganzes Produkt — erzählen Sie uns, wovon Sie träumen.",
     cta_btn1:"Projekt starten →",cta_btn2:"Nochmal ansehen",
-    foot1:"KI- & Web-Studio · Wien · Österreich & Niederlande",foot2:"© 2026 · gebaut mit WebGL & KI",mailsubj:"Projekt mit BlackUnicorn"
+    foot1:"KI- & Web-Studio · Wien · Österreich & Niederlande",foot2:"© 2026 · gebaut mit WebGL & KI",mailsubj:"Projekt mit BlackUnicorn",
+    eo_tag:"Eigenes Produkt · Krypto-Infrastruktur",
+    eo_h2:'Euphena ONE — unsere eigene <span class="grad">tokenisierte Asset-Plattform</span>.',
+    eo_p:"Wir bauen nicht nur für andere. Euphena ONE ist unsere eigene Plattform, um reale Vermögenswerte zu tokenisieren — mit Dual-Token-Architektur (ERC-3643), rechtssicher und investorbereit. Der Beweis, dass wir komplette Krypto-Infrastruktur end-to-end selbst bauen.",
+    eo_f1:'<b>Dual-Token</b> · ERC-3643',eo_f2:'<b>Tokenisierung</b> realer Assets',eo_f3:'<b>Eigene</b> Exchange-Infrastruktur',eo_f4:'<b>Compliance-first</b>',
+    eo_note:"Euphena ONE zeigt unsere Tiefe als Studio — von der Idee bis zur eigenen Plattform.",
+    prod_more:"Details ansehen →",prod_cta:"Dieses Produkt anfragen →",
+    form_title:"Projekt starten",form_sub:"Erzählen Sie uns kurz, worum es geht — wir melden uns persönlich.",
+    form_name:"Name",form_company:"Firma",form_email:"E-Mail",form_market:"Markt",
+    form_market_at:"Österreich",form_market_nl:"Niederlande",form_market_int:"International",
+    form_interest:"Interesse",form_int_web:"Website",form_int_ai:"KI-Assistent",form_int_crypto:"Euphena ONE / Krypto",form_int_other:"Sonstiges",
+    form_msg:"Nachricht (optional)",form_send:"Anfrage senden →",form_sending:"Wird gesendet…",
+    form_ok_title:"Danke — angekommen!",form_ok_body:"Ihre Anfrage ist bei uns. Ein:e Kolleg:in meldet sich in Kürze persönlich bei Ihnen.",form_err:"Fehler — bitte nochmal",form_close:"Schließen"
   },
   nl:{
     nav_studio:"Studio",nav_products:"Producten",nav_approach:"Aanpak",nav_contact:"Contact",nav_cta:"Project starten",
@@ -340,7 +475,19 @@ const I18N = {
     cta_h2:'Laten we samen<br><span class="grad">iets moois</span> bouwen.',
     cta_p:"Een website met diepte, een AI-assistent, een heel product — vertel ons waarvan u droomt.",
     cta_btn1:"Project starten →",cta_btn2:"Opnieuw bekijken",
-    foot1:"AI- & webstudio · Wenen · Oostenrijk & Nederland",foot2:"© 2026 · gebouwd met WebGL & AI",mailsubj:"Project met BlackUnicorn"
+    foot1:"AI- & webstudio · Wenen · Oostenrijk & Nederland",foot2:"© 2026 · gebouwd met WebGL & AI",mailsubj:"Project met BlackUnicorn",
+    eo_tag:"Eigen product · Crypto-infrastructuur",
+    eo_h2:'Euphena ONE — ons eigen <span class="grad">getokeniseerd asset-platform</span>.',
+    eo_p:"Wij bouwen niet alleen voor anderen. Euphena ONE is ons eigen platform om reële activa te tokeniseren — met dual-token-architectuur (ERC-3643), juridisch sluitend en investeerder-klaar. Het bewijs dat we complete crypto-infrastructuur volledig zelf bouwen.",
+    eo_f1:'<b>Dual-token</b> · ERC-3643',eo_f2:'<b>Tokenisering</b> van reële activa',eo_f3:'<b>Eigen</b> exchange-infrastructuur',eo_f4:'<b>Compliance-first</b>',
+    eo_note:"Euphena ONE toont onze diepgang als studio — van idee tot eigen platform.",
+    prod_more:"Bekijk details →",prod_cta:"Dit product aanvragen →",
+    form_title:"Project starten",form_sub:"Vertel ons kort waar het om gaat — we nemen persoonlijk contact op.",
+    form_name:"Naam",form_company:"Bedrijf",form_email:"E-mail",form_market:"Markt",
+    form_market_at:"Oostenrijk",form_market_nl:"Nederland",form_market_int:"Internationaal",
+    form_interest:"Interesse",form_int_web:"Website",form_int_ai:"AI-assistent",form_int_crypto:"Euphena ONE / Crypto",form_int_other:"Anders",
+    form_msg:"Bericht (optioneel)",form_send:"Aanvraag versturen →",form_sending:"Versturen…",
+    form_ok_title:"Bedankt — ontvangen!",form_ok_body:"Uw aanvraag staat bij ons. Een collega neemt binnenkort persoonlijk contact met u op.",form_err:"Fout — probeer opnieuw",form_close:"Sluiten"
   },
   en:{
     nav_studio:"Studio",nav_products:"Products",nav_approach:"Approach",nav_contact:"Contact",nav_cta:"Start a project",
@@ -370,7 +517,19 @@ const I18N = {
     cta_h2:'Let\'s build<br><span class="grad">something beautiful</span>.',
     cta_p:"A website with depth, an AI assistant, a whole product — tell us what you dream of.",
     cta_btn1:"Start a project →",cta_btn2:"See it again",
-    foot1:"AI & web studio · Vienna · Austria & Netherlands",foot2:"© 2026 · built with WebGL & AI",mailsubj:"Project with BlackUnicorn"
+    foot1:"AI & web studio · Vienna · Austria & Netherlands",foot2:"© 2026 · built with WebGL & AI",mailsubj:"Project with BlackUnicorn",
+    eo_tag:"Own product · Crypto infrastructure",
+    eo_h2:'Euphena ONE — our own <span class="grad">tokenized asset platform</span>.',
+    eo_p:"We don't only build for others. Euphena ONE is our own platform to tokenize real-world assets — dual-token architecture (ERC-3643), legally sound and investor-ready. Proof that we build complete crypto infrastructure end-to-end ourselves.",
+    eo_f1:'<b>Dual-token</b> · ERC-3643',eo_f2:'<b>Tokenization</b> of real assets',eo_f3:'<b>Own</b> exchange infrastructure',eo_f4:'<b>Compliance-first</b>',
+    eo_note:"Euphena ONE shows our depth as a studio — from idea to our own platform.",
+    prod_more:"View details →",prod_cta:"Enquire about this product →",
+    form_title:"Start a project",form_sub:"Tell us briefly what it's about — we'll get back to you personally.",
+    form_name:"Name",form_company:"Company",form_email:"Email",form_market:"Market",
+    form_market_at:"Austria",form_market_nl:"Netherlands",form_market_int:"International",
+    form_interest:"Interest",form_int_web:"Website",form_int_ai:"AI assistant",form_int_crypto:"Euphena ONE / Crypto",form_int_other:"Other",
+    form_msg:"Message (optional)",form_send:"Send request →",form_sending:"Sending…",
+    form_ok_title:"Thank you — received!",form_ok_body:"Your request has reached us. A colleague will get back to you personally very soon.",form_err:"Error — please retry",form_close:"Close"
   }
 };
 function __setLang(l){
@@ -383,6 +542,63 @@ function __setLang(l){
 }
 window.__setLang=__setLang;
 (function(){ const b=(navigator.language||'de').slice(0,2).toLowerCase(); __setLang(['de','nl','en'].includes(b)?b:'de'); })();
+</script>
+
+<!-- modals + lead form (classic script) -->
+<script>
+(function(){
+  const ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybml3bHpyY2VqYXJybHR4ZnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMTQxMjEsImV4cCI6MjA5NTc5MDEyMX0.22qFWQbHPoLjgH3OBGRkon8i4iO8jVedXWtRxzxVc54";
+  const EP_INTAKE="https://prniwlzrcejarrltxftd.supabase.co/functions/v1/atlas-lead-intake";
+  window._presetInterest=null;
+  const D=()=>(typeof I18N!=='undefined' && I18N[document.documentElement.lang]) || {};
+
+  window.closeModal=function(id){ const m=document.getElementById(id); if(m) m.classList.remove('open'); };
+  window.openForm=function(e, preset){ if(e&&e.preventDefault) e.preventDefault(); window._presetInterest=preset||null;
+    closeModal('prodModal');
+    const l=document.documentElement.lang||'de', mk=({de:'AT',nl:'NL',en:'INT'})[l]||'AT';
+    const sel=document.getElementById('fMarket'); if(sel) sel.value=mk;
+    document.getElementById('formWrap').style.display='block';
+    document.getElementById('formOk').style.display='none';
+    const btn=document.getElementById('formSubmit'); if(btn) btn.style.opacity='1';
+    if(window.__setLang) window.__setLang(l);
+    document.getElementById('formModal').classList.add('open');
+  };
+  window.openProd=function(card){
+    document.getElementById('pmTitle').textContent=card.querySelector('h3').textContent;
+    document.getElementById('pmDesc').textContent=card.querySelector('.desc').textContent;
+    const g=card.querySelector('.glyph'); document.getElementById('pmGlyph').textContent=g?g.textContent:'✨';
+    document.getElementById('prodModal').classList.add('open');
+  };
+  window.submitLead=function(e){
+    e.preventDefault();
+    const f=e.target, dict=D(), btn=document.getElementById('formSubmit');
+    const done=()=>{ document.getElementById('formWrap').style.display='none'; document.getElementById('formOk').style.display='block'; };
+    if(f.website2 && f.website2.value){ done(); return false; } // honeypot -> silently succeed
+    btn.textContent=dict.form_sending||'…'; btn.style.opacity='.7';
+    const name=(f.name.value||'').trim(), parts=name.split(/\s+/);
+    const msg=(f.message.value||'').replace(/[\r\n]+/g,' ').slice(0,240);
+    const payload={ action:'intake', venture:'blackunicorn',
+      company:(f.company.value||name||'—').trim(),
+      first_name:parts[0]||name||'—', last_name:parts.slice(1).join(' '),
+      email:(f.email.value||'').trim(), country:f.market.value,
+      product_name: window._presetInterest || f.interest.value,
+      demo:'blackunicorn-site'+(msg?' | '+msg:'') };
+    fetch(EP_INTAKE,{method:'POST',headers:{'apikey':ANON_KEY,'Authorization':'Bearer '+ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(r=>r.json()).then(()=>done()).catch(()=>{ btn.textContent=dict.form_err||'Error'; btn.style.opacity='1'; });
+    return false;
+  };
+
+  function wire(){
+    document.querySelectorAll('#producten .card').forEach(c=>{
+      c.addEventListener('click',()=>openProd(c));
+      if(!c.querySelector('.more')){ const m=document.createElement('div'); m.className='more'; m.setAttribute('data-i18n','prod_more'); c.appendChild(m); }
+    });
+    document.querySelectorAll('.modal').forEach(md=>md.addEventListener('click',e=>{ if(e.target===md) md.classList.remove('open'); }));
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open')); });
+    if(window.__setLang) window.__setLang(document.documentElement.lang||'de');
+  }
+  if(document.readyState!=='loading') wire(); else document.addEventListener('DOMContentLoaded',wire);
+})();
 </script>
 
 <!-- Smooth scroll -->
