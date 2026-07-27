@@ -19,7 +19,7 @@
   html{scroll-behavior:smooth;background:#07080b}
   body{background:transparent;color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:52px}
   footer{position:relative;z-index:2}
-  #gl{position:fixed;inset:0;z-index:0;width:100%;height:100%;display:block;pointer-events:none}
+  #gl{position:fixed;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none;mix-blend-mode:screen}
   #glfallback{position:fixed;inset:0;z-index:0;background:radial-gradient(60% 55% at 75% 22%,var(--accent-soft),transparent 66%),radial-gradient(45% 45% at 15% 88%,rgba(255,255,255,.04),transparent 60%),#070810}
   .vign2{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 0%,transparent 55%,rgba(4,5,9,.5) 100%)}
   .showcase{position:relative;min-height:74vh;overflow:hidden}
@@ -51,11 +51,12 @@
   @media(max-width:800px){.nlinks{display:none}}
 
   /* HERO with photo */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
-  .hero .bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transform:scale(1.05);animation:kb 18s ease-out forwards}
+  .hero{position:relative;z-index:2;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  /* Hero-Foto liegt UNTER dem 3D-Canvas (z0) -> Partikel leuchten per screen ueber dem Bild; Hero-Text (z2) bleibt gestochen scharf darueber */
+  #heroBg{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0;background-size:cover;background-position:center;transform:scale(1.05);animation:kb 18s ease-out forwards}
   @keyframes kb{to{transform:scale(1.14)}}
-  .hero .ov{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,11,15,.35) 0%,rgba(10,11,15,.25) 40%,rgba(10,11,15,.92) 100%)}
-  .hero .tint{position:absolute;inset:0;z-index:1;background:radial-gradient(70% 60% at 80% 20%,var(--accent-soft),transparent 70%);mix-blend-mode:screen}
+  #heroOv{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,11,15,.42) 0%,rgba(10,11,15,.3) 40%,rgba(10,11,15,.92) 100%)}
+  #heroTint{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0;pointer-events:none;background:radial-gradient(70% 60% at 80% 20%,var(--accent-soft),transparent 70%);mix-blend-mode:screen}
   .hero .inner{position:relative;z-index:2;padding-bottom:min(12vh,110px);max-width:760px}
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#e9e4da;border:1px solid rgba(255,255,255,.25);border-radius:30px;padding:7px 14px;margin-bottom:22px;background:rgba(0,0,0,.2);backdrop-filter:blur(4px)}
   .eyebrow .d{width:7px;height:7px;border-radius:50%;background:var(--accent)}
@@ -152,6 +153,7 @@
 <div id="glfallback"></div>
 <canvas id="gl"></canvas>
 <div class="vign2"></div>
+<div id="heroBg"></div><div id="heroOv"></div><div id="heroTint"></div>
 
 <nav id="nav">
   <div class="logo"><span class="badge" id="lgBadge">B</span> <span id="lgName">Bella</span></div>
@@ -164,7 +166,6 @@
 </nav>
 
 <section class="hero">
-  <div class="bg" id="heroBg"></div><div class="ov"></div><div class="tint"></div>
   <div class="container"><div class="inner">
     <span class="eyebrow"><span class="d"></span> <span id="eyebrow">Restaurant · Wien</span></span>
     <h1 id="h1">Willkommen bei <span class="accent" id="h1name">Bella</span></h1>
@@ -552,9 +553,7 @@ window.toggleChat=toggleChat;
 addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}});
 </script>
 
-<!-- smooth scroll -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script>try{if(matchMedia('(hover:hover) and (pointer:fine)').matches){const l=new Lenis({lerp:0.12,wheelMultiplier:1});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);}}catch(e){}</script>
+<!-- natives Scrollen (flüssigst) -->
 
 <!-- 3D background (accent-themed, core three = robust) -->
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" }}</script>
@@ -577,10 +576,10 @@ function fib(i,n,r){const off=2/n,inc=Math.PI*(3-Math.sqrt(5));const y=i*off-1+o
 function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
 function sz(){return [innerWidth, innerHeight];}
 function init(){
-  N = innerWidth<760 ? 1500 : 2600;
+  N = innerWidth<760 ? 1000 : 2200;
   const [w,h]=sz();
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
-  renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio,1.9));
+  renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
   scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(55,w/h,0.1,100);camera.position.set(0,0,13.5);
   base=new Float32Array(N*3);const start=new Float32Array(N*3),col=new Float32Array(N*3);
   const cA=new THREE.Color(ACC),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.65);
