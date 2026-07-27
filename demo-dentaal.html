@@ -347,8 +347,19 @@ const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
   cWeb:{de:"jederzeit",nl:"altijd",en:"anytime"},
   info_cta:{de:"Jetzt anfragen",nl:"Nu aanvragen",en:"Enquire now"},
   fab:{de:"Fragen?",nl:"Vragen?",en:"Questions?"},chStatus:{de:"● Assistent · online",nl:"● Assistent · online",en:"● Assistant · online"},
-  chGreet:{de:"Hallo 👋 Ich bin der KI-Assistent. Möchten Sie buchen oder sich anrufen lassen?",nl:"Hallo 👋 Ik ben de AI-assistent. Wilt u boeken of gebeld worden?",en:"Hi 👋 I'm the AI assistant. Want to book or get a call?"},
+  chGreet:{de:"Hallo 👋 Das ist Ihre neue Website — schon fertig und ganz auf Sie gebrandet. Sie können sie hier LIVE anpassen (Farbe, Texte) oder mir sagen, was ich für Sie ändern soll. Wenn alles passt, sichern Sie sie einfach. Was möchten Sie?",nl:"Hallo 👋 Dit is uw nieuwe website — al klaar en helemaal in uw stijl. U kunt hem hier LIVE aanpassen (kleur, teksten) of zeg mij wat ik moet wijzigen. Als alles klopt, legt u hem gewoon vast. Wat wilt u?",en:"Hi 👋 This is your new website — already done and fully branded for you. You can adjust it LIVE here (colour, text) or tell me what to change. When it fits, just secure it. What would you like?"},
   q_book:{de:"Buchen",nl:"Boeken",en:"Book"},q_call:{de:"Anrufen lassen",nl:"Laten bellen",en:"Call me"},q_hours:{de:"Öffnungszeiten",nl:"Openingstijden",en:"Hours"},
+  q_edit:{de:"✏️ Live anpassen",nl:"✏️ Live aanpassen",en:"✏️ Edit live"},
+  ed_intro:{de:"Klar! Was möchten Sie anpassen? Änderungen sind sofort sichtbar.",nl:"Zeker! Wat wilt u aanpassen? Wijzigingen zijn meteen zichtbaar.",en:"Sure! What would you like to change? Edits appear instantly."},
+  ed_color:{de:"🎨 Farbe",nl:"🎨 Kleur",en:"🎨 Colour"},ed_slogan:{de:"✍️ Slogan",nl:"✍️ Slogan",en:"✍️ Tagline"},ed_name:{de:"🏷 Firmenname",nl:"🏷 Bedrijfsnaam",en:"🏷 Business name"},ed_wish:{de:"💬 Wunsch an uns",nl:"💬 Wens aan ons",en:"💬 Request to us"},ed_done:{de:"Passt so ✓",nl:"Zo goed ✓",en:"Looks good ✓"},ed_back:{de:"↩ Zurück",nl:"↩ Terug",en:"↩ Back"},
+  ed_pickcolor:{de:"Wählen Sie eine Farbe — sie ändert sich sofort auf der ganzen Seite:",nl:"Kies een kleur — verandert direct op de hele pagina:",en:"Pick a colour — it changes across the whole page instantly:"},
+  ed_more:{de:"Schön! Noch etwas anpassen?",nl:"Mooi! Nog iets aanpassen?",en:"Nice! Anything else?"},
+  ed_askslogan:{de:"Tippen Sie Ihren neuen Slogan und schicken Sie ihn:",nl:"Typ uw nieuwe slogan en verstuur:",en:"Type your new tagline and send:"},
+  ed_askname:{de:"Wie soll Ihr Betrieb heißen?",nl:"Hoe moet uw bedrijf heten?",en:"What should your business be called?"},
+  ed_wishask:{de:"Schreiben Sie kurz, was wir ändern sollen — wir setzen es um:",nl:"Schrijf kort wat we moeten wijzigen — wij regelen het:",en:"Briefly tell us what to change — we'll handle it:"},
+  ed_wishdone:{de:"Danke! Ihr Wunsch ist bei uns — ein Kollege setzt ihn um und meldet sich.",nl:"Bedankt! Uw wens staat bij ons — een collega regelt het en neemt contact op.",en:"Thanks! Your request reached us — a colleague will handle it and get in touch."},
+  ed_donemsg:{de:"Freut mich, dass es gefällt! 🎉 Sichern Sie sich Ihre Website:",nl:"Fijn dat het bevalt! 🎉 Leg uw website vast:",en:"Glad you like it! 🎉 Secure your website:"},
+  ed_send:{de:"Senden",nl:"Versturen",en:"Send"},
   a_hours:{de:"Sehen Sie unten im Bereich Öffnungszeiten. 🕒",nl:"Zie hieronder bij Openingstijden. 🕒",en:"See the opening hours section below. 🕒"},
   bk_h:{de:"Fast geschafft!",nl:"Bijna klaar!",en:"Almost there!"},
   bk_p:{de:"In der echten Version wählen Sie jetzt Datum & Uhrzeit — die Buchung läuft automatisch, rund um die Uhr.",nl:"In de echte versie kiest u nu datum & tijd — automatisch, 24/7.",en:"In the live version you'd pick date & time — automatic, 24/7."},
@@ -433,14 +444,40 @@ document.getElementById('bkModal').addEventListener('click',e=>{if(e.target.id==
 
 let started=false;
 function bub(t,w){const d=document.createElement('div');d.className='bub '+w;d.textContent=t;const b=document.getElementById('chBody');b.appendChild(d);b.scrollTop=b.scrollHeight;}
-function renderQ(){const q=document.getElementById('chQr');q.innerHTML='';
-  [['book','q_book'],['call','q_call'],['hours','q_hours']].forEach(([k,lk])=>{const b=document.createElement('button');b.textContent=pick(T[lk]);b.onclick=()=>pickQ(k);q.appendChild(b);});}
+const SWATCHES=['#c0432f','#0ea5a3','#8a5cff','#e2b45c','#2f7d4f','#d94f8a','#2563eb','#0f172a'];
+function qrClear(){const q=document.getElementById('chQr');q.innerHTML='';return q;}
+function qrBtns(items){const q=qrClear();items.forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.onclick=fn;q.appendChild(b);});}
+function mainMenu(){qrBtns([[pick(T.q_edit),()=>pickQ('edit')],[pick(T.q_book),()=>pickQ('book')],[pick(T.q_call),()=>pickQ('call')],[pick(T.q_hours),()=>pickQ('hours')]]);}
+function editMenu(){qrBtns([[pick(T.ed_color),()=>edit('color')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+function chInput(onSend){const q=qrClear();const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:7px;width:100%';
+  const inp=document.createElement('input');inp.style.cssText='flex:1;min-width:0;background:#080a12;border:1px solid var(--line);border-radius:20px;padding:9px 12px;color:var(--ink);font-family:inherit;font-size:13px';
+  const snd=document.createElement('button');snd.textContent=pick(T.ed_send);
+  const go=()=>{const v=inp.value.trim();if(v)onSend(v);};
+  snd.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+  wrap.appendChild(inp);wrap.appendChild(snd);q.appendChild(wrap);setTimeout(()=>inp.focus(),50);}
+function applyAccent(hex){document.documentElement.style.setProperty('--accent',hex);const h=hex.replace('#','').replace(/^(.)(.)(.)$/,'$1$1$2$2$3$3');const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);document.documentElement.style.setProperty('--accent-soft',`rgba(${r},${g},${bl},.18)`);if(window.__recolor)window.__recolor(hex);}
+function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function setBusinessName(v){CFG.company=v;setText('lgName',v);setText('lgBadge',v[0].toUpperCase());setText('ph_name',v);setText('chName',v.split(/\s+/)[0]);setText('chAv',v[0].toUpperCase());
+  document.getElementById('h1').innerHTML=(L==='nl'?'Welkom bij ':(L==='en'?'Welcome to ':'Willkommen bei '))+'<span class="accent">'+v+'</span>';}
+function sendWish(v){const payload={action:'intake',venture:'blackunicorn',company:CFG.company+' (Demo-Wunsch)',first_name:'Website',last_name:'Lead',country:CC,product_name:'Website-Anpassung',demo:'demo-'+CFG.company+' | WUNSCH: '+v.slice(0,180)};
+  fetch(INTAKE,{method:'POST',headers:{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});}
+function edit(k){
+  if(k==='color'){bub(pick(T.ed_pickcolor),'a');const q=qrClear();
+    SWATCHES.forEach(hex=>{const b=document.createElement('button');b.style.cssText='width:28px;height:28px;border-radius:50%;padding:0;border:2px solid rgba(255,255,255,.3);cursor:pointer;background:'+hex;b.onclick=()=>{applyAccent(hex);bub(pick(T.ed_more),'a');editMenu();};q.appendChild(b);});
+    const back=document.createElement('button');back.textContent=pick(T.ed_back);back.onclick=editMenu;q.appendChild(back);return;}
+  if(k==='slogan'){bub(pick(T.ed_askslogan),'a');chInput(v=>{bub(v,'u');setText('sub',v);bub(pick(T.ed_more),'a');editMenu();});return;}
+  if(k==='name'){bub(pick(T.ed_askname),'a');chInput(v=>{bub(v,'u');setBusinessName(v);bub(pick(T.ed_more),'a');editMenu();});return;}
+  if(k==='wish'){bub(pick(T.ed_wishask),'a');chInput(v=>{bub(v,'u');sendWish(v);bub(pick(T.ed_wishdone),'a');setTimeout(editMenu,500);});return;}
+  if(k==='done'){bub(pick(T.ed_donemsg),'a');setTimeout(()=>{toggleChat(true);book();},900);return;}
+}
+function renderQ(){mainMenu();}
 function pickQ(k){bub(pick(T['q_'+k]),'u');document.getElementById('chQr').innerHTML='';
-  setTimeout(()=>{ if(k==='book'){bub(pick(T.bk_p),'a');setTimeout(()=>{toggleChat(true);book();},700);return;}
+  setTimeout(()=>{ if(k==='edit'){bub(pick(T.ed_intro),'a');editMenu();return;}
+    if(k==='book'){bub(pick(T.bk_p),'a');setTimeout(()=>{toggleChat(true);book();},700);return;}
     if(k==='call'){bub(pick(T.cm_p),'a');setTimeout(()=>{toggleChat(true);scrollAssist();},700);return;}
     bub(pick(T.a_hours),'a');setTimeout(renderQ,300); },420);}
 function toggleChat(fc){const c=document.getElementById('chat'),f=document.getElementById('fab');const open=fc===true?false:!c.classList.contains('open');c.classList.toggle('open',open);f.style.display=open?'none':'flex';
-  if(open&&!started){started=true;setTimeout(()=>{bub(pick(T.chGreet),'a');renderQ();},250);}}
+  if(open&&!started){started=true;setTimeout(()=>{bub(pick(T.chGreet),'a');mainMenu();},250);}}
 window.toggleChat=toggleChat;
 addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}});
 </script>
@@ -455,9 +492,10 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}
 import * as THREE from 'three';
 const canvas=document.getElementById('gl');
 const ACC=(JSON.parse(document.getElementById('demo-cfg').textContent).accent)||'#c0432f';
-let renderer,scene,camera,points,halo,clock,base,N=2600,visible=true;
+let renderer,scene,camera,points,halo,clock,base,N=2600,visible=true,geoRef=null;
 const rc=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
 let active=false;
+window.__recolor=function(hex){ if(!geoRef)return; const cA=new THREE.Color(hex),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.65); const col=geoRef.attributes.color.array; for(let i=0;i<N;i++){const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;} geoRef.attributes.color.needsUpdate=true; };
 function fib(i,n,r){const off=2/n,inc=Math.PI*(3-Math.sqrt(5));const y=i*off-1+off/2,rad=Math.sqrt(1-y*y),phi=i*inc;return[Math.cos(phi)*rad*r,y*r,Math.sin(phi)*rad*r];}
 function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
 function sz(){return [canvas.clientWidth||innerWidth, canvas.clientHeight||Math.round(innerHeight*0.88)];}
@@ -471,7 +509,7 @@ function init(){
   const cA=new THREE.Color(ACC),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.65);
   for(let i=0;i<N;i++){const s=fib(i,N,6);base[i*3]=s[0];base[i*3+1]=s[1];base[i*3+2]=s[2];start[i*3]=s[0];start[i*3+1]=s[1];start[i*3+2]=s[2];
     const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;}
-  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(start,3));geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(start,3));geo.setAttribute('color',new THREE.BufferAttribute(col,3));geoRef=geo;
   const sp=sprite();
   points=new THREE.Points(geo,new THREE.PointsMaterial({size:0.145,map:sp,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.95}));scene.add(points);
   halo=new THREE.Points(geo,new THREE.PointsMaterial({size:0.5,map:sp,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.22}));scene.add(halo);
