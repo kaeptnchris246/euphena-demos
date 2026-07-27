@@ -26,7 +26,7 @@
   .showcase .sc-head h2{font-size:clamp(26px,4.2vw,48px);line-height:1.05;text-shadow:0 4px 40px rgba(0,0,0,.6)}
   .showcase .sc-head .hint{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:30px;padding:7px 14px;background:rgba(0,0,0,.3)}
   a{color:inherit;text-decoration:none}
-  h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  h1,h2,h3,.serif{font-family:var(--disp,"Fraunces"),Georgia,serif;font-weight:400;letter-spacing:-.01em}
   .container{max-width:1120px;margin:0 auto;padding:0 26px}
   .accent{color:var(--accent)}
   section{position:relative;z-index:2}
@@ -360,6 +360,16 @@ const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
   ed_wishdone:{de:"Danke! Ihr Wunsch ist bei uns — ein Kollege setzt ihn um und meldet sich.",nl:"Bedankt! Uw wens staat bij ons — een collega regelt het en neemt contact op.",en:"Thanks! Your request reached us — a colleague will handle it and get in touch."},
   ed_donemsg:{de:"Freut mich, dass es gefällt! 🎉 Sichern Sie sich Ihre Website:",nl:"Fijn dat het bevalt! 🎉 Leg uw website vast:",en:"Glad you like it! 🎉 Secure your website:"},
   ed_send:{de:"Senden",nl:"Versturen",en:"Send"},
+  ed_ai:{de:"💬 Sag es einfach (KI)",nl:"💬 Zeg het gewoon (AI)",en:"💬 Just say it (AI)"},
+  ed_ai_ask:{de:"Sagen Sie einfach, was ich ändern soll — z. B. »Hintergrund als DNA und Farbe blau, Titel: Trattoria Nonna, Slogan: Frisch & ehrlich«.",nl:"Zeg gewoon wat ik moet wijzigen — bijv. »achtergrond als DNA en kleur blauw, titel: Trattoria Nonna, slogan: Vers & eerlijk«.",en:"Just tell me what to change — e.g. »background as DNA and colour blue, title: Trattoria Nonna, tagline: Fresh & honest«."},
+  ed_ai_working:{de:"Einen Moment… ✨",nl:"Een moment… ✨",en:"One moment… ✨"},
+  ed_ai_done:{de:"Erledigt! ✨ Noch etwas?",nl:"Klaar! ✨ Nog iets?",en:"Done! ✨ Anything else?"},
+  ed_ai_fail:{de:"Das hab ich nicht ganz erwischt — versuchen Sie z. B. »Farbe grün, Hintergrund Wellen« oder nutzen Sie die Knöpfe.",nl:"Dat begreep ik niet helemaal — probeer bijv. »kleur groen, achtergrond golven« of gebruik de knoppen.",en:"I didn't quite catch that — try e.g. »colour green, background waves« or use the buttons."},
+  ed_look:{de:"🪄 Kompletter Look",nl:"🪄 Complete look",en:"🪄 Full look"},
+  look_elegant:{de:"Elegant",nl:"Elegant",en:"Elegant"},look_tech:{de:"Modern / Tech",nl:"Modern / Tech",en:"Modern / Tech"},look_frisch:{de:"Frisch",nl:"Fris",en:"Fresh"},look_bold:{de:"Auffällig",nl:"Opvallend",en:"Bold"},
+  ed_3d:{de:"✨ 3D-Stil",nl:"✨ 3D-stijl",en:"✨ 3D style"},d3_particles:{de:"Partikel-Kugel",nl:"Deeltjes-bol",en:"Particle sphere"},d3_dna:{de:"DNA-Helix",nl:"DNA-helix",en:"DNA helix"},d3_wave:{de:"Wellen",nl:"Golven",en:"Waves"},d3_torus:{de:"Schleife",nl:"Lus",en:"Loop"},d3_calm:{de:"Ruhig (ohne 3D)",nl:"Rustig (geen 3D)",en:"Calm (no 3D)"},
+  ed_font:{de:"🔤 Schrift",nl:"🔤 Lettertype",en:"🔤 Typeface"},font_elegant:{de:"Elegant (Serif)",nl:"Elegant (serif)",en:"Elegant (serif)"},font_modern:{de:"Modern (Sans)",nl:"Modern (sans)",en:"Modern (sans)"},
+  ed_looked:{de:"Fertig! Gefällt Ihnen dieser Look? Sie können weiter feintunen.",nl:"Klaar! Bevalt deze look? U kunt verder finetunen.",en:"Done! Like this look? Keep fine-tuning if you want."},
   a_hours:{de:"Sehen Sie unten im Bereich Öffnungszeiten. 🕒",nl:"Zie hieronder bij Openingstijden. 🕒",en:"See the opening hours section below. 🕒"},
   bk_h:{de:"Fast geschafft!",nl:"Bijna klaar!",en:"Almost there!"},
   bk_p:{de:"In der echten Version wählen Sie jetzt Datum & Uhrzeit — die Buchung läuft automatisch, rund um die Uhr.",nl:"In de echte versie kiest u nu datum & tijd — automatisch, 24/7.",en:"In the live version you'd pick date & time — automatic, 24/7."},
@@ -448,7 +458,7 @@ const SWATCHES=['#c0432f','#0ea5a3','#8a5cff','#e2b45c','#2f7d4f','#d94f8a','#25
 function qrClear(){const q=document.getElementById('chQr');q.innerHTML='';return q;}
 function qrBtns(items){const q=qrClear();items.forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.onclick=fn;q.appendChild(b);});}
 function mainMenu(){qrBtns([[pick(T.q_edit),()=>pickQ('edit')],[pick(T.q_book),()=>pickQ('book')],[pick(T.q_call),()=>pickQ('call')],[pick(T.q_hours),()=>pickQ('hours')]]);}
-function editMenu(){qrBtns([[pick(T.ed_color),()=>edit('color')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+function editMenu(){qrBtns([[pick(T.ed_ai),()=>edit('ai')],[pick(T.ed_look),()=>edit('look')],[pick(T.ed_color),()=>edit('color')],[pick(T.ed_3d),()=>edit('3d')],[pick(T.ed_font),()=>edit('font')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
 function chInput(onSend){const q=qrClear();const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:7px;width:100%';
   const inp=document.createElement('input');inp.style.cssText='flex:1;min-width:0;background:#080a12;border:1px solid var(--line);border-radius:20px;padding:9px 12px;color:var(--ink);font-family:inherit;font-size:13px';
   const snd=document.createElement('button');snd.textContent=pick(T.ed_send);
@@ -456,12 +466,39 @@ function chInput(onSend){const q=qrClear();const wrap=document.createElement('di
   snd.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
   wrap.appendChild(inp);wrap.appendChild(snd);q.appendChild(wrap);setTimeout(()=>inp.focus(),50);}
 function applyAccent(hex){document.documentElement.style.setProperty('--accent',hex);const h=hex.replace('#','').replace(/^(.)(.)(.)$/,'$1$1$2$2$3$3');const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);document.documentElement.style.setProperty('--accent-soft',`rgba(${r},${g},${bl},.18)`);if(window.__recolor)window.__recolor(hex);}
+function setFont(kind){document.documentElement.style.setProperty('--disp', kind==='modern'?"'Inter'":"'Fraunces'");}
+function setShape(n){if(window.__setShape)window.__setShape(n);}
+const LOOKS={elegant:{a:'#c0432f',s:'sphere',f:'elegant'},tech:{a:'#2563eb',s:'dna',f:'modern'},frisch:{a:'#0ea5a3',s:'wave',f:'modern'},bold:{a:'#8a5cff',s:'sphere',f:'elegant'}};
+function applyLook(k){const p=LOOKS[k]||LOOKS.elegant;applyAccent(p.a);setShape(p.s);setFont(p.f);}
+const AICOL={rot:'#c0432f',red:'#c0432f',rood:'#c0432f',blau:'#2563eb',blue:'#2563eb',blauw:'#2563eb','grün':'#2f7d4f',gruen:'#2f7d4f',green:'#2f7d4f',groen:'#2f7d4f','türkis':'#0ea5a3',tuerkis:'#0ea5a3',teal:'#0ea5a3',cyan:'#0ea5a3',violett:'#8a5cff',lila:'#8a5cff',purple:'#8a5cff',paars:'#8a5cff',pink:'#d94f8a',rosa:'#d94f8a',magenta:'#d94f8a',gold:'#e2b45c',gelb:'#e2b45c',yellow:'#e2b45c',geel:'#e2b45c',orange:'#e2762f',oranje:'#e2762f',schwarz:'#0f172a',dunkel:'#0f172a',dark:'#0f172a',zwart:'#0f172a'};
+function aiEdit(text){
+  const s=text.toLowerCase(); const did=[]; let m;
+  if((m=text.match(/#([0-9a-fA-F]{6})/))){applyAccent('#'+m[1]);did.push('Farbe');}
+  else for(const k in AICOL){ if(s.includes(k)){applyAccent(AICOL[k]);did.push('Farbe');break;} }
+  if(/dna|helix/.test(s)){setShape('dna');did.push('3D');}
+  else if(/welle|wave|golv/.test(s)){setShape('wave');did.push('3D');}
+  else if(/schleife|torus|loop|ring|lus/.test(s)){setShape('torus');did.push('3D');}
+  else if(/partikel|kugel|sphere|bol|punkte|dots|deeltjes/.test(s)){setShape('sphere');did.push('3D');}
+  else if(/ruhig|kein\s*3d|ohne\s*3d|clean|calm|rustig|geen\s*3d/.test(s)){setShape('none');did.push('3D');}
+  if(/\bmodern|sans|schlicht\b/.test(s)){setFont('modern');did.push('Schrift');}
+  else if(/elegant|serif|klassisch/.test(s)){setFont('elegant');did.push('Schrift');}
+  if((m=text.match(/(?:slogan|tagline|untertitel|subtitel)\s*[:=]\s*([^;\n]+)/i))){setText('sub',m[1].trim());did.push('Slogan');}
+  if((m=text.match(/(?:titel|title)\s*[:=]\s*([^;\n]+)/i)) && !/dna|welle|farbe/.test(m[1].toLowerCase())){setText('sub',m[1].trim());did.push('Slogan');}
+  if((m=text.match(/(?:firmenname|firma|name|betrieb|bedrijf|business)\s*[:=]\s*([^,;\n]+)/i))){setBusinessName(m[1].trim().replace(/[.。]+$/,''));did.push('Name');}
+  if(did.length){ bub(pick(T.ed_ai_done)+' ('+did.join(', ')+')','a'); }
+  else { bub(pick(T.ed_ai_fail),'a'); sendWish(text); }
+  setTimeout(editMenu,300);
+}
 function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
 function setBusinessName(v){CFG.company=v;setText('lgName',v);setText('lgBadge',v[0].toUpperCase());setText('ph_name',v);setText('chName',v.split(/\s+/)[0]);setText('chAv',v[0].toUpperCase());
   document.getElementById('h1').innerHTML=(L==='nl'?'Welkom bij ':(L==='en'?'Welcome to ':'Willkommen bei '))+'<span class="accent">'+v+'</span>';}
 function sendWish(v){const payload={action:'intake',venture:'blackunicorn',company:CFG.company+' (Demo-Wunsch)',first_name:'Website',last_name:'Lead',country:CC,product_name:'Website-Anpassung',demo:'demo-'+CFG.company+' | WUNSCH: '+v.slice(0,180)};
   fetch(INTAKE,{method:'POST',headers:{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});}
 function edit(k){
+  if(k==='ai'){bub(pick(T.ed_ai_ask),'a');chInput(v=>{bub(v,'u');bub(pick(T.ed_ai_working),'a');setTimeout(()=>aiEdit(v),350);});return;}
+  if(k==='look'){bub(pick(T.ed_intro),'a');qrBtns([[pick(T.look_elegant),()=>{applyLook('elegant');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_tech),()=>{applyLook('tech');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_frisch),()=>{applyLook('frisch');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_bold),()=>{applyLook('bold');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='3d'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.d3_particles),()=>{setShape('sphere');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_dna),()=>{setShape('dna');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_wave),()=>{setShape('wave');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_torus),()=>{setShape('torus');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_calm),()=>{setShape('none');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='font'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.font_elegant),()=>{setFont('elegant');editMenu();}],[pick(T.font_modern),()=>{setFont('modern');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
   if(k==='color'){bub(pick(T.ed_pickcolor),'a');const q=qrClear();
     SWATCHES.forEach(hex=>{const b=document.createElement('button');b.style.cssText='width:28px;height:28px;border-radius:50%;padding:0;border:2px solid rgba(255,255,255,.3);cursor:pointer;background:'+hex;b.onclick=()=>{applyAccent(hex);bub(pick(T.ed_more),'a');editMenu();};q.appendChild(b);});
     const back=document.createElement('button');back.textContent=pick(T.ed_back);back.onclick=editMenu;q.appendChild(back);return;}
@@ -496,6 +533,13 @@ let renderer,scene,camera,points,halo,clock,base,N=2600,visible=true,geoRef=null
 const rc=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
 let active=false;
 window.__recolor=function(hex){ if(!geoRef)return; const cA=new THREE.Color(hex),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.65); const col=geoRef.attributes.color.array; for(let i=0;i<N;i++){const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;} geoRef.attributes.color.needsUpdate=true; };
+function shapePos(name,i,n){
+  if(name==='dna'){const t=i/n,strand=i%2,ang=t*Math.PI*2*5+strand*Math.PI,r=2.6;return[Math.cos(ang)*r,(t-0.5)*13,Math.sin(ang)*r];}
+  if(name==='wave'){const cols=Math.max(2,Math.round(Math.sqrt(n)));const gx=(i%cols)/cols-0.5,gz=Math.floor(i/cols)/(n/cols)-0.5;return[gx*13,Math.sin(gx*8)*Math.cos(gz*8)*2.2,gz*13];}
+  if(name==='torus'){const t=i/n*Math.PI*2*3,R=4.2,r=1.7;return[(R+r*Math.cos(t*2))*Math.cos(t*3)*.95,(R+r*Math.cos(t*2))*Math.sin(t*3)*.95,r*Math.sin(t*2)*2.2];}
+  return fib(i,n,6);
+}
+window.__setShape=function(name){ if(name==='none'){ if(canvas) canvas.style.opacity='0'; return true; } if(canvas) canvas.style.opacity='1'; if(!base) return false; for(let i=0;i<N;i++){const p=shapePos(name,i,N);base[i*3]=p[0];base[i*3+1]=p[1];base[i*3+2]=p[2];} return true; };
 function fib(i,n,r){const off=2/n,inc=Math.PI*(3-Math.sqrt(5));const y=i*off-1+off/2,rad=Math.sqrt(1-y*y),phi=i*inc;return[Math.cos(phi)*rad*r,y*r,Math.sin(phi)*rad*r];}
 function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
 function sz(){return [canvas.clientWidth||innerWidth, canvas.clientHeight||Math.round(innerHeight*0.88)];}
