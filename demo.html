@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo</title>
+<meta name="description" content="Website-Demo mit KI-Assistent & KI-Telefonassistent — präsentiert von BlackUnicorn.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- PER-CUSTOMER CONFIG (generator replaces this block) -->
+<script id="demo-cfg" type="application/json">
+{"company":"Ristorante Bella","city":"Wien","branche":"horeca","accent":"#c0432f","lang":"de","phone":"+43 1 512 34 56"}
+</script>
+
+<style>
+  :root{--accent:#c0432f;--accent-soft:rgba(192,67,47,.16);--bg:#0a0b0f;--ink:#f5f3ef;--mut:#a2a8b4;--dim:#666c7a;--line:rgba(255,255,255,.10)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;background:#07080b}
+  body{background:transparent;color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:52px}
+  footer{position:relative;z-index:2}
+  #gl{position:fixed;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none;mix-blend-mode:screen}
+  #glfallback{position:fixed;inset:0;z-index:0;background:radial-gradient(60% 55% at 75% 22%,var(--accent-soft),transparent 66%),radial-gradient(45% 45% at 15% 88%,rgba(255,255,255,.04),transparent 60%),#070810}
+  .vign2{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 0%,transparent 55%,rgba(4,5,9,.5) 100%)}
+  /* ===== HELL-THEME (Hero bleibt cinematisch dunkel, Rest hell) ===== */
+  body.light{--ink:#1c1e24;--mut:#5b616e;--dim:#8a909c;--line:rgba(20,22,30,.12)}
+  body.light #glfallback{background:radial-gradient(60% 55% at 75% 22%,var(--accent-soft),transparent 66%),radial-gradient(45% 45% at 15% 88%,rgba(0,0,0,.03),transparent 60%),#f4f1ea}
+  body.light .vign2{background:radial-gradient(120% 90% at 50% 100%,transparent 62%,rgba(255,255,255,.55) 100%)}
+  body.light nav{color:#f5f3ef}
+  body.light nav .nlinks{color:rgba(245,243,239,.9)}
+  body.light nav.scrolled{background:rgba(250,248,244,.86);border-bottom-color:rgba(20,22,30,.1)}
+  body.light nav.scrolled,body.light nav.scrolled .nlinks,body.light nav.scrolled .logo{color:#1c1e24}
+  body.light .phone{background:#ffffff;box-shadow:0 40px 90px rgba(30,30,40,.16)}
+  body.light .callme,body.light .c,body.light .info .box{background:rgba(255,255,255,.74)}
+  body.light .c:hover{background:rgba(255,255,255,.92)}
+  body.light .field input{background:#fff;color:#1c1e24;border-color:rgba(20,22,30,.15)}
+  body.light .btn.s{border-color:rgba(20,22,30,.25);color:#1c1e24;background:rgba(20,22,30,.04)}
+  body.light .bu{background:linear-gradient(90deg,#faf8f4,#f1eef8);color:#5b616e;border-top-color:rgba(20,22,30,.1)}
+  body.light .sheet{background:#ffffff}
+  body.light .chat{background:#ffffff}
+  body.light .chat .top{background:#faf8f4;border-bottom-color:rgba(20,22,30,.1)}
+  body.light .showcase .sc-head h2{text-shadow:0 4px 30px rgba(255,255,255,.7)}
+  /* ===== KI-Module & Preise ===== */
+  .c .price{margin-top:16px;display:flex;align-items:baseline;gap:6px}
+  .c .price .from{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+  .c .price .amt{font-family:var(--disp,"Fraunces"),serif;font-size:30px;color:var(--ink)}
+  .c .price .per{font-size:13px;color:var(--mut)}
+  .slotbox{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;border:1px solid var(--line);border-radius:22px;padding:30px;background:linear-gradient(120deg,var(--accent-soft),transparent 70%),rgba(12,14,20,.5);backdrop-filter:blur(6px)}
+  .slotbox .sb-tag{display:inline-block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .slotbox h3{font-size:clamp(20px,2.4vw,27px);line-height:1.15;margin-bottom:12px}
+  .msg-prev{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:16px;max-width:400px}
+  .msg-prev .mp-top{display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px}
+  .msg-prev .mp-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .msg-prev .mp-body{background:var(--accent);color:#fff;border-radius:4px 16px 16px 16px;padding:13px 15px;font-size:14.5px;line-height:1.5}
+  @media(max-width:800px){.slotbox{grid-template-columns:1fr}}
+  body.light .slotbox{background:linear-gradient(120deg,var(--accent-soft),transparent 70%),rgba(255,255,255,.74)}
+  body.light .msg-prev{background:rgba(20,22,30,.04)}
+  .showcase{position:relative;min-height:74vh;overflow:hidden}
+  .showcase .sc-head{position:absolute;top:8%;left:0;right:0;text-align:center;z-index:2;pointer-events:none;padding:0 22px}
+  .showcase .sc-head .t{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .showcase .sc-head h2{font-size:clamp(26px,4.2vw,48px);line-height:1.05;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+  .showcase .sc-head .hint{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:30px;padding:7px 14px;background:rgba(0,0,0,.3)}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.serif{font-family:var(--disp,"Fraunces"),Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  .container{max-width:1120px;margin:0 auto;padding:0 26px}
+  .accent{color:var(--accent)}
+  section{position:relative;z-index:2}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .pad{padding:clamp(70px,11vh,130px) 0}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:40px;font-size:15px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:.3s;font-family:inherit}
+  .btn.p{background:var(--accent);color:#fff;box-shadow:0 12px 34px var(--accent-soft)}
+  .btn.p:hover{transform:translateY(-2px);filter:brightness(1.1)}
+  .btn.s{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.06);backdrop-filter:blur(4px)}
+  .btn.s:hover{border-color:#fff}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;transition:.4s}
+  nav.scrolled{background:rgba(10,11,15,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 28px}
+  .logo{font-family:"Fraunces",serif;font-size:21px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .logo .badge{width:30px;height:30px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:15px;font-weight:700}
+  .nlinks{display:flex;gap:24px;font-size:14px;color:var(--mut)}.nlinks a:hover{color:var(--ink)}
+  .book{background:var(--accent);color:#fff;padding:10px 18px;border-radius:30px;font-size:14px;font-weight:600;border:0;cursor:pointer;transition:.3s;font-family:inherit}
+  .book:hover{filter:brightness(1.12);transform:translateY(-1px)}
+  @media(max-width:800px){.nlinks{display:none}}
+
+  /* HERO with photo */
+  .hero{position:relative;z-index:2;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  /* Hero-Foto liegt UNTER dem 3D-Canvas (z0) -> Partikel leuchten per screen ueber dem Bild; Hero-Text (z2) bleibt gestochen scharf darueber */
+  #heroBg{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0;background-size:cover;background-position:center;transform:scale(1.05);animation:kb 18s ease-out forwards}
+  @keyframes kb{to{transform:scale(1.14)}}
+  #heroOv{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,11,15,.42) 0%,rgba(10,11,15,.3) 40%,rgba(10,11,15,.92) 100%)}
+  #heroTint{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0;pointer-events:none;background:radial-gradient(70% 60% at 80% 20%,var(--accent-soft),transparent 70%);mix-blend-mode:screen}
+  .hero .inner{position:relative;z-index:2;padding-bottom:min(12vh,110px);max-width:760px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#e9e4da;border:1px solid rgba(255,255,255,.25);border-radius:30px;padding:7px 14px;margin-bottom:22px;background:rgba(0,0,0,.2);backdrop-filter:blur(4px)}
+  .eyebrow .d{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .hero h1{font-size:clamp(44px,8vw,96px);line-height:.98;letter-spacing:-.02em;text-shadow:0 4px 40px rgba(0,0,0,.4)}
+  .hero .sub{margin-top:20px;font-size:clamp(16px,2vw,21px);line-height:1.55;color:#e4e0d8;max-width:560px}
+  .hero .cta{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
+
+  /* gallery */
+  .gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:220px;gap:12px}
+  .gal .im{background-size:cover;background-position:center;border-radius:16px;position:relative;overflow:hidden;transition:.5s;filter:saturate(1.05)}
+  .gal .im:first-child{grid-row:span 2}
+  .gal .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.25));opacity:0;transition:.4s}
+  .gal .im:hover{transform:scale(1.02)}.gal .im:hover::after{opacity:1}
+  @media(max-width:820px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal .im:first-child{grid-column:span 2;grid-row:span 1;height:220px}}
+
+  .shead{max-width:660px;margin-bottom:42px}
+  .shead .t{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .shead h2{font-size:clamp(30px,4.7vw,52px);line-height:1.04}
+  .shead p{margin-top:16px;color:var(--mut);font-size:16px;line-height:1.6}
+
+  /* KI phone assistant — the star */
+  .phone-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  @media(max-width:860px){.phone-wrap{grid-template-columns:1fr;gap:34px}}
+  .phone{max-width:330px;margin:0 auto;width:100%;background:#0e1016;border:1px solid var(--line);border-radius:32px;padding:22px 18px 26px;box-shadow:0 40px 90px rgba(0,0,0,.5);position:relative}
+  .phone .notch{width:120px;height:26px;background:#000;border-radius:0 0 16px 16px;margin:-22px auto 16px}
+  .phone .callhead{text-align:center;margin-bottom:16px}
+  .phone .callhead .ring{width:74px;height:74px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin:0 auto 12px;font-size:32px;position:relative}
+  .phone .callhead .ring.calling::before,.phone .callhead .ring.calling::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);animation:rw 1.6s infinite}
+  .phone .callhead .ring.calling::after{animation-delay:.6s}
+  @keyframes rw{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.8);opacity:0}}
+  .phone .callhead b{font-family:"Fraunces",serif;font-size:18px}
+  .phone .callhead span{display:block;color:var(--mut);font-size:12.5px;margin-top:3px}
+  .phone .tr{min-height:210px;display:flex;flex-direction:column;gap:8px;font-size:12.5px;padding:4px 2px}
+  .tb{max-width:86%;padding:8px 11px;border-radius:13px;line-height:1.45;animation:pop .3s}
+  .tb.ai{align-self:flex-start;background:var(--accent);color:#fff;border-bottom-left-radius:4px}
+  .tb.ca{align-self:flex-end;background:rgba(255,255,255,.08);border:1px solid var(--line);border-bottom-right-radius:4px}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+  .phone .play{width:100%;margin-top:8px}
+  .callme{border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(12,14,20,.55);backdrop-filter:blur(6px)}
+  .callme h3{font-size:21px;margin-bottom:8px}
+  .callme p{color:var(--mut);font-size:14px;line-height:1.55;margin-bottom:16px}
+  .callme .field{display:flex;gap:10px;flex-wrap:wrap}
+  .callme input{flex:1;min-width:160px;background:#080a12;border:1px solid var(--line);border-radius:10px;padding:13px 14px;color:var(--ink);font-family:inherit;font-size:14.5px}
+  .callme input:focus{outline:none;border-color:var(--accent)}
+  .callme .ok{color:#2fbf71;font-size:13.5px;margin-top:12px;display:none}
+  .feat{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .feat span{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:20px;padding:6px 11px}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .c{border:1px solid var(--line);border-radius:18px;padding:26px 22px;background:rgba(12,14,20,.5);backdrop-filter:blur(6px);transition:.4s}
+  .c:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .c .i{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+  .c h3{font-size:19px;margin-bottom:8px}.c p{color:var(--mut);font-size:14px;line-height:1.55}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .info .box{border:1px solid var(--line);border-radius:18px;padding:26px;background:rgba(12,14,20,.55);backdrop-filter:blur(6px)}
+  .info .ph{border-radius:18px;background-size:cover;background-position:center;min-height:260px}
+  .info h3{font-size:20px;margin-bottom:14px}
+  .info .row{display:flex;justify-content:space-between;padding:7px 0;color:var(--mut);font-size:14px;border-bottom:1px dashed var(--line)}
+  .info .row:last-child{border:0}
+  @media(max-width:760px){.info{grid-template-columns:1fr}.info .ph{min-height:200px}}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--dim);font-size:13px}
+  .bu{position:fixed;bottom:0;left:0;right:0;z-index:50;background:linear-gradient(90deg,#0d0f16,#15121c);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:16px;padding:11px 18px;font-size:13.5px;color:var(--mut);flex-wrap:wrap}
+  .bu b{color:var(--ink)}
+  .bu a{background:linear-gradient(100deg,#8f6bff,#c04bff,#e2b45c);color:#150f22;font-weight:700;padding:8px 15px;border-radius:30px;font-size:13px}
+
+  .modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,4,8,.74);backdrop-filter:blur(8px)}
+  .modal.open{display:flex}
+  .sheet{background:#0e1017;border:1px solid var(--line);border-radius:20px;max-width:460px;width:100%;padding:32px;position:relative;text-align:center}
+  .sheet .x{position:absolute;top:14px;right:16px;background:none;border:0;color:var(--mut);font-size:22px;cursor:pointer}
+  .sheet .big{font-size:40px;margin-bottom:10px;color:var(--accent)}
+  .sheet h3{font-size:24px;margin-bottom:10px}.sheet p{color:var(--mut);font-size:14.5px;line-height:1.6}
+
+  .fab{position:fixed;bottom:64px;right:22px;z-index:70;display:flex;align-items:center;gap:9px;background:var(--accent);color:#fff;border:0;border-radius:40px;padding:13px 18px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;box-shadow:0 12px 34px var(--accent-soft);transition:.3s}
+  .fab:hover{transform:translateY(-2px);filter:brightness(1.1)}.fab .p{width:8px;height:8px;border-radius:50%;background:#fff}
+  .chat{position:fixed;bottom:64px;right:22px;z-index:71;width:min(360px,calc(100vw - 28px));height:min(520px,calc(100vh - 120px));background:#0d0f16;border:1px solid var(--line);border-radius:18px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+  .chat.open{display:flex}
+  .chat .top{display:flex;align-items:center;gap:11px;padding:15px 16px;border-bottom:1px solid var(--line)}
+  .chat .av{width:36px;height:36px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:700}
+  .chat .who b{font-size:14px}.chat .who span{display:block;font-size:11.5px;color:#2fbf71}
+  .chat .x2{margin-left:auto;background:none;border:0;color:var(--mut);font-size:20px;cursor:pointer}
+  .chat .body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+  .bub{max-width:84%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.5;animation:pop .3s}
+  .bub.a{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .bub.u{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+  .qr{display:flex;flex-wrap:wrap;gap:7px;padding:0 16px 14px}
+  .qr button{background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:12.5px;padding:8px 12px;border-radius:30px;cursor:pointer}
+  .qr button:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="glfallback"></div>
+<canvas id="gl"></canvas>
+<div class="vign2"></div>
+<div id="heroBg"></div><div id="heroOv"></div><div id="heroTint"></div>
+
+<nav id="nav">
+  <div class="logo"><span class="badge" id="lgBadge">B</span> <span id="lgName">Bella</span></div>
+  <div class="nlinks">
+    <a href="#assist" id="nl1">KI-Telefon</a>
+    <a href="#highlights" id="nl2">Angebot</a>
+    <a href="#info" id="nl3">Kontakt</a>
+  </div>
+  <button class="book" onclick="book(event)" id="bookNav">Reservieren</button>
+</nav>
+
+<section class="hero">
+  <div class="container"><div class="inner">
+    <span class="eyebrow"><span class="d"></span> <span id="eyebrow">Restaurant · Wien</span></span>
+    <h1 id="h1">Willkommen bei <span class="accent" id="h1name">Bella</span></h1>
+    <p class="sub" id="sub">…</p>
+    <div class="cta">
+      <button class="btn p" onclick="scrollAssist()" id="ctaMain">📞 KI-Assistent anrufen lassen</button>
+      <button class="btn s" onclick="book(event)" id="ctaSec">Reservieren</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- GALLERY -->
+<section class="pad" id="gallery"><div class="container">
+  <div class="gal reveal" id="gal"></div>
+</div></section>
+
+<!-- INTERACTIVE 3D -->
+<section class="showcase" id="showcase">
+  <div class="sc-head">
+    <div class="t" id="sc_tag">Interaktiv</div>
+    <h2 id="sc_h">Erleben Sie den Unterschied</h2>
+    <span class="hint" id="sc_hint">↔ Maus bewegen</span>
+  </div>
+</section>
+
+<!-- KI TELEFONASSISTENT (Herzstück) -->
+<section class="pad" id="assist"><div class="container">
+  <div class="shead reveal"><div class="t" id="as_tag">Ihr KI-Telefonassistent</div><h2 id="as_h2">Nie wieder einen Anruf verpassen.</h2><p id="as_p">…</p></div>
+  <div class="phone-wrap">
+    <div class="reveal">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="callhead"><div class="ring" id="ring">📞</div><b id="ph_name">Ristorante Bella</b><span id="ph_status">KI-Telefonassistent</span></div>
+        <div class="tr" id="transcript"></div>
+        <button class="btn p play" onclick="playCall()" id="playBtn">▶ Beispielanruf abspielen</button>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="callme">
+        <h3 id="cm_h">Lassen Sie sich jetzt anrufen</h3>
+        <p id="cm_p">Geben Sie Ihre Nummer ein — der KI-Telefonassistent ruft Sie an und zeigt Ihnen live, wie er für Ihre Kunden ans Telefon geht.</p>
+        <div class="field">
+          <input id="cmPhone" type="tel" placeholder="+43 …">
+          <button class="btn p" onclick="requestCall()" id="cm_btn">Anrufen lassen</button>
+        </div>
+        <div class="ok" id="cmOk">✓ <span id="cm_ok">Angefragt! Der Assistent (bzw. ein Kollege) meldet sich in Kürze.</span></div>
+      </div>
+      <div class="feat" id="as_feat"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- HIGHLIGHTS -->
+<section class="pad" id="highlights"><div class="container">
+  <div class="shead reveal"><div class="t" id="hl_tag">Alles inklusive</div><h2 id="hl_h2">…</h2></div>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<!-- SMART FEATURES (branchenspezifische KI-Automatik) -->
+<section class="pad" id="smart"><div class="container">
+  <div class="shead reveal"><div class="t" id="sm_tag">Intelligente Automatik</div><h2 id="sm_h2">…</h2><p id="sm_sub" style="color:var(--mut);margin-top:14px;max-width:640px">…</p></div>
+  <div class="cards" id="smCards"></div>
+</div></section>
+
+<!-- KI-MODULE & PREISE -->
+<section class="pad" id="module"><div class="container">
+  <div class="shead reveal"><div class="t" id="mo_tag">KI-Module &amp; Preise</div><h2 id="mo_h2">…</h2><p id="mo_sub" style="color:var(--mut);margin-top:14px;max-width:660px">…</p></div>
+  <div class="cards" id="moCards"></div>
+  <div class="slotbox reveal" id="slotBox">
+    <div class="sb-l"><span class="sb-tag" id="sb_tag">⚡ Auslastungs-KI · Live-Beispiel</span><h3 id="sb_h">So füllt sich ein kurzfristig freier Platz — von allein</h3><p id="sb_p" style="color:var(--mut)">Wird ein Tisch/Termin kurzfristig frei, verschickt die KI automatisch eine persönliche Einladung an passende Stammgäste. Ohne Ihr Zutun.</p></div>
+    <div class="sb-r"><div class="msg-prev"><div class="mp-top"><span class="mp-dot"></span> <b id="sb_from">Ihr Betrieb</b> <span id="sb_time" style="margin-left:auto;color:var(--dim);font-size:12px">jetzt</span></div><div class="mp-body" id="sb_msg">…</div></div></div>
+  </div>
+</div></section>
+
+<!-- INFO -->
+<section class="pad" id="info"><div class="container">
+  <div class="info">
+    <div class="ph reveal" id="infoPh"></div>
+    <div class="box reveal">
+      <h3 id="info_h1">Öffnungszeiten</h3><div id="hours"></div>
+      <div style="margin-top:16px" id="contactRows"></div>
+      <button class="btn p" style="margin-top:16px;width:100%;justify-content:center" onclick="book(event)" id="info_cta">Jetzt anfragen</button>
+    </div>
+  </div>
+</div></section>
+
+<!-- REVIEWS (optional, standardmäßig aus) -->
+<section class="pad" id="reviews" style="display:none"><div class="container">
+  <div class="shead reveal"><div class="t" id="rv_tag">Bewertungen</div><h2 id="rv_h2">Das sagen Ihre Gäste</h2></div>
+  <div class="cards" id="rvCards"></div>
+</div></section>
+
+<footer><div class="container" id="footcopy">© 2026 · Demo</div></footer>
+
+<button class="fab" id="fab" onclick="toggleChat()"><span class="p"></span> <span id="fabTxt">Fragen?</span></button>
+<div class="chat" id="chat">
+  <div class="top"><div class="av" id="chAv">B</div><div class="who"><b id="chName">Assistent</b><span id="chStatus">● online</span></div><button class="x2" onclick="toggleChat()">×</button></div>
+  <div class="body" id="chBody"></div><div class="qr" id="chQr"></div>
+</div>
+
+<div class="modal" id="bkModal"><div class="sheet">
+  <button class="x" onclick="closeBk()">×</button><div class="big">✓</div>
+  <h3 id="bk_h">Fast geschafft!</h3><p id="bk_p">…</p>
+  <p style="color:var(--dim);font-size:12px;margin-top:12px" id="bk_note">Demo-Vorschau</p>
+  <button class="btn p" style="margin-top:14px;width:100%;justify-content:center" onclick="closeBk()" id="bk_close">Schließen</button>
+</div></div>
+
+<div class="bu"><span>🦄 <b>BlackUnicorn</b> · <span id="bu_txt">Gefällt Ihnen Ihre neue Website?</span></span><a href="https://studio.sites.blackunicorn.at" target="_blank" rel="noopener" id="bu_cta">Jetzt sichern →</a></div>
+
+<script>
+const CFG=JSON.parse(document.getElementById('demo-cfg').textContent);
+// URL-Parameter ueberschreiben die eingebettete Config -> EINE Seite rendert jeden Lead per Link
+(function(){try{const Q=new URLSearchParams(location.search);if(![...Q.keys()].length)return;
+  const bmap={friseur:'kapper',barber:'kapper',kapper:'kapper',beauty:'kapper',restaurant:'horeca',horeca:'horeca',cafe:'cafe',zahnarzt:'praktijk',praktijk:'praktijk',tattoo:'horeca',handwerk:'horeca',default:'horeca'};
+  if(Q.get('n'))CFG.company=Q.get('n');
+  if(Q.get('c'))CFG.city=Q.get('c');
+  if(Q.get('b'))CFG.branche=bmap[Q.get('b').toLowerCase()]||Q.get('b').toLowerCase();
+  if(Q.get('l'))CFG.lang=Q.get('l');
+  if(Q.get('ac'))CFG.accent=(Q.get('ac')[0]==='#'?'':'#')+Q.get('ac');
+  if(Q.get('ph'))CFG.phone=Q.get('ph');
+  if(Q.get('th'))CFG.theme=Q.get('th');
+  if(Q.get('pk'))CFG.paket={name:Q.get('pk'),price:Q.get('pp')||'€49'};
+  document.getElementById('demo-cfg').textContent=JSON.stringify(CFG);
+}catch(e){}})();
+const L=CFG.lang||'de';
+const pick=o=>o&&(o[L]!=null?o[L]:o.de);
+const IMG=id=>`https://images.unsplash.com/photo-${id}?w=1400&q=80&auto=format&fit=crop`;
+const ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBybml3bHpyY2VqYXJybHR4ZnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMTQxMjEsImV4cCI6MjA5NTc5MDEyMX0.22qFWQbHPoLjgH3OBGRkon8i4iO8jVedXWtRxzxVc54";
+const INTAKE="https://prniwlzrcejarrltxftd.supabase.co/functions/v1/atlas-lead-intake";
+const CC={de:"AT",nl:"NL",en:"INT"}[L]||"AT";
+
+const PRESETS={
+  horeca:{icon:"🍽",img:["1517248135467-4c7edcad34c4","1414235077428-338989a2e8c0","1552566626-52f8b828add9","1600891964092-4316c288032e"],
+    eyebrow:{de:"Restaurant",nl:"Restaurant",en:"Restaurant"},
+    sub:{de:"Frisch, saisonal, mit Herz gekocht. Ihr Tisch — in 20 Sekunden reserviert, oder lassen Sie sich vom KI-Assistenten anrufen.",nl:"Vers, seizoensgebonden, met liefde bereid. Uw tafel — in 20 seconden gereserveerd, of laat u bellen door de AI-assistent.",en:"Fresh, seasonal, cooked with heart. Your table — booked in 20 seconds, or let the AI assistant call you."},
+    ctaMain:{de:"📞 KI-Assistent anrufen lassen",nl:"📞 AI-assistent laten bellen",en:"📞 Have the AI assistant call"},
+    book:{de:"Reservieren",nl:"Reserveren",en:"Book"},
+    hl_h2:{de:"Alles, was Ihr Restaurant braucht",nl:"Alles wat uw restaurant nodig heeft",en:"Everything your restaurant needs"},
+    as_h2:{de:"Nie wieder einen Tisch verpassen.",nl:"Nooit meer een tafel missen.",en:"Never miss a table again."},
+    as_p:{de:"Ihr KI-Telefonassistent geht rund um die Uhr ans Telefon, nimmt Reservierungen an und beantwortet Fragen — mit Ihrer Stimme, in Ihrem Stil.",nl:"Uw AI-telefoonassistent neemt 24/7 op, verwerkt reserveringen en beantwoordt vragen — in uw stijl.",en:"Your AI phone assistant answers around the clock, takes reservations and answers questions — in your style."},
+    call:[{w:"ai",t:{de:"Ristorante Bella, guten Abend! Wie kann ich helfen?",nl:"Ristorante Bella, goedenavond! Hoe kan ik helpen?",en:"Ristorante Bella, good evening! How can I help?"}},
+      {w:"ca",t:{de:"Ich hätte gern einen Tisch für zwei, heute um acht.",nl:"Graag een tafel voor twee, vanavond om acht uur.",en:"I'd like a table for two, tonight at eight."}},
+      {w:"ai",t:{de:"Sehr gern — zwei Personen, 20:00 Uhr. Auf welchen Namen darf ich reservieren?",nl:"Met plezier — twee personen, 20:00 uur. Op welke naam mag ik reserveren?",en:"Of course — two people, 8pm. What name should I book under?"}},
+      {w:"ca",t:{de:"Auf Berger.",nl:"Op Berger.",en:"Under Berger."}},
+      {w:"ai",t:{de:"Erledigt, Herr Berger! Tisch für zwei um 20:00 Uhr ist bestätigt. Wir freuen uns auf Sie. 🍷",nl:"Gedaan, meneer Berger! Tafel voor twee om 20:00 uur bevestigd. Tot vanavond. 🍷",en:"Done, Mr Berger! Table for two at 8pm confirmed. See you tonight. 🍷"}}],
+    cards:[{i:"📞",t:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},p:{de:"Geht 24/7 ans Telefon, nimmt Reservierungen an — kein Anruf geht verloren.",nl:"Neemt 24/7 op, verwerkt reserveringen — geen oproep gaat verloren.",en:"Answers 24/7, takes bookings — no call is lost."}},
+      {i:"💬",t:{de:"Chat-Assistent",nl:"Chat-assistent",en:"Chat assistant"},p:{de:"Beantwortet Fragen auf der Website und bucht Tische — sofort.",nl:"Beantwoordt vragen op de site en boekt tafels — direct.",en:"Answers questions on the site and books tables — instantly."}},
+      {i:"🌐",t:{de:"Diese Website",nl:"Deze website",en:"This website"},p:{de:"Schnell, mobil, elegant — genau wie diese hier.",nl:"Snel, mobiel, elegant — precies zoals deze.",en:"Fast, mobile, elegant — just like this one."}}],
+    hours:[["Mo",{de:"Ruhetag",nl:"Gesloten",en:"Closed"}],["Di–Fr","17:00 – 23:00"],["Sa","12:00 – 23:00"],["So","12:00 – 22:00"]]},
+
+  kapper:{icon:"✂",img:["1560066984-138dadb4c035","1585747860715-2ba37e788b70","1521590832167-7bcbfaa6381f","1503951914875-452162b0f3f1"],
+    eyebrow:{de:"Kapsalon",nl:"Kapsalon",en:"Hair salon"},
+    sub:{de:"Ihr Look, unser Handwerk. Termin online buchen — oder vom KI-Assistenten anrufen lassen.",nl:"Uw look, ons vakmanschap. Boek online — of laat u bellen door de AI-assistent.",en:"Your look, our craft. Book online — or let the AI assistant call you."},
+    ctaMain:{de:"📞 KI-Assistent anrufen lassen",nl:"📞 AI-assistent laten bellen",en:"📞 Have the AI assistant call"},
+    book:{de:"Termin buchen",nl:"Afspraak boeken",en:"Book"},
+    hl_h2:{de:"Alles, was Ihr Salon braucht",nl:"Alles wat uw salon nodig heeft",en:"Everything your salon needs"},
+    as_h2:{de:"Nie wieder einen Termin verpassen.",nl:"Nooit meer een afspraak missen.",en:"Never miss a booking again."},
+    as_p:{de:"Ihr KI-Telefonassistent nimmt Anrufe an, während Sie schneiden — bucht Termine und beantwortet Fragen, rund um die Uhr.",nl:"Uw AI-telefoonassistent neemt op terwijl u knipt — boekt afspraken en beantwoordt vragen, 24/7.",en:"Your AI phone assistant answers while you cut — books appointments and answers questions, 24/7."},
+    call:[{w:"ai",t:{de:"Kapsalon, schönen guten Tag! Was kann ich für Sie tun?",nl:"Kapsalon, goedendag! Wat kan ik voor u doen?",en:"Salon, good day! What can I do for you?"}},
+      {w:"ca",t:{de:"Ich bräuchte einen Termin zum Schneiden, diese Woche.",nl:"Ik wil graag een knipafspraak, deze week.",en:"I'd like a haircut appointment this week."}},
+      {w:"ai",t:{de:"Klar! Donnerstag 14:30 oder Freitag 10:00 — was passt besser?",nl:"Zeker! Donderdag 14:30 of vrijdag 10:00 — wat komt beter uit?",en:"Sure! Thursday 2:30pm or Friday 10am — what suits better?"}},
+      {w:"ca",t:{de:"Donnerstag passt.",nl:"Donderdag is goed.",en:"Thursday works."}},
+      {w:"ai",t:{de:"Perfekt, Donnerstag 14:30 ist gebucht. Bis dann! ✂️",nl:"Perfect, donderdag 14:30 geboekt. Tot dan! ✂️",en:"Perfect, Thursday 2:30pm booked. See you then! ✂️"}}],
+    cards:[{i:"📞",t:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},p:{de:"Nimmt Anrufe an und bucht Termine, während Sie arbeiten.",nl:"Neemt op en boekt afspraken terwijl u werkt.",en:"Answers and books while you work."}},
+      {i:"💬",t:{de:"Chat-Assistent",nl:"Chat-assistent",en:"Chat assistant"},p:{de:"Online buchen und Fragen klären — sofort.",nl:"Online boeken en vragen — direct.",en:"Book online and answer questions — instantly."}},
+      {i:"🌐",t:{de:"Diese Website",nl:"Deze website",en:"This website"},p:{de:"Modern, mobil, mit Ihrer Handschrift.",nl:"Modern, mobiel, met uw signatuur.",en:"Modern, mobile, with your signature."}}],
+    hours:[["Mo",{de:"Ruhetag",nl:"Gesloten",en:"Closed"}],["Di–Fr","09:00 – 18:00"],["Sa","09:00 – 15:00"],["So",{de:"Ruhetag",nl:"Gesloten",en:"Closed"}]]},
+
+  praktijk:{icon:"🦷",img:["1588776814546-1ffcf47267a5","1629909613654-28e377c37b09","1606755962773-d324e0a13086","1519494026892-80bbd2d6fd0d"],
+    eyebrow:{de:"Praxis",nl:"Praktijk",en:"Practice"},
+    sub:{de:"Ihre Gesundheit in besten Händen. Termine online — oder lassen Sie sich vom KI-Assistenten anrufen.",nl:"Uw gezondheid in goede handen. Afspraken online — of laat u bellen door de AI-assistent.",en:"Your health in good hands. Book online — or let the AI assistant call you."},
+    ctaMain:{de:"📞 KI-Assistent anrufen lassen",nl:"📞 AI-assistent laten bellen",en:"📞 Have the AI assistant call"},
+    book:{de:"Termin",nl:"Afspraak",en:"Book"},
+    hl_h2:{de:"Alles, was Ihre Praxis entlastet",nl:"Alles wat uw praktijk ontlast",en:"Everything that unburdens your practice"},
+    as_h2:{de:"Nie wieder ein besetztes Telefon.",nl:"Nooit meer een bezette lijn.",en:"Never a busy line again."},
+    as_p:{de:"Ihr KI-Telefonassistent nimmt Termine auf und entlastet die Rezeption — Patienten warten nicht mehr in der Leitung.",nl:"Uw AI-telefoonassistent maakt afspraken en ontlast de balie — patiënten wachten niet meer aan de lijn.",en:"Your AI phone assistant books appointments and relieves the front desk — patients don't wait on hold."},
+    call:[{w:"ai",t:{de:"Praxis, guten Tag! Möchten Sie einen Termin vereinbaren?",nl:"Praktijk, goedendag! Wilt u een afspraak maken?",en:"Practice, good day! Would you like to book an appointment?"}},
+      {w:"ca",t:{de:"Ja, für eine Kontrolle bitte.",nl:"Ja, voor een controle graag.",en:"Yes, for a check-up please."}},
+      {w:"ai",t:{de:"Gern. Montag 09:15 oder Mittwoch 16:00 — was passt Ihnen?",nl:"Graag. Maandag 09:15 of woensdag 16:00 — wat past u?",en:"Certainly. Monday 9:15 or Wednesday 4pm — what suits you?"}},
+      {w:"ca",t:{de:"Mittwoch bitte.",nl:"Woensdag graag.",en:"Wednesday please."}},
+      {w:"ai",t:{de:"Notiert — Mittwoch 16:00. Sie erhalten eine Erinnerung. Gute Besserung! 🦷",nl:"Genoteerd — woensdag 16:00. U krijgt een herinnering. Beterschap! 🦷",en:"Noted — Wednesday 4pm. You'll get a reminder. Take care! 🦷"}}],
+    cards:[{i:"📞",t:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},p:{de:"Entlastet die Rezeption, nimmt Termine 24/7 an.",nl:"Ontlast de balie, maakt afspraken 24/7.",en:"Relieves the desk, books 24/7."}},
+      {i:"🔔",t:{de:"Erinnerungen",nl:"Herinneringen",en:"Reminders"},p:{de:"Automatische Kontroll-Erinnerung — weniger Ausfälle.",nl:"Automatische controle-herinnering — minder no-shows.",en:"Automatic reminders — fewer no-shows."}},
+      {i:"🌐",t:{de:"Diese Website",nl:"Deze website",en:"This website"},p:{de:"Seriös, klar, vertrauensbildend.",nl:"Serieus, helder, vertrouwenwekkend.",en:"Serious, clear, trust-building."}}],
+    hours:[["Mo–Fr","08:00 – 17:00"],["Sa",{de:"n. Vereinbarung",nl:"op afspraak",en:"by appointment"}],["So",{de:"geschlossen",nl:"gesloten",en:"closed"}]]},
+
+  cafe:{icon:"☕",img:["1554118811-1e0d58224f24","1501339847302-ac426a4a7cbb","1447933601403-0c6688de566e","1559339352-11d035aa65de"],
+    eyebrow:{de:"Café & Lunchroom",nl:"Café & lunchroom",en:"Café & lunch"},
+    sub:{de:"Guter Kaffee, frische Küche, gute Laune. Tisch anfragen — oder vom KI-Assistenten anrufen lassen.",nl:"Goede koffie, verse keuken, goede sfeer. Tafel aanvragen — of laat u bellen door de AI-assistent.",en:"Good coffee, fresh food, good vibes. Request a table — or let the AI assistant call you."},
+    ctaMain:{de:"📞 KI-Assistent anrufen lassen",nl:"📞 AI-assistent laten bellen",en:"📞 Have the AI assistant call"},
+    book:{de:"Anfragen",nl:"Aanvragen",en:"Request"},
+    hl_h2:{de:"Alles, was Ihr Café braucht",nl:"Alles wat uw café nodig heeft",en:"Everything your café needs"},
+    as_h2:{de:"Nie wieder einen Gast verpassen.",nl:"Nooit meer een gast missen.",en:"Never miss a guest again."},
+    as_p:{de:"Ihr KI-Telefonassistent nimmt Tisch- und Event-Anfragen an, auch wenn's voll ist — rund um die Uhr.",nl:"Uw AI-telefoonassistent neemt tafel- en event-aanvragen aan, ook als het druk is — 24/7.",en:"Your AI phone assistant takes table and event requests, even when it's busy — 24/7."},
+    call:[{w:"ai",t:{de:"Café, hallo! Was kann ich für Sie tun?",nl:"Café, hallo! Wat kan ik voor u doen?",en:"Café, hi! What can I do for you?"}},
+      {w:"ca",t:{de:"Habt ihr Sonntag Vormittag einen Tisch für vier?",nl:"Hebben jullie zondagochtend een tafel voor vier?",en:"Do you have a table for four Sunday morning?"}},
+      {w:"ai",t:{de:"Ja! Um 10:00 oder 11:30 — was passt?",nl:"Ja! Om 10:00 of 11:30 — wat past?",en:"Yes! At 10 or 11:30 — what works?"}},
+      {w:"ca",t:{de:"11:30 bitte.",nl:"11:30 graag.",en:"11:30 please."}},
+      {w:"ai",t:{de:"Super, Tisch für vier um 11:30 am Sonntag ist reserviert. Bis dann! ☕",nl:"Top, tafel voor vier om 11:30 op zondag gereserveerd. Tot dan! ☕",en:"Great, table for four at 11:30 Sunday reserved. See you! ☕"}}],
+    cards:[{i:"📞",t:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},p:{de:"Nimmt Anrufe an, auch im Trubel — 24/7.",nl:"Neemt op, ook in de drukte — 24/7.",en:"Answers even when busy — 24/7."}},
+      {i:"💬",t:{de:"Chat-Assistent",nl:"Chat-assistent",en:"Chat assistant"},p:{de:"Fragen und Anfragen sofort geklärt.",nl:"Vragen en aanvragen direct geregeld.",en:"Questions and requests handled instantly."}},
+      {i:"🌐",t:{de:"Diese Website",nl:"Deze website",en:"This website"},p:{de:"Warm, einladend, mobil.",nl:"Warm, uitnodigend, mobiel.",en:"Warm, inviting, mobile."}}],
+    hours:[["Mo–Fr","08:00 – 18:00"],["Sa","09:00 – 18:00"],["So","09:00 – 16:00"]]}
+};
+
+// Intelligente, branchenspezifische KI-Automatik (Showcase der echten Fähigkeiten)
+const SMART={
+  horeca:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI hält das Haus voll — vollautomatisch",nl:"Uw AI houdt de zaak vol — volautomatisch",en:"Your AI keeps the house full — fully automatic"},
+    sub:{de:"Kein leerer Tisch, keine verpasste Reservierung. Die KI denkt mit und handelt selbstständig.",nl:"Geen lege tafel, geen gemiste reservering. De AI denkt mee en handelt zelfstandig.",en:"No empty table, no missed booking. The AI thinks ahead and acts on its own."},
+    items:[
+      {i:"🍷",t:{de:"Freie Tische füllen",nl:"Lege tafels vullen",en:"Fill empty tables"},p:{de:"Erkennt freie Tische für heute Abend und lädt automatisch die passenden Stammgäste per WhatsApp/SMS ein — die Lücke schließt sich von selbst.",nl:"Herkent lege tafels voor vanavond en nodigt automatisch de juiste vaste gasten uit via WhatsApp/SMS — het gat vult zich vanzelf.",en:"Detects empty tables for tonight and automatically invites the right regulars via WhatsApp/SMS — the gap fills itself."}},
+      {i:"🛡",t:{de:"No-Show-Schutz",nl:"No-show-bescherming",en:"No-show protection"},p:{de:"Bestätigt Reservierungen automatisch, erinnert rechtzeitig und gibt abgesagte Tische sofort wieder frei.",nl:"Bevestigt reserveringen automatisch, herinnert op tijd en geeft geannuleerde tafels meteen weer vrij.",en:"Confirms bookings automatically, reminds in time and instantly frees up cancelled tables."}},
+      {i:"💌",t:{de:"KI-Einladungen",nl:"AI-uitnodigingen",en:"AI invitations"},p:{de:"Personalisierte Einladungen zu ruhigen Tagen, Events oder Aktionen — nur an die passenden Gäste, ganz von allein.",nl:"Gepersonaliseerde uitnodigingen voor rustige dagen, events of acties — alleen aan de juiste gasten, helemaal vanzelf.",en:"Personalised invitations for quiet days, events or offers — only to the right guests, all by itself."}}]},
+  kapper:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI füllt den Kalender — vollautomatisch",nl:"Uw AI vult de agenda — volautomatisch",en:"Your AI fills the calendar — fully automatic"},
+    sub:{de:"Keine Lücke im Terminbuch, kein vergessener Kunde. Die KI holt sie aktiv zurück.",nl:"Geen gat in de agenda, geen vergeten klant. De AI haalt ze actief terug.",en:"No gap in the book, no forgotten client. The AI actively brings them back."},
+    items:[
+      {i:"⏰",t:{de:"Wiederkommen-Erinnerung",nl:"Terugkom-herinnering",en:"Return reminder"},p:{de:"Erkennt, wann ein Kunde wieder dran wäre, und fragt automatisch: Zeit für den nächsten Schnitt? — mit direktem Buchungslink.",nl:"Herkent wanneer een klant weer aan de beurt is en vraagt automatisch: tijd voor de volgende knipbeurt? — met directe boekingslink.",en:"Recognises when a client is due again and asks automatically: time for your next cut? — with a direct booking link."}},
+      {i:"🎁",t:{de:"Rabatt-Aktionen",nl:"Kortingsacties",en:"Discount actions"},p:{de:"Füllt ruhige Tage gezielt: automatische Aktionen an genau die Kunden, die gerade dran sind.",nl:"Vult rustige dagen gericht: automatische acties naar precies de klanten die aan de beurt zijn.",en:"Fills quiet days on purpose: automatic offers to exactly the clients who are due."}},
+      {i:"💌",t:{de:"KI-Einladungen",nl:"AI-uitnodigingen",en:"AI invitations"},p:{de:"Reaktiviert inaktive Kunden mit persönlichen Einladungen — bevor sie zur Konkurrenz gehen.",nl:"Reactiveert inactieve klanten met persoonlijke uitnodigingen — voordat ze naar de concurrent gaan.",en:"Reactivates dormant clients with personal invitations — before they go to a competitor."}}]},
+  praktijk:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI hält die Praxis ausgelastet — vollautomatisch",nl:"Uw AI houdt de praktijk vol — volautomatisch",en:"Your AI keeps the practice full — fully automatic"},
+    sub:{de:"Weniger Ausfälle, volle Termine, entlastetes Team. Die KI arbeitet im Hintergrund.",nl:"Minder uitval, volle agenda, ontlast team. De AI werkt op de achtergrond.",en:"Fewer no-shows, full schedule, relieved team. The AI works in the background."},
+    items:[
+      {i:"🔔",t:{de:"Recall-System",nl:"Recall-systeem",en:"Recall system"},p:{de:"Erinnert Patienten automatisch an fällige Kontrollen — der Stuhl bleibt gefüllt, ganz ohne Nachtelefonieren.",nl:"Herinnert patiënten automatisch aan controles — de stoel blijft gevuld, zonder nabellen.",en:"Automatically reminds patients of due check-ups — the chair stays filled, no chasing calls."}},
+      {i:"📅",t:{de:"Lücken-Füller",nl:"Gaten-vuller",en:"Gap filler"},p:{de:"Vergibt frei werdende Termine sofort an Wartende — keine Leerlaufzeit mehr.",nl:"Geeft vrijgekomen afspraken meteen aan wachtenden — geen leegloop meer.",en:"Instantly offers freed slots to those waiting — no idle time."}},
+      {i:"💬",t:{de:"Nachsorge-KI",nl:"Nazorg-AI",en:"Aftercare AI"},p:{de:"Automatische Nachfrage nach der Behandlung — mehr Bindung, bessere Bewertungen.",nl:"Automatische opvolging na de behandeling — meer binding, betere reviews.",en:"Automatic follow-up after treatment — more loyalty, better reviews."}}]},
+  cafe:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI hält das Café lebendig — vollautomatisch",nl:"Uw AI houdt het café levendig — volautomatisch",en:"Your AI keeps the café buzzing — fully automatic"},
+    sub:{de:"Volle Tische auch in Randzeiten. Die KI bringt Gäste, wenn es ruhig ist.",nl:"Volle tafels ook in daluren. De AI brengt gasten als het rustig is.",en:"Full tables even in off-hours. The AI brings guests when it's quiet."},
+    items:[
+      {i:"☕",t:{de:"Ruhige-Zeiten-Aktionen",nl:"Daluren-acties",en:"Off-peak actions"},p:{de:"Erkennt ruhige Stunden und schickt gezielte Aktionen an Stammgäste in der Nähe.",nl:"Herkent rustige uren en stuurt gerichte acties naar vaste gasten in de buurt.",en:"Detects quiet hours and sends targeted offers to nearby regulars."}},
+      {i:"💌",t:{de:"KI-Einladungen",nl:"AI-uitnodigingen",en:"AI invitations"},p:{de:"Persönliche Einladungen zu Events, Specials oder neuen Karten — automatisch an die richtigen Gäste.",nl:"Persoonlijke uitnodigingen voor events, specials of nieuwe kaarten — automatisch aan de juiste gasten.",en:"Personal invitations to events, specials or new menus — automatically to the right guests."}},
+      {i:"⭐",t:{de:"Feedback-KI",nl:"Feedback-AI",en:"Feedback AI"},p:{de:"Fragt zufriedene Gäste automatisch nach einer Bewertung — mehr Sichtbarkeit, mehr Laufkundschaft.",nl:"Vraagt tevreden gasten automatisch om een review — meer zichtbaarheid, meer aanloop.",en:"Automatically asks happy guests for a review — more visibility, more walk-ins."}}]}
+};
+
+// Buchbare KI-Module + Preise (PLATZHALTER-Preise, per cfg.prices ueberschreibbar)
+const PRICE=Object.assign({web:"€49",phone:"€99",slot:"€79",per:{de:"/Monat",nl:"/maand",en:"/month"},from:{de:"ab",nl:"vanaf",en:"from"}}, (CFG.prices||{}));
+const MODULES={
+  tag:{de:"KI-Module & Preise",nl:"AI-modules & prijzen",en:"AI modules & pricing"},
+  h2:{de:"Bausteine, die sich sofort rechnen",nl:"Bouwstenen die zich direct terugverdienen",en:"Modules that pay for themselves"},
+  sub:{de:"Nehmen Sie nur, was Sie brauchen — transparent, günstig, monatlich kündbar. Ein voller Tisch mehr pro Woche zahlt das Modul.",nl:"Neem alleen wat u nodig heeft — transparant, voordelig, maandelijks opzegbaar. Eén volle tafel extra per week betaalt de module.",en:"Take only what you need — transparent, affordable, cancel monthly. One extra full table a week pays for it."},
+  items:[
+    {i:"🌐",k:"web",t:{de:"Ihre Website",nl:"Uw website",en:"Your website"},p:{de:"Komplett gebaut, gebrandet, blitzschnell & mobil — genau wie diese hier.",nl:"Volledig gebouwd, gebrand, razendsnel & mobiel — precies zoals deze.",en:"Fully built, branded, lightning-fast & mobile — just like this one."}},
+    {i:"📞",k:"phone",t:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},p:{de:"Geht 24/7 ans Telefon, bucht Termine & Tische, in Ihrer Stimme.",nl:"Neemt 24/7 op, boekt afspraken & tafels, in uw stem.",en:"Answers 24/7, books appointments & tables, in your voice."}},
+    {i:"⚡",k:"slot",t:{de:"Auslastungs-KI",nl:"Bezettings-AI",en:"Occupancy AI"},p:{de:"Hält Kalender & Tische voll — erkennt kurzfristige Lücken und lädt automatisch die passenden Gäste ein.",nl:"Houdt agenda & tafels vol — herkent last-minute gaten en nodigt automatisch de juiste gasten uit.",en:"Keeps calendar & tables full — spots last-minute gaps and automatically invites the right guests."}}]
+};
+// Beispiel einer automatischen Einladung (branchenspezifisch)
+const SLOTEX={
+  horeca:{de:"🥃 Heute Abend spontan Lust auf einen Tisch? Wir würden Sie gern auf einen kleinen Hausschnaps und unsere köstliche Karte einladen — der Schnaps geht auf uns. Tisch für 2 um 20:00 frei. Zusagen?",nl:"🥃 Vanavond spontaan zin in een tafel? We nodigen u graag uit voor een klein huisborreltje en onze heerlijke kaart — de borrel is van ons. Tafel voor 2 om 20:00 vrij. Toezeggen?",en:"🥃 Feel like a table tonight? We'd love to treat you to a little house schnapps and our delicious menu — the schnapps is on us. Table for 2 at 8pm free. Yes?"},
+  kapper:{de:"✂️ Diese Woche wird noch ein Platz frei — Zeit für den nächsten Schnitt? Als kleines Dankeschön 10% auf Ihren Besuch. Termin sichern?",nl:"✂️ Deze week komt nog een plek vrij — tijd voor de volgende knipbeurt? Als bedankje 10% op uw bezoek. Afspraak vastleggen?",en:"✂️ A slot just opened this week — time for your next cut? As a thank-you, 10% off your visit. Book it?"},
+  praktijk:{de:"🦷 Kurzfristig ist ein Termin frei geworden — möchten Sie Ihre Kontrolle vorziehen? Antworten Sie einfach mit Ja, wir buchen es für Sie.",nl:"🦷 Er is net een afspraak vrijgekomen — wilt u uw controle naar voren halen? Antwoord met Ja, wij regelen het.",en:"🦷 A slot just opened up — want to bring your check-up forward? Just reply Yes and we'll book it."},
+  cafe:{de:"☕ Sonne draußen, Tisch frei — kommen Sie auf einen Kaffee vorbei, das zweite Stück Kuchen geht heute auf uns. Bis gleich?",nl:"☕ Zon buiten, tafel vrij — kom langs voor een koffie, het tweede stuk taart is vandaag van ons. Tot zo?",en:"☕ Sun's out, table free — pop in for a coffee, the second slice of cake is on us today. See you soon?"}};
+
+const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
+  nav1:{de:"KI-Telefon",nl:"AI-telefoon",en:"AI phone"},nav2:{de:"Angebot",nl:"Aanbod",en:"Offer"},nav3:{de:"Kontakt",nl:"Contact",en:"Contact"},
+  as_tag:{de:"Ihr KI-Telefonassistent",nl:"Uw AI-telefoonassistent",en:"Your AI phone assistant"},
+  hl_tag:{de:"Alles inklusive",nl:"Alles inbegrepen",en:"All included"},
+  playBtn:{de:"▶ Beispielanruf abspielen",nl:"▶ Voorbeeldgesprek afspelen",en:"▶ Play sample call"},
+  ph_status:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},
+  cm_h:{de:"Lassen Sie sich jetzt anrufen",nl:"Laat u nu bellen",en:"Get a call now"},
+  cm_p:{de:"Nummer eingeben — der KI-Telefonassistent ruft an und zeigt live, wie er für Ihre Kunden ans Telefon geht.",nl:"Vul uw nummer in — de AI-telefoonassistent belt u en laat live zien hoe hij voor uw klanten opneemt.",en:"Enter your number — the AI phone assistant calls you and shows live how it answers for your customers."},
+  cm_btn:{de:"Anrufen lassen",nl:"Laten bellen",en:"Call me"},
+  cm_ok:{de:"Angefragt! Der Assistent bzw. ein Kollege meldet sich in Kürze.",nl:"Aangevraagd! De assistent of een collega neemt snel contact op.",en:"Requested! The assistant or a colleague will be in touch shortly."},
+  feat:{de:["24/7 erreichbar","Ihre Stimme & Stil","Termine direkt gebucht"],nl:["24/7 bereikbaar","Uw stem & stijl","Afspraken direct geboekt"],en:["Reachable 24/7","Your voice & style","Appointments booked directly"]},
+  info_h1:{de:"Öffnungszeiten",nl:"Openingstijden",en:"Opening hours"},
+  cl:{de:["Ort","Telefon","Online"],nl:["Plaats","Telefoon","Online"],en:["City","Phone","Online"]},
+  cWeb:{de:"jederzeit",nl:"altijd",en:"anytime"},
+  info_cta:{de:"Jetzt anfragen",nl:"Nu aanvragen",en:"Enquire now"},
+  fab:{de:"Fragen?",nl:"Vragen?",en:"Questions?"},chStatus:{de:"● Assistent · online",nl:"● Assistent · online",en:"● Assistant · online"},
+  chGreet:{de:"Hallo 👋 Das ist Ihre neue Website — schon fertig und ganz auf Sie gebrandet. Sie können sie hier LIVE anpassen (Farbe, Texte) oder mir sagen, was ich für Sie ändern soll. Wenn alles passt, sichern Sie sie einfach. Was möchten Sie?",nl:"Hallo 👋 Dit is uw nieuwe website — al klaar en helemaal in uw stijl. U kunt hem hier LIVE aanpassen (kleur, teksten) of zeg mij wat ik moet wijzigen. Als alles klopt, legt u hem gewoon vast. Wat wilt u?",en:"Hi 👋 This is your new website — already done and fully branded for you. You can adjust it LIVE here (colour, text) or tell me what to change. When it fits, just secure it. What would you like?"},
+  q_book:{de:"Buchen",nl:"Boeken",en:"Book"},q_call:{de:"Anrufen lassen",nl:"Laten bellen",en:"Call me"},q_hours:{de:"Öffnungszeiten",nl:"Openingstijden",en:"Hours"},
+  q_edit:{de:"✏️ Live anpassen",nl:"✏️ Live aanpassen",en:"✏️ Edit live"},
+  ed_intro:{de:"Klar! Was möchten Sie anpassen? Änderungen sind sofort sichtbar.",nl:"Zeker! Wat wilt u aanpassen? Wijzigingen zijn meteen zichtbaar.",en:"Sure! What would you like to change? Edits appear instantly."},
+  ed_color:{de:"🎨 Farbe",nl:"🎨 Kleur",en:"🎨 Colour"},ed_slogan:{de:"✍️ Slogan",nl:"✍️ Slogan",en:"✍️ Tagline"},ed_name:{de:"🏷 Firmenname",nl:"🏷 Bedrijfsnaam",en:"🏷 Business name"},ed_wish:{de:"💬 Wunsch an uns",nl:"💬 Wens aan ons",en:"💬 Request to us"},ed_done:{de:"Passt so ✓",nl:"Zo goed ✓",en:"Looks good ✓"},ed_back:{de:"↩ Zurück",nl:"↩ Terug",en:"↩ Back"},
+  ed_pickcolor:{de:"Wählen Sie eine Farbe — sie ändert sich sofort auf der ganzen Seite:",nl:"Kies een kleur — verandert direct op de hele pagina:",en:"Pick a colour — it changes across the whole page instantly:"},
+  ed_more:{de:"Schön! Noch etwas anpassen?",nl:"Mooi! Nog iets aanpassen?",en:"Nice! Anything else?"},
+  ed_askslogan:{de:"Tippen Sie Ihren neuen Slogan und schicken Sie ihn:",nl:"Typ uw nieuwe slogan en verstuur:",en:"Type your new tagline and send:"},
+  ed_askname:{de:"Wie soll Ihr Betrieb heißen?",nl:"Hoe moet uw bedrijf heten?",en:"What should your business be called?"},
+  ed_wishask:{de:"Schreiben Sie kurz, was wir ändern sollen — wir setzen es um:",nl:"Schrijf kort wat we moeten wijzigen — wij regelen het:",en:"Briefly tell us what to change — we'll handle it:"},
+  ed_wishdone:{de:"Danke! Ihr Wunsch ist bei uns — ein Kollege setzt ihn um und meldet sich.",nl:"Bedankt! Uw wens staat bij ons — een collega regelt het en neemt contact op.",en:"Thanks! Your request reached us — a colleague will handle it and get in touch."},
+  ed_donemsg:{de:"Freut mich, dass es gefällt! 🎉 Sichern Sie sich Ihre Website:",nl:"Fijn dat het bevalt! 🎉 Leg uw website vast:",en:"Glad you like it! 🎉 Secure your website:"},
+  ed_send:{de:"Senden",nl:"Versturen",en:"Send"},
+  ed_ai:{de:"💬 Sag es einfach (KI)",nl:"💬 Zeg het gewoon (AI)",en:"💬 Just say it (AI)"},
+  ed_ai_ask:{de:"Sagen Sie einfach, was ich ändern soll — z. B. »Hintergrund als DNA und Farbe blau, Titel: Trattoria Nonna, Slogan: Frisch & ehrlich«.",nl:"Zeg gewoon wat ik moet wijzigen — bijv. »achtergrond als DNA en kleur blauw, titel: Trattoria Nonna, slogan: Vers & eerlijk«.",en:"Just tell me what to change — e.g. »background as DNA and colour blue, title: Trattoria Nonna, tagline: Fresh & honest«."},
+  ed_ai_working:{de:"Einen Moment… ✨",nl:"Een moment… ✨",en:"One moment… ✨"},
+  ed_ai_done:{de:"Erledigt! ✨ Noch etwas?",nl:"Klaar! ✨ Nog iets?",en:"Done! ✨ Anything else?"},
+  ed_ai_fail:{de:"Das hab ich nicht ganz erwischt — versuchen Sie z. B. »Farbe grün, Hintergrund Wellen« oder nutzen Sie die Knöpfe.",nl:"Dat begreep ik niet helemaal — probeer bijv. »kleur groen, achtergrond golven« of gebruik de knoppen.",en:"I didn't quite catch that — try e.g. »colour green, background waves« or use the buttons."},
+  ed_look:{de:"🪄 Kompletter Look",nl:"🪄 Complete look",en:"🪄 Full look"},
+  ed_theme:{de:"🌗 Hell / Dunkel",nl:"🌗 Licht / Donker",en:"🌗 Light / Dark"},th_light:{de:"☀️ Heller Look",nl:"☀️ Lichte look",en:"☀️ Light look"},th_dark:{de:"🌙 Dunkler Look",nl:"🌙 Donkere look",en:"🌙 Dark look"},th_done:{de:"Look umgestellt. ✨",nl:"Look aangepast. ✨",en:"Look switched. ✨"},
+  look_elegant:{de:"Elegant",nl:"Elegant",en:"Elegant"},look_tech:{de:"Modern / Tech",nl:"Modern / Tech",en:"Modern / Tech"},look_frisch:{de:"Frisch",nl:"Fris",en:"Fresh"},look_bold:{de:"Auffällig",nl:"Opvallend",en:"Bold"},
+  ed_3d:{de:"✨ 3D-Stil",nl:"✨ 3D-stijl",en:"✨ 3D style"},d3_particles:{de:"Partikel-Kugel",nl:"Deeltjes-bol",en:"Particle sphere"},d3_dna:{de:"DNA-Helix",nl:"DNA-helix",en:"DNA helix"},d3_wave:{de:"Wellen",nl:"Golven",en:"Waves"},d3_torus:{de:"Schleife",nl:"Lus",en:"Loop"},d3_calm:{de:"Ruhig (ohne 3D)",nl:"Rustig (geen 3D)",en:"Calm (no 3D)"},
+  ed_font:{de:"🔤 Schrift",nl:"🔤 Lettertype",en:"🔤 Typeface"},font_elegant:{de:"Elegant (Serif)",nl:"Elegant (serif)",en:"Elegant (serif)"},font_modern:{de:"Modern (Sans)",nl:"Modern (sans)",en:"Modern (sans)"},
+  ed_looked:{de:"Fertig! Gefällt Ihnen dieser Look? Sie können weiter feintunen.",nl:"Klaar! Bevalt deze look? U kunt verder finetunen.",en:"Done! Like this look? Keep fine-tuning if you want."},
+  rv_tag:{de:"Bewertungen",nl:"Reviews",en:"Reviews"},rv_h2:{de:"Das sagen Ihre Gäste",nl:"Wat uw gasten zeggen",en:"What your guests say"},
+  rv:[{q:{de:"Absolut top — schnell, freundlich, immer wieder gern.",nl:"Absoluut top — snel, vriendelijk, altijd weer.",en:"Absolutely top — fast, friendly, always a pleasure."},a:"Sandra K."},
+      {q:{de:"Online gebucht in 30 Sekunden. So einfach!",nl:"Online geboekt in 30 seconden. Zo simpel!",en:"Booked online in 30 seconds. So easy!"},a:"Michael R."},
+      {q:{de:"Genau wie beschrieben. Klare Empfehlung.",nl:"Precies zoals beschreven. Een aanrader.",en:"Exactly as described. Highly recommended."},a:"Julia B."}],
+  ed_seg:{de:"🧩 Bereiche",nl:"🧩 Secties",en:"🧩 Sections"},
+  seg_hint:{de:"Tippen zum Ein-/Ausblenden:",nl:"Tik om te tonen/verbergen:",en:"Tap to show/hide:"},
+  seg_gallery:{de:"Galerie",nl:"Galerij",en:"Gallery"},seg_d3:{de:"3D-Bereich",nl:"3D-sectie",en:"3D section"},seg_phone:{de:"KI-Telefon",nl:"AI-telefoon",en:"AI phone"},seg_offer:{de:"Angebot",nl:"Aanbod",en:"Offer"},seg_info:{de:"Öffnungszeiten",nl:"Openingstijden",en:"Hours"},seg_reviews:{de:"Bewertungen",nl:"Reviews",en:"Reviews"},
+  seg_done:{de:"Bereich aktualisiert. ✨",nl:"Sectie bijgewerkt. ✨",en:"Section updated. ✨"},
+  a_hours:{de:"Sehen Sie unten im Bereich Öffnungszeiten. 🕒",nl:"Zie hieronder bij Openingstijden. 🕒",en:"See the opening hours section below. 🕒"},
+  bk_h:{de:"Fast geschafft!",nl:"Bijna klaar!",en:"Almost there!"},
+  bk_p:{de:"In der echten Version wählen Sie jetzt Datum & Uhrzeit — die Buchung läuft automatisch, rund um die Uhr.",nl:"In de echte versie kiest u nu datum & tijd — automatisch, 24/7.",en:"In the live version you'd pick date & time — automatic, 24/7."},
+  bk_note:{de:"Demo-Vorschau",nl:"Demo",en:"Demo preview"},bk_close:{de:"Schließen",nl:"Sluiten",en:"Close"},
+  bu_txt:{de:"Gefällt Ihnen Ihre neue Website?",nl:"Bevalt uw nieuwe website?",en:"Like your new website?"},bu_cta:{de:"Jetzt sichern →",nl:"Nu vastleggen →",en:"Get it now →"},
+  foot:{de:"Website-Demo · präsentiert von BlackUnicorn",nl:"Website-demo · door BlackUnicorn",en:"Website demo · by BlackUnicorn"},
+  sc_tag:{de:"Interaktiv",nl:"Interactief",en:"Interactive"},sc_h:{de:"Bewegung, die begeistert",nl:"Beweging die boeit",en:"Motion that captivates"},sc_hint:{de:"↔ Maus bewegen",nl:"↔ Beweeg je muis",en:"↔ Move your mouse"}};
+
+const P=PRESETS[CFG.branche]||PRESETS.horeca;
+(function render(){
+  const acc=CFG.accent||"#c0432f";
+  document.documentElement.style.setProperty('--accent',acc);
+  const h=acc.replace('#','').replace(/(.)(.)(.)/,(m,a,b,c)=>a+a+b+b+c+c);
+  const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);
+  document.documentElement.style.setProperty('--accent-soft',`rgba(${r},${g},${bl},.18)`);
+  if((CFG.theme||'dark')==='light') document.body.classList.add('light');
+  document.documentElement.lang=L;
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  const short=(CFG.company||'').split(/\s+/)[0]||CFG.company; const city=CFG.city||'';
+  document.title=CFG.company+' · '+pick(P.eyebrow);
+  set('lgBadge',(CFG.company||'B')[0].toUpperCase()); set('lgName',CFG.company);
+  set('eyebrow',pick(P.eyebrow)+(city?' · '+city:''));
+  document.getElementById('h1').innerHTML=(L==='nl'?'Welkom bij ':(L==='en'?'Welcome to ':'Willkommen bei '))+'<span class="accent">'+CFG.company+'</span>';
+  set('sub',pick(P.sub)); set('ctaMain',pick(P.ctaMain)); set('ctaSec',pick(P.book)); set('bookNav',pick(P.book));
+  set('nl1',pick(T.nav1));set('nl2',pick(T.nav2));set('nl3',pick(T.nav3));
+  document.getElementById('heroBg').style.backgroundImage=`url("${IMG(P.img[0])}")`;
+  document.getElementById('gal').innerHTML=P.img.slice(0,4).map(id=>`<div class="im" style="background-image:url('${IMG(id)}')"></div>`).join('');
+  set('as_tag',pick(T.as_tag)); set('as_h2',pick(P.as_h2)); set('as_p',pick(P.as_p));
+  set('ph_name',CFG.company); set('ph_status',pick(T.ph_status)); set('playBtn',pick(T.playBtn));
+  set('cm_h',pick(T.cm_h)); set('cm_p',pick(T.cm_p)); set('cm_btn',pick(T.cm_btn)); set('cm_ok',pick(T.cm_ok));
+  document.getElementById('cmPhone').placeholder = CC==='NL'?'+31 …':(CC==='INT'?'+ …':'+43 …');
+  document.getElementById('as_feat').innerHTML=pick(T.feat).map(f=>`<span>✓ ${f}</span>`).join('');
+  set('hl_tag',pick(T.hl_tag)); set('hl_h2',pick(P.hl_h2));
+  document.getElementById('cards').innerHTML=P.cards.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p></div>`).join('');
+  const SM=SMART[CFG.branche]||SMART.horeca;
+  set('sm_tag',pick(SM.tag)); set('sm_h2',pick(SM.h2)); set('sm_sub',pick(SM.sub));
+  document.getElementById('smCards').innerHTML=SM.items.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p></div>`).join('');
+  set('mo_tag',pick(MODULES.tag)); set('mo_h2',pick(MODULES.h2));
+  const inclLbl={de:'im Paket enthalten',nl:'inbegrepen in het pakket',en:'included in the package'};
+  if(CFG.paket){
+    const pkNote={de:', alles inklusive · monatlich kündbar',nl:', alles inbegrepen · maandelijks opzegbaar',en:', all included · cancel monthly'};
+    document.getElementById('mo_sub').innerHTML=`<b style="color:var(--accent)">${CFG.paket.name}</b> — <b class="serif" style="font-size:22px">${CFG.paket.price}</b><span style="color:var(--mut)">${pick(PRICE.per)}${pick(pkNote)}</span>`;
+  } else { set('mo_sub',pick(MODULES.sub)); }
+  document.getElementById('moCards').innerHTML=MODULES.items.map(c=>{
+    const pr = CFG.paket ? `<div class="price"><span class="per" style="color:var(--accent);font-weight:600">✓ ${pick(inclLbl)}</span></div>`
+      : `<div class="price"><span class="from">${pick(PRICE.from)}</span><span class="amt">${PRICE[c.k]}</span><span class="per">${pick(PRICE.per)}</span></div>`;
+    return `<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p>${pr}</div>`;
+  }).join('');
+  const SBT={tag:{de:"⚡ Auslastungs-KI · Live-Beispiel",nl:"⚡ Bezettings-AI · Live-voorbeeld",en:"⚡ Occupancy AI · Live example"},h:{de:"So füllt sich ein kurzfristig freier Platz — von allein",nl:"Zo vult een last-minute vrije plek zich — vanzelf",en:"How a last-minute opening fills itself — automatically"},p:{de:"Wird ein Tisch oder Termin kurzfristig frei, verschickt die KI automatisch eine persönliche Einladung an die passenden Stammgäste. Ganz ohne Ihr Zutun.",nl:"Komt een tafel of afspraak last-minute vrij, dan stuurt de AI automatisch een persoonlijke uitnodiging naar de juiste vaste gasten. Zonder uw toedoen.",en:"When a table or slot frees up last-minute, the AI automatically sends a personal invitation to the right regulars. Fully hands-off."},time:{de:"jetzt",nl:"nu",en:"now"}};
+  set('sb_tag',pick(SBT.tag)); set('sb_h',pick(SBT.h)); set('sb_p',pick(SBT.p)); set('sb_time',pick(SBT.time)); set('sb_from',CFG.company);
+  set('sb_msg',pick(SLOTEX[CFG.branche]||SLOTEX.horeca));
+  set('rv_tag',pick(T.rv_tag)); set('rv_h2',pick(T.rv_h2));
+  document.getElementById('rvCards').innerHTML=T.rv.map(r=>`<div class="c reveal"><div style="color:var(--accent);font-size:17px;letter-spacing:2px;margin-bottom:10px">★★★★★</div><p style="color:var(--ink);font-size:15px;line-height:1.5">„${pick(r.q)}"</p><div style="color:var(--mut);font-size:13px;margin-top:12px">— ${r.a}</div></div>`).join('');
+  document.getElementById('infoPh').style.backgroundImage=`url("${IMG(P.img[1])}")`;
+  set('info_h1',pick(T.info_h1));
+  document.getElementById('hours').innerHTML=P.hours.map(x=>`<div class="row"><span>${x[0]}</span><span>${typeof x[1]==='string'?x[1]:pick(x[1])}</span></div>`).join('');
+  const cl=pick(T.cl);
+  document.getElementById('contactRows').innerHTML=
+    `<div class="row"><span>${cl[0]}</span><span>${city||'—'}</span></div>`+
+    `<div class="row"><span>${cl[1]}</span><span>${CFG.phone||'—'}</span></div>`+
+    `<div class="row"><span>${cl[2]}</span><span>${pick(T.cWeb)}</span></div>`;
+  set('info_cta',pick(T.info_cta));
+  set('sc_tag',pick(T.sc_tag)); set('sc_h',pick(T.sc_h)); set('sc_hint',pick(T.sc_hint));
+  set('footcopy','© 2026 '+CFG.company+' · '+pick(T.foot));
+  set('fabTxt',pick(T.fab)); set('chAv',(CFG.company||'B')[0].toUpperCase()); set('chName',short); set('chStatus',pick(T.chStatus));
+  set('bk_h',pick(T.bk_h)); set('bk_p',pick(T.bk_p)); set('bk_note',pick(T.bk_note)); set('bk_close',pick(T.bk_close));
+  set('bu_txt',pick(T.bu_txt)); set('bu_cta',pick(T.bu_cta));
+})();
+
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>30),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+function scrollAssist(){document.getElementById('assist').scrollIntoView({behavior:'smooth'}); setTimeout(playCall,600);}
+window.scrollAssist=scrollAssist;
+
+let playing=false;
+function playCall(){
+  if(playing) return; playing=true;
+  const tr=document.getElementById('transcript'), ring=document.getElementById('ring'); tr.innerHTML=''; ring.classList.add('calling');
+  const seq=P.call; let i=0;
+  const step=()=>{ if(i>=seq.length){ ring.classList.remove('calling'); playing=false; return; }
+    const m=seq[i++]; const d=document.createElement('div'); d.className='tb '+(m.w==='ai'?'ai':'ca'); d.textContent=pick(m.t); tr.appendChild(d); tr.scrollTop=tr.scrollHeight;
+    setTimeout(step, m.w==='ai'?1500:1100); };
+  setTimeout(step,900);
+}
+window.playCall=playCall;
+
+function requestCall(){
+  const inp=document.getElementById('cmPhone'), ph=(inp.value||'').trim();
+  if(ph.replace(/[^0-9]/g,'').length<6){ inp.style.borderColor='var(--accent)'; inp.focus(); return; }
+  const payload={action:'intake',venture:'blackunicorn',company:CFG.company+' (Demo-Interesse)',first_name:'Website',last_name:'Lead',phone:ph,country:CC,product_name:'KI-Telefonassistent',demo:'demo-'+(CFG.company||'')+' | RÜCKRUF via KI-Telefon-Demo'};
+  fetch(INTAKE,{method:'POST',headers:{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
+  document.getElementById('cmOk').style.display='block'; inp.value=''; playCall();
+}
+window.requestCall=requestCall;
+
+function book(e){if(e)e.preventDefault();document.getElementById('bkModal').classList.add('open');}
+function closeBk(){document.getElementById('bkModal').classList.remove('open');}
+window.book=book;window.closeBk=closeBk;
+document.getElementById('bkModal').addEventListener('click',e=>{if(e.target.id==='bkModal')closeBk();});
+
+let started=false;
+function bub(t,w){const d=document.createElement('div');d.className='bub '+w;d.textContent=t;const b=document.getElementById('chBody');b.appendChild(d);b.scrollTop=b.scrollHeight;}
+const SWATCHES=['#c0432f','#0ea5a3','#8a5cff','#e2b45c','#2f7d4f','#d94f8a','#2563eb','#0f172a'];
+function qrClear(){const q=document.getElementById('chQr');q.innerHTML='';return q;}
+function qrBtns(items){const q=qrClear();items.forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.onclick=fn;q.appendChild(b);});}
+function mainMenu(){qrBtns([[pick(T.q_edit),()=>pickQ('edit')],[pick(T.q_book),()=>pickQ('book')],[pick(T.q_call),()=>pickQ('call')],[pick(T.q_hours),()=>pickQ('hours')]]);}
+function editMenu(){qrBtns([[pick(T.ed_ai),()=>edit('ai')],[pick(T.ed_look),()=>edit('look')],[pick(T.ed_theme),()=>edit('theme')],[pick(T.ed_seg),()=>edit('seg')],[pick(T.ed_color),()=>edit('color')],[pick(T.ed_3d),()=>edit('3d')],[pick(T.ed_font),()=>edit('font')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+function setLight(on){if(window.__setLight)window.__setLight(on);else document.body.classList.toggle('light',on);}
+const SEGMENTS={gallery:'#gallery',d3:'#showcase',phone:'#assist',offer:'#highlights',info:'#info',reviews:'#reviews'};
+function segOn(key){const el=document.querySelector(SEGMENTS[key]);return !!el&&getComputedStyle(el).display!=='none';}
+function setSeg(key,on){const el=document.querySelector(SEGMENTS[key]);if(el)el.style.display=on?'':'none';}
+function segMenu(){const keys=['gallery','d3','phone','offer','info','reviews'];
+  qrBtns(keys.map(key=>[(segOn(key)?'✓ ':'○ ')+pick(T['seg_'+key]),()=>{setSeg(key,!segOn(key));segMenu();}]).concat([[pick(T.ed_back),editMenu]]));}
+function chInput(onSend){const q=qrClear();const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:7px;width:100%';
+  const inp=document.createElement('input');inp.style.cssText='flex:1;min-width:0;background:#080a12;border:1px solid var(--line);border-radius:20px;padding:9px 12px;color:var(--ink);font-family:inherit;font-size:13px';
+  const snd=document.createElement('button');snd.textContent=pick(T.ed_send);
+  const go=()=>{const v=inp.value.trim();if(v)onSend(v);};
+  snd.onclick=go;inp.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+  wrap.appendChild(inp);wrap.appendChild(snd);q.appendChild(wrap);setTimeout(()=>inp.focus(),50);}
+function applyAccent(hex){document.documentElement.style.setProperty('--accent',hex);const h=hex.replace('#','').replace(/^(.)(.)(.)$/,'$1$1$2$2$3$3');const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);document.documentElement.style.setProperty('--accent-soft',`rgba(${r},${g},${bl},.18)`);if(window.__recolor)window.__recolor(hex);}
+function setFont(kind){document.documentElement.style.setProperty('--disp', kind==='modern'?"'Inter'":"'Fraunces'");}
+function setShape(n){if(window.__setShape)window.__setShape(n);}
+const LOOKS={elegant:{a:'#c0432f',s:'sphere',f:'elegant'},tech:{a:'#2563eb',s:'dna',f:'modern'},frisch:{a:'#0ea5a3',s:'wave',f:'modern'},bold:{a:'#8a5cff',s:'sphere',f:'elegant'}};
+function applyLook(k){const p=LOOKS[k]||LOOKS.elegant;applyAccent(p.a);setShape(p.s);setFont(p.f);}
+const AICOL={rot:'#c0432f',red:'#c0432f',rood:'#c0432f',blau:'#2563eb',blue:'#2563eb',blauw:'#2563eb','grün':'#2f7d4f',gruen:'#2f7d4f',green:'#2f7d4f',groen:'#2f7d4f','türkis':'#0ea5a3',tuerkis:'#0ea5a3',teal:'#0ea5a3',cyan:'#0ea5a3',violett:'#8a5cff',lila:'#8a5cff',purple:'#8a5cff',paars:'#8a5cff',pink:'#d94f8a',rosa:'#d94f8a',magenta:'#d94f8a',gold:'#e2b45c',gelb:'#e2b45c',yellow:'#e2b45c',geel:'#e2b45c',orange:'#e2762f',oranje:'#e2762f',schwarz:'#0f172a',dunkel:'#0f172a',dark:'#0f172a',zwart:'#0f172a'};
+function aiEdit(text){
+  const s=text.toLowerCase(); const did=[]; let m;
+  if((m=text.match(/#([0-9a-fA-F]{6})/))){applyAccent('#'+m[1]);did.push('Farbe');}
+  else for(const k in AICOL){ if(s.includes(k)){applyAccent(AICOL[k]);did.push('Farbe');break;} }
+  if(/dna|helix/.test(s)){setShape('dna');did.push('3D');}
+  else if(/welle|wave|golv/.test(s)){setShape('wave');did.push('3D');}
+  else if(/schleife|torus|loop|ring|lus/.test(s)){setShape('torus');did.push('3D');}
+  else if(/partikel|kugel|sphere|bol|punkte|dots|deeltjes/.test(s)){setShape('sphere');did.push('3D');}
+  else if(/ruhig|kein\s*3d|ohne\s*3d|clean|calm|rustig|geen\s*3d/.test(s)){setShape('none');did.push('3D');}
+  if(/\bmodern|sans|schlicht\b/.test(s)){setFont('modern');did.push('Schrift');}
+  else if(/elegant|serif|klassisch/.test(s)){setFont('elegant');did.push('Schrift');}
+  if(/\b(hell|licht|light|bright|weiss|weiß)\b/.test(s)){setLight(true);did.push('Look');}
+  else if(/\b(dunkel|donker|dark|schwarz|nacht)\b/.test(s)){setLight(false);did.push('Look');}
+  if((m=text.match(/(?:slogan|tagline|untertitel|subtitel)\s*[:=]\s*([^;\n]+)/i))){setText('sub',m[1].trim());did.push('Slogan');}
+  if((m=text.match(/(?:titel|title)\s*[:=]\s*([^;\n]+)/i)) && !/dna|welle|farbe/.test(m[1].toLowerCase())){setText('sub',m[1].trim());did.push('Slogan');}
+  if((m=text.match(/(?:firmenname|firma|name|betrieb|bedrijf|business)\s*[:=]\s*([^,;\n]+)/i))){setBusinessName(m[1].trim().replace(/[.。]+$/,''));did.push('Name');}
+  const SEGW={gallery:/galerie|galerij|gallery|fotos?/,d3:/3d|partikel|animation/,phone:/telefon|telefoon|phone|anruf/,offer:/angebot|aanbod|offer|leistung/,info:/öffnung|oeffnung|opening|hours|zeiten/,reviews:/bewertung|reviews?|rezension|sterne/};
+  s.split(/[,;.]| und | en | and | plus /).forEach(cl=>{
+    const h=/ausblenden|verstecken|verbergen|entfernen|\bweg\b|hide|remove|verwijder|verberg/.test(cl);
+    const sh=/hinzu|einblenden|zeig|anzeig|\badd\b|show|toon|tonen/.test(cl);
+    if(!h&&!sh)return;
+    for(const key in SEGW){ if(SEGW[key].test(cl)){ setSeg(key, sh&&!h); did.push('Bereich'); } }
+  });
+  if(did.length){ bub(pick(T.ed_ai_done)+' ('+[...new Set(did)].join(', ')+')','a'); }
+  else { bub(pick(T.ed_ai_fail),'a'); sendWish(text); }
+  setTimeout(editMenu,300);
+}
+function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function setBusinessName(v){CFG.company=v;setText('lgName',v);setText('lgBadge',v[0].toUpperCase());setText('ph_name',v);setText('chName',v.split(/\s+/)[0]);setText('chAv',v[0].toUpperCase());
+  document.getElementById('h1').innerHTML=(L==='nl'?'Welkom bij ':(L==='en'?'Welcome to ':'Willkommen bei '))+'<span class="accent">'+v+'</span>';}
+function sendWish(v){const payload={action:'intake',venture:'blackunicorn',company:CFG.company+' (Demo-Wunsch)',first_name:'Website',last_name:'Lead',country:CC,product_name:'Website-Anpassung',demo:'demo-'+CFG.company+' | WUNSCH: '+v.slice(0,180)};
+  fetch(INTAKE,{method:'POST',headers:{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});}
+function edit(k){
+  if(k==='ai'){bub(pick(T.ed_ai_ask),'a');chInput(v=>{bub(v,'u');bub(pick(T.ed_ai_working),'a');setTimeout(()=>aiEdit(v),350);});return;}
+  if(k==='seg'){bub(pick(T.seg_hint),'a');segMenu();return;}
+  if(k==='look'){bub(pick(T.ed_intro),'a');qrBtns([[pick(T.look_elegant),()=>{applyLook('elegant');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_tech),()=>{applyLook('tech');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_frisch),()=>{applyLook('frisch');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_bold),()=>{applyLook('bold');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='3d'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.d3_particles),()=>{setShape('sphere');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_dna),()=>{setShape('dna');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_wave),()=>{setShape('wave');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_torus),()=>{setShape('torus');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_calm),()=>{setShape('none');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='font'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.font_elegant),()=>{setFont('elegant');editMenu();}],[pick(T.font_modern),()=>{setFont('modern');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='theme'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.th_light),()=>{setLight(true);bub(pick(T.th_done),'a');editMenu();}],[pick(T.th_dark),()=>{setLight(false);bub(pick(T.th_done),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='color'){bub(pick(T.ed_pickcolor),'a');const q=qrClear();
+    SWATCHES.forEach(hex=>{const b=document.createElement('button');b.style.cssText='width:28px;height:28px;border-radius:50%;padding:0;border:2px solid rgba(255,255,255,.3);cursor:pointer;background:'+hex;b.onclick=()=>{applyAccent(hex);bub(pick(T.ed_more),'a');editMenu();};q.appendChild(b);});
+    const back=document.createElement('button');back.textContent=pick(T.ed_back);back.onclick=editMenu;q.appendChild(back);return;}
+  if(k==='slogan'){bub(pick(T.ed_askslogan),'a');chInput(v=>{bub(v,'u');setText('sub',v);bub(pick(T.ed_more),'a');editMenu();});return;}
+  if(k==='name'){bub(pick(T.ed_askname),'a');chInput(v=>{bub(v,'u');setBusinessName(v);bub(pick(T.ed_more),'a');editMenu();});return;}
+  if(k==='wish'){bub(pick(T.ed_wishask),'a');chInput(v=>{bub(v,'u');sendWish(v);bub(pick(T.ed_wishdone),'a');setTimeout(editMenu,500);});return;}
+  if(k==='done'){bub(pick(T.ed_donemsg),'a');setTimeout(()=>{toggleChat(true);book();},900);return;}
+}
+function renderQ(){mainMenu();}
+function pickQ(k){bub(pick(T['q_'+k]),'u');document.getElementById('chQr').innerHTML='';
+  setTimeout(()=>{ if(k==='edit'){bub(pick(T.ed_intro),'a');editMenu();return;}
+    if(k==='book'){bub(pick(T.bk_p),'a');setTimeout(()=>{toggleChat(true);book();},700);return;}
+    if(k==='call'){bub(pick(T.cm_p),'a');setTimeout(()=>{toggleChat(true);scrollAssist();},700);return;}
+    bub(pick(T.a_hours),'a');setTimeout(renderQ,300); },420);}
+function toggleChat(fc){const c=document.getElementById('chat'),f=document.getElementById('fab');const open=fc===true?false:!c.classList.contains('open');c.classList.toggle('open',open);f.style.display=open?'none':'flex';
+  if(open&&!started){started=true;setTimeout(()=>{bub(pick(T.chGreet),'a');mainMenu();},250);}}
+window.toggleChat=toggleChat;
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}});
+</script>
+
+<!-- natives Scrollen (flüssigst) -->
+
+<!-- 3D background (accent-themed, core three = robust) -->
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" }}</script>
+<script type="module">
+import * as THREE from 'three';
+const canvas=document.getElementById('gl');
+const __CFG=JSON.parse(document.getElementById('demo-cfg').textContent);
+const ACC=__CFG.accent||'#c0432f';
+let curAcc=ACC, themeLight=(__CFG.theme==='light');
+let renderer,scene,camera,points,halo,clock,base,N=2600,visible=true,geoRef=null;
+const rc=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
+let active=false;
+// Scroll-gesteuerte Morph-Choreografie: Header=Linie (stoert das Bild nicht) -> Kugel -> Welle -> Torus
+let scrollP=0,scrollMorph=true,KF=[];const SEQ=['line','sphere','wave','torus'];
+function recolorNow(){ if(!geoRef)return; const cA=new THREE.Color(curAcc); const cB=themeLight? cA.clone().lerp(new THREE.Color('#15151f'),.35) : cA.clone().lerp(new THREE.Color('#ffffff'),.65); const col=geoRef.attributes.color.array; for(let i=0;i<N;i++){const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;} geoRef.attributes.color.needsUpdate=true; }
+function applyBlend(){ if(canvas) canvas.style.mixBlendMode = themeLight?'normal':'screen'; if(points){points.material.blending=themeLight?THREE.NormalBlending:THREE.AdditiveBlending; points.material.opacity=themeLight?0.92:0.95; points.material.needsUpdate=true;} if(halo){halo.material.opacity=themeLight?0:0.22; halo.material.needsUpdate=true;} }
+window.__recolor=function(hex){ curAcc=hex; recolorNow(); };
+window.__setLight=function(on){ themeLight=!!on; document.body.classList.toggle('light',themeLight); applyBlend(); recolorNow(); };
+function shapePos(name,i,n){
+  if(name==='line'){return [(i/n-0.5)*16, -4.6 + Math.sin(i*0.35)*0.3, Math.cos(i*0.2)*0.3];}
+  if(name==='sphere'){return fib(i,n,6);}
+  if(name==='dna'){const t=i/n,strand=i%2,ang=t*Math.PI*2*5+strand*Math.PI,r=2.6;return[Math.cos(ang)*r,(t-0.5)*13,Math.sin(ang)*r];}
+  if(name==='wave'){const cols=Math.max(2,Math.round(Math.sqrt(n)));const gx=(i%cols)/cols-0.5,gz=Math.floor(i/cols)/(n/cols)-0.5;return[gx*13,Math.sin(gx*8)*Math.cos(gz*8)*2.2,gz*13];}
+  if(name==='torus'){const t=i/n*Math.PI*2*3,R=4.2,r=1.7;return[(R+r*Math.cos(t*2))*Math.cos(t*3)*.95,(R+r*Math.cos(t*2))*Math.sin(t*3)*.95,r*Math.sin(t*2)*2.2];}
+  return fib(i,n,6);
+}
+window.__setShape=function(name){ if(name==='none'){ if(canvas) canvas.style.opacity='0'; return true; } if(canvas) canvas.style.opacity='1'; if(name==='auto'){ scrollMorph=true; return true; } if(!base) return false; scrollMorph=false; for(let i=0;i<N;i++){const p=shapePos(name,i,N);base[i*3]=p[0];base[i*3+1]=p[1];base[i*3+2]=p[2];} return true; };
+function fib(i,n,r){const off=2/n,inc=Math.PI*(3-Math.sqrt(5));const y=i*off-1+off/2,rad=Math.sqrt(1-y*y),phi=i*inc;return[Math.cos(phi)*rad*r,y*r,Math.sin(phi)*rad*r];}
+function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
+function sz(){return [innerWidth, innerHeight];}
+function init(){
+  N = innerWidth<760 ? 1000 : 2200;
+  const [w,h]=sz();
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+  renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(55,w/h,0.1,100);camera.position.set(0,0,13.5);
+  base=new Float32Array(N*3);const start=new Float32Array(N*3),col=new Float32Array(N*3);
+  const cA=new THREE.Color(ACC),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.65);
+  for(let i=0;i<N;i++){const s=shapePos('line',i,N);base[i*3]=s[0];base[i*3+1]=s[1];base[i*3+2]=s[2];start[i*3]=s[0];start[i*3+1]=s[1];start[i*3+2]=s[2];
+    const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;}
+  KF=SEQ.map(nm=>{const a=new Float32Array(N*3);for(let i=0;i<N;i++){const p=shapePos(nm,i,N);a[i*3]=p[0];a[i*3+1]=p[1];a[i*3+2]=p[2];}return a;});
+  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(start,3));geo.setAttribute('color',new THREE.BufferAttribute(col,3));geoRef=geo;
+  const sp=sprite();
+  points=new THREE.Points(geo,new THREE.PointsMaterial({size:0.145,map:sp,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.95}));scene.add(points);
+  halo=new THREE.Points(geo,new THREE.PointsMaterial({size:0.5,map:sp,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.22}));scene.add(halo);
+  clock=new THREE.Clock();addEventListener('resize',onR);
+  addEventListener('pointermove',e=>{ndc.x=(e.clientX/innerWidth)*2-1;ndc.y=-(e.clientY/innerHeight)*2+1;active=true;});
+  const upP=()=>{const m=document.documentElement.scrollHeight-innerHeight;scrollP=m>0?Math.min(1,Math.max(0,scrollY/m)):0;};upP();addEventListener('scroll',upP,{passive:true});
+  try{new IntersectionObserver(es=>{visible=es[0].isIntersecting;},{threshold:0}).observe(canvas);}catch(e){}
+  if(themeLight){ document.body.classList.add('light'); applyBlend(); recolorNow(); }
+  animate();
+}
+function onR(){const [w,h]=sz();camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);}
+function animate(){requestAnimationFrame(animate);if(!visible||document.hidden)return;const t=clock.getElapsedTime();
+  camera.position.x=Math.sin(t*0.15)*2.6;camera.position.y=Math.cos(t*0.12)*1.3;camera.lookAt(0,0,0);
+  if(scrollMorph&&KF.length){const K=SEQ.length,f=scrollP*(K-1);let a=Math.floor(f);if(a<0)a=0;if(a>K-2)a=K-2;const A=KF[a],B=KF[a+1];let m=f-a;m=m*m*(3-2*m);for(let i=0;i<N*3;i++)base[i]=A[i]+(B[i]-A[i])*m;}
+  let hv=false;if(active){rc.setFromCamera(ndc,camera);hv=!!rc.ray.intersectPlane(plane,hit);}
+  const pos=points.geometry.attributes.position.array,R=3.6,S=3.0;
+  for(let i=0;i<N;i++){const ix=i*3;
+    let tx=base[ix]+Math.sin(t*0.9+i)*0.04, ty=base[ix+1]+Math.cos(t*0.8+i*1.3)*0.04, tz=base[ix+2];
+    if(hv){const dx=tx-hit.x,dy=ty-hit.y,d=Math.sqrt(dx*dx+dy*dy);if(d<R){const f=(1-d/R)*S,inv=1/(d||1);tx+=dx*inv*f;ty+=dy*inv*f;tz+=(1-d/R)*1.4;}}
+    pos[ix]+=(tx-pos[ix])*0.12;pos[ix+1]+=(ty-pos[ix+1])*0.12;pos[ix+2]+=(tz-pos[ix+2])*0.12;}
+  points.geometry.attributes.position.needsUpdate=true;
+  renderer.render(scene,camera);
+}
+try{const tst=document.createElement('canvas').getContext('webgl2')||document.createElement('canvas').getContext('webgl');if(!tst)throw 0;setTimeout(init,60);}
+catch(e){canvas.style.display='none';}
+</script>
+</body>
+</html>
