@@ -40,6 +40,21 @@
   body.light .chat{background:#ffffff}
   body.light .chat .top{background:#faf8f4;border-bottom-color:rgba(20,22,30,.1)}
   body.light .showcase .sc-head h2{text-shadow:0 4px 30px rgba(255,255,255,.7)}
+  /* ===== KI-Module & Preise ===== */
+  .c .price{margin-top:16px;display:flex;align-items:baseline;gap:6px}
+  .c .price .from{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+  .c .price .amt{font-family:var(--disp,"Fraunces"),serif;font-size:30px;color:var(--ink)}
+  .c .price .per{font-size:13px;color:var(--mut)}
+  .slotbox{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;border:1px solid var(--line);border-radius:22px;padding:30px;background:linear-gradient(120deg,var(--accent-soft),transparent 70%),rgba(12,14,20,.5);backdrop-filter:blur(6px)}
+  .slotbox .sb-tag{display:inline-block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .slotbox h3{font-size:clamp(20px,2.4vw,27px);line-height:1.15;margin-bottom:12px}
+  .msg-prev{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:16px;max-width:400px}
+  .msg-prev .mp-top{display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px}
+  .msg-prev .mp-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .msg-prev .mp-body{background:var(--accent);color:#fff;border-radius:4px 16px 16px 16px;padding:13px 15px;font-size:14.5px;line-height:1.5}
+  @media(max-width:800px){.slotbox{grid-template-columns:1fr}}
+  body.light .slotbox{background:linear-gradient(120deg,var(--accent-soft),transparent 70%),rgba(255,255,255,.74)}
+  body.light .msg-prev{background:rgba(20,22,30,.04)}
   .showcase{position:relative;min-height:74vh;overflow:hidden}
   .showcase .sc-head{position:absolute;top:8%;left:0;right:0;text-align:center;z-index:2;pointer-events:none;padding:0 22px}
   .showcase .sc-head .t{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
@@ -248,6 +263,16 @@
   <div class="cards" id="smCards"></div>
 </div></section>
 
+<!-- KI-MODULE & PREISE -->
+<section class="pad" id="module"><div class="container">
+  <div class="shead reveal"><div class="t" id="mo_tag">KI-Module &amp; Preise</div><h2 id="mo_h2">…</h2><p id="mo_sub" style="color:var(--mut);margin-top:14px;max-width:660px">…</p></div>
+  <div class="cards" id="moCards"></div>
+  <div class="slotbox reveal" id="slotBox">
+    <div class="sb-l"><span class="sb-tag" id="sb_tag">⚡ Auslastungs-KI · Live-Beispiel</span><h3 id="sb_h">So füllt sich ein kurzfristig freier Platz — von allein</h3><p id="sb_p" style="color:var(--mut)">Wird ein Tisch/Termin kurzfristig frei, verschickt die KI automatisch eine persönliche Einladung an passende Stammgäste. Ohne Ihr Zutun.</p></div>
+    <div class="sb-r"><div class="msg-prev"><div class="mp-top"><span class="mp-dot"></span> <b id="sb_from">Ihr Betrieb</b> <span id="sb_time" style="margin-left:auto;color:var(--dim);font-size:12px">jetzt</span></div><div class="mp-body" id="sb_msg">…</div></div></div>
+  </div>
+</div></section>
+
 <!-- INFO -->
 <section class="pad" id="info"><div class="container">
   <div class="info">
@@ -398,6 +423,24 @@ const SMART={
       {i:"⭐",t:{de:"Feedback-KI",nl:"Feedback-AI",en:"Feedback AI"},p:{de:"Fragt zufriedene Gäste automatisch nach einer Bewertung — mehr Sichtbarkeit, mehr Laufkundschaft.",nl:"Vraagt tevreden gasten automatisch om een review — meer zichtbaarheid, meer aanloop.",en:"Automatically asks happy guests for a review — more visibility, more walk-ins."}}]}
 };
 
+// Buchbare KI-Module + Preise (PLATZHALTER-Preise, per cfg.prices ueberschreibbar)
+const PRICE=Object.assign({web:"€49",phone:"€99",slot:"€79",per:{de:"/Monat",nl:"/maand",en:"/month"},from:{de:"ab",nl:"vanaf",en:"from"}}, (CFG.prices||{}));
+const MODULES={
+  tag:{de:"KI-Module & Preise",nl:"AI-modules & prijzen",en:"AI modules & pricing"},
+  h2:{de:"Bausteine, die sich sofort rechnen",nl:"Bouwstenen die zich direct terugverdienen",en:"Modules that pay for themselves"},
+  sub:{de:"Nehmen Sie nur, was Sie brauchen — transparent, günstig, monatlich kündbar. Ein voller Tisch mehr pro Woche zahlt das Modul.",nl:"Neem alleen wat u nodig heeft — transparant, voordelig, maandelijks opzegbaar. Eén volle tafel extra per week betaalt de module.",en:"Take only what you need — transparent, affordable, cancel monthly. One extra full table a week pays for it."},
+  items:[
+    {i:"🌐",k:"web",t:{de:"Ihre Website",nl:"Uw website",en:"Your website"},p:{de:"Komplett gebaut, gebrandet, blitzschnell & mobil — genau wie diese hier.",nl:"Volledig gebouwd, gebrand, razendsnel & mobiel — precies zoals deze.",en:"Fully built, branded, lightning-fast & mobile — just like this one."}},
+    {i:"📞",k:"phone",t:{de:"KI-Telefonassistent",nl:"AI-telefoonassistent",en:"AI phone assistant"},p:{de:"Geht 24/7 ans Telefon, bucht Termine & Tische, in Ihrer Stimme.",nl:"Neemt 24/7 op, boekt afspraken & tafels, in uw stem.",en:"Answers 24/7, books appointments & tables, in your voice."}},
+    {i:"⚡",k:"slot",t:{de:"Auslastungs-KI",nl:"Bezettings-AI",en:"Occupancy AI"},p:{de:"Hält Kalender & Tische voll — erkennt kurzfristige Lücken und lädt automatisch die passenden Gäste ein.",nl:"Houdt agenda & tafels vol — herkent last-minute gaten en nodigt automatisch de juiste gasten uit.",en:"Keeps calendar & tables full — spots last-minute gaps and automatically invites the right guests."}}]
+};
+// Beispiel einer automatischen Einladung (branchenspezifisch)
+const SLOTEX={
+  horeca:{de:"🥃 Heute Abend spontan Lust auf einen Tisch? Wir würden Sie gern auf einen kleinen Hausschnaps und unsere köstliche Karte einladen — der Schnaps geht auf uns. Tisch für 2 um 20:00 frei. Zusagen?",nl:"🥃 Vanavond spontaan zin in een tafel? We nodigen u graag uit voor een klein huisborreltje en onze heerlijke kaart — de borrel is van ons. Tafel voor 2 om 20:00 vrij. Toezeggen?",en:"🥃 Feel like a table tonight? We'd love to treat you to a little house schnapps and our delicious menu — the schnapps is on us. Table for 2 at 8pm free. Yes?"},
+  kapper:{de:"✂️ Diese Woche wird noch ein Platz frei — Zeit für den nächsten Schnitt? Als kleines Dankeschön 10% auf Ihren Besuch. Termin sichern?",nl:"✂️ Deze week komt nog een plek vrij — tijd voor de volgende knipbeurt? Als bedankje 10% op uw bezoek. Afspraak vastleggen?",en:"✂️ A slot just opened this week — time for your next cut? As a thank-you, 10% off your visit. Book it?"},
+  praktijk:{de:"🦷 Kurzfristig ist ein Termin frei geworden — möchten Sie Ihre Kontrolle vorziehen? Antworten Sie einfach mit Ja, wir buchen es für Sie.",nl:"🦷 Er is net een afspraak vrijgekomen — wilt u uw controle naar voren halen? Antwoord met Ja, wij regelen het.",en:"🦷 A slot just opened up — want to bring your check-up forward? Just reply Yes and we'll book it."},
+  cafe:{de:"☕ Sonne draußen, Tisch frei — kommen Sie auf einen Kaffee vorbei, das zweite Stück Kuchen geht heute auf uns. Bis gleich?",nl:"☕ Zon buiten, tafel vrij — kom langs voor een koffie, het tweede stuk taart is vandaag van ons. Tot zo?",en:"☕ Sun's out, table free — pop in for a coffee, the second slice of cake is on us today. See you soon?"}};
+
 const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
   nav1:{de:"KI-Telefon",nl:"AI-telefoon",en:"AI phone"},nav2:{de:"Angebot",nl:"Aanbod",en:"Offer"},nav3:{de:"Kontakt",nl:"Contact",en:"Contact"},
   as_tag:{de:"Ihr KI-Telefonassistent",nl:"Uw AI-telefoonassistent",en:"Your AI phone assistant"},
@@ -483,6 +526,11 @@ const P=PRESETS[CFG.branche]||PRESETS.horeca;
   const SM=SMART[CFG.branche]||SMART.horeca;
   set('sm_tag',pick(SM.tag)); set('sm_h2',pick(SM.h2)); set('sm_sub',pick(SM.sub));
   document.getElementById('smCards').innerHTML=SM.items.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p></div>`).join('');
+  set('mo_tag',pick(MODULES.tag)); set('mo_h2',pick(MODULES.h2)); set('mo_sub',pick(MODULES.sub));
+  document.getElementById('moCards').innerHTML=MODULES.items.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p><div class="price"><span class="from">${pick(PRICE.from)}</span><span class="amt">${PRICE[c.k]}</span><span class="per">${pick(PRICE.per)}</span></div></div>`).join('');
+  const SBT={tag:{de:"⚡ Auslastungs-KI · Live-Beispiel",nl:"⚡ Bezettings-AI · Live-voorbeeld",en:"⚡ Occupancy AI · Live example"},h:{de:"So füllt sich ein kurzfristig freier Platz — von allein",nl:"Zo vult een last-minute vrije plek zich — vanzelf",en:"How a last-minute opening fills itself — automatically"},p:{de:"Wird ein Tisch oder Termin kurzfristig frei, verschickt die KI automatisch eine persönliche Einladung an die passenden Stammgäste. Ganz ohne Ihr Zutun.",nl:"Komt een tafel of afspraak last-minute vrij, dan stuurt de AI automatisch een persoonlijke uitnodiging naar de juiste vaste gasten. Zonder uw toedoen.",en:"When a table or slot frees up last-minute, the AI automatically sends a personal invitation to the right regulars. Fully hands-off."},time:{de:"jetzt",nl:"nu",en:"now"}};
+  set('sb_tag',pick(SBT.tag)); set('sb_h',pick(SBT.h)); set('sb_p',pick(SBT.p)); set('sb_time',pick(SBT.time)); set('sb_from',CFG.company);
+  set('sb_msg',pick(SLOTEX[CFG.branche]||SLOTEX.horeca));
   set('rv_tag',pick(T.rv_tag)); set('rv_h2',pick(T.rv_h2));
   document.getElementById('rvCards').innerHTML=T.rv.map(r=>`<div class="c reveal"><div style="color:var(--accent);font-size:17px;letter-spacing:2px;margin-bottom:10px">★★★★★</div><p style="color:var(--ink);font-size:15px;line-height:1.5">„${pick(r.q)}"</p><div style="color:var(--mut);font-size:13px;margin-top:12px">— ${r.a}</div></div>`).join('');
   document.getElementById('infoPh').style.backgroundImage=`url("${IMG(P.img[1])}")`;
