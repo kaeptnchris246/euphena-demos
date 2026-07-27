@@ -16,8 +16,11 @@
 <style>
   :root{--accent:#c0432f;--accent-soft:rgba(192,67,47,.16);--bg:#0a0b0f;--ink:#f5f3ef;--mut:#a2a8b4;--dim:#666c7a;--line:rgba(255,255,255,.10)}
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:52px}
+  html{scroll-behavior:smooth;background:#07080b}
+  body{background:transparent;color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:52px}
+  #gl{position:fixed;inset:0;z-index:0;display:block;pointer-events:none}
+  #glfallback{position:fixed;inset:0;z-index:0;background:radial-gradient(60% 55% at 75% 22%,var(--accent-soft),transparent 66%),radial-gradient(45% 40% at 15% 85%,rgba(255,255,255,.04),transparent 60%),#07080b}
+  footer{position:relative;z-index:2}
   a{color:inherit;text-decoration:none}
   h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif;font-weight:400;letter-spacing:-.01em}
   .container{max-width:1120px;margin:0 auto;padding:0 26px}
@@ -140,6 +143,8 @@
 </style>
 </head>
 <body>
+<div id="glfallback"></div>
+<canvas id="gl"></canvas>
 
 <nav id="nav">
   <div class="logo"><span class="badge" id="lgBadge">B</span> <span id="lgName">Bella</span></div>
@@ -424,6 +429,52 @@ function toggleChat(fc){const c=document.getElementById('chat'),f=document.getEl
   if(open&&!started){started=true;setTimeout(()=>{bub(pick(T.chGreet),'a');renderQ();},250);}}
 window.toggleChat=toggleChat;
 addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}});
+</script>
+
+<!-- smooth scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>try{const l=new Lenis({lerp:0.09});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);}catch(e){}</script>
+
+<!-- 3D background (accent-themed, core three = robust) -->
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" }}</script>
+<script type="module">
+import * as THREE from 'three';
+const canvas=document.getElementById('gl');
+const ACC=(JSON.parse(document.getElementById('demo-cfg').textContent).accent)||'#c0432f';
+let renderer,scene,camera,points,halo,clock,tA,tB,tC,base,N=3000,mouse={x:0,y:0},mt={x:0,y:0};
+function fib(i,n,r){const off=2/n,inc=Math.PI*(3-Math.sqrt(5));const y=i*off-1+off/2,rad=Math.sqrt(1-y*y),phi=i*inc;return[Math.cos(phi)*rad*r,y*r,Math.sin(phi)*rad*r];}
+function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.85)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
+function init(){
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+  renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));
+  scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);camera.position.set(0,0,15);
+  tA=new Float32Array(N*3);tB=new Float32Array(N*3);tC=new Float32Array(N*3);const col=new Float32Array(N*3);
+  const cA=new THREE.Color(ACC),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.55),cC=cA.clone().lerp(new THREE.Color('#ffffff'),.15);
+  for(let i=0;i<N;i++){
+    const s=fib(i,N,6.2);tA[i*3]=s[0];tA[i*3+1]=s[1];tA[i*3+2]=s[2];
+    const t=i/N*Math.PI*2*3,R=4.4,r=1.8;
+    tB[i*3]=(R+r*Math.cos(t*2))*Math.cos(t*3)*.9;tB[i*3+1]=(R+r*Math.cos(t*2))*Math.sin(t*3)*.9;tB[i*3+2]=r*Math.sin(t*2)*2.2;
+    const gx=(i%55)/55-.5,gz=Math.floor(i/55)/(N/55)-.5;tC[i*3]=gx*16;tC[i*3+1]=Math.sin(gx*7)*Math.cos(gz*7)*2.4;tC[i*3+2]=gz*16;
+    const f=i/N,c=new THREE.Color();if(f<.5)c.lerpColors(cA,cB,f*2);else c.lerpColors(cB,cC,(f-.5)*2);col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;
+  }
+  base=Float32Array.from(tA);
+  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(base,3));geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const sp=sprite();
+  points=new THREE.Points(geo,new THREE.PointsMaterial({size:0.12,map:sp,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.9}));scene.add(points);
+  halo=new THREE.Points(geo,new THREE.PointsMaterial({size:0.55,map:sp,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.13}));scene.add(halo);
+  clock=new THREE.Clock();addEventListener('resize',onR);addEventListener('pointermove',e=>{mouse.x=e.clientX/innerWidth-.5;mouse.y=e.clientY/innerHeight-.5;});animate();
+}
+function onR(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
+function prog(){const h=document.documentElement,m=h.scrollHeight-innerHeight;return m>0?Math.min(1,Math.max(0,scrollY/m)):0;}
+function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime(),p=prog();
+  const pos=points.geometry.attributes.position.array;let seg,fr,to;if(p<.5){seg=p/.5;fr=tA;to=tB;}else{seg=(p-.5)/.5;fr=tB;to=tC;}seg=seg*seg*(3-2*seg);
+  for(let i=0;i<N*3;i++)pos[i]+=((fr[i]+(to[i]-fr[i])*seg)-pos[i])*.08;points.geometry.attributes.position.needsUpdate=true;
+  mt.x+=(mouse.x-mt.x)*.05;mt.y+=(mouse.y-mt.y)*.05;points.rotation.y=t*.06+mt.x*.5;points.rotation.x=mt.y*.35;halo.rotation.copy(points.rotation);
+  camera.position.z=15-p*4;camera.position.y=mt.y*-1.1;camera.lookAt(0,0,0);
+  renderer.render(scene,camera);
+}
+try{const tst=document.createElement('canvas').getContext('webgl2')||document.createElement('canvas').getContext('webgl');if(!tst)throw 0;init();}
+catch(e){canvas.style.display='none';}
 </script>
 </body>
 </html>
