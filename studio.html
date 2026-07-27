@@ -752,9 +752,11 @@ window.__setLang=__setLang;
 /* ---------- Smooth scroll (Lenis) ---------- */
 let lenis;
 try {
-  lenis = new Lenis({ lerp:0.09, wheelMultiplier:1 });
-  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    lenis = new Lenis({ lerp:0.12, wheelMultiplier:1 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
 } catch(e){ /* fallback: native scroll */ }
 
 /* ---------- Nav + reveals ---------- */
@@ -772,6 +774,8 @@ import * as THREE from 'three';
 const canvas = document.getElementById('gl');
 let renderer, scene, camera, points, halo, clock, targetA, targetB, targetC, base, N=3600;
 let mouse = {x:0,y:0}, mt={x:0,y:0};
+let visible=true, active=false;
+const rc=new THREE.Raycaster(), plane=new THREE.Plane(new THREE.Vector3(0,0,1),0), hit=new THREE.Vector3(), ndc=new THREE.Vector2();
 
 function fibSphere(i,n,r){
   const off=2/n, inc=Math.PI*(3-Math.sqrt(5));
@@ -780,6 +784,7 @@ function fibSphere(i,n,r){
 }
 
 function init(){
+  N = innerWidth<760 ? 2000 : 3600;
   renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
   renderer.setSize(innerWidth, innerHeight);
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));
@@ -831,7 +836,9 @@ function init(){
 
   clock=new THREE.Clock();
   addEventListener('resize', onResize);
-  addEventListener('pointermove', (e)=>{ mouse.x=(e.clientX/innerWidth-0.5); mouse.y=(e.clientY/innerHeight-0.5); });
+  addEventListener('pointermove', (e)=>{ mouse.x=(e.clientX/innerWidth-0.5); mouse.y=(e.clientY/innerHeight-0.5); ndc.x=(e.clientX/innerWidth)*2-1; ndc.y=-(e.clientY/innerHeight)*2+1; active=true; });
+  addEventListener('pointerleave', ()=>active=false);
+  document.addEventListener('visibilitychange', ()=>{ visible=!document.hidden; });
   animate();
 }
 
@@ -859,16 +866,9 @@ function docProgress(){
 
 function animate(){
   requestAnimationFrame(animate);
+  if(!visible || document.hidden) return;
   const t=clock.getElapsedTime();
   const p=docProgress();
-
-  const pos=points.geometry.attributes.position.array;
-  let seg, from, to;
-  if(p<0.5){ seg=p/0.5; from=targetA; to=targetB; }
-  else{ seg=(p-0.5)/0.5; from=targetB; to=targetC; }
-  seg = seg*seg*(3-2*seg);
-  for(let i=0;i<N*3;i++){ pos[i]+= ((from[i]+(to[i]-from[i])*seg) - pos[i])*0.08; }
-  points.geometry.attributes.position.needsUpdate=true;
 
   mt.x+=(mouse.x-mt.x)*0.05; mt.y+=(mouse.y-mt.y)*0.05;
   points.rotation.y = t*0.06 + mt.x*0.6;
@@ -878,6 +878,24 @@ function animate(){
   camera.position.z = 15 - p*4;
   camera.position.y = mt.y*-1.2;
   camera.lookAt(0,0,0);
+  camera.updateMatrixWorld();
+
+  // interactive cursor-repel (in the field's local space so it works while rotating)
+  let hv=false, lx=0, ly=0;
+  if(active){ rc.setFromCamera(ndc,camera); if(rc.ray.intersectPlane(plane,hit)){ points.updateMatrixWorld(); const lc=points.worldToLocal(hit.clone()); lx=lc.x; ly=lc.y; hv=true; } }
+
+  const pos=points.geometry.attributes.position.array;
+  let seg, from, to;
+  if(p<0.5){ seg=p/0.5; from=targetA; to=targetB; }
+  else{ seg=(p-0.5)/0.5; from=targetB; to=targetC; }
+  seg = seg*seg*(3-2*seg);
+  const R=3.0, S=2.2;
+  for(let i=0;i<N;i++){ const ix=i*3;
+    let tx=from[ix]+(to[ix]-from[ix])*seg, ty=from[ix+1]+(to[ix+1]-from[ix+1])*seg, tz=from[ix+2]+(to[ix+2]-from[ix+2])*seg;
+    if(hv){ const dx=tx-lx, dy=ty-ly, d=Math.sqrt(dx*dx+dy*dy); if(d<R){ const f=(1-d/R)*S, inv=1/(d||1); tx+=dx*inv*f; ty+=dy*inv*f; tz+=(1-d/R)*1.0; } }
+    pos[ix]+=(tx-pos[ix])*0.09; pos[ix+1]+=(ty-pos[ix+1])*0.09; pos[ix+2]+=(tz-pos[ix+2])*0.09;
+  }
+  points.geometry.attributes.position.needsUpdate=true;
 
   canvas.style.opacity = String(1 - Math.min(0.62, p*1.15));
 
