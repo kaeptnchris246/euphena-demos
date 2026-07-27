@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BlackUnicorn · KI- & Web-Studio</title>
+<meta name="description" content="BlackUnicorn — die Digital- & KI-Agentur der Euphena-Gruppe. Websites, WebGL, KI-Assistenten, autonome Systeme. AT · NL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#06070d; --bg2:#0a0c16; --ink:#f3f0ea; --mut:#9aa0b5; --dim:#5c6178;
+    --v:#7c5cff; --m:#c04bff; --g:#e2b45c; --line:rgba(255,255,255,.08);
+    --grad:linear-gradient(100deg,#8f6bff 0%,#c04bff 45%,#e2b45c 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(192,75,255,.35)}
+  h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* WebGL canvas fixed behind everything */
+  #gl{position:fixed;inset:0;z-index:0;display:block}
+  #glfallback{position:fixed;inset:0;z-index:0;
+    background:radial-gradient(60% 50% at 70% 30%,rgba(124,92,255,.28),transparent 60%),
+               radial-gradient(50% 45% at 25% 75%,rgba(226,180,92,.16),transparent 60%),var(--bg);}
+  .vign{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 10%,transparent 40%,rgba(3,3,8,.55) 100%)}
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+
+  /* layout */
+  .wrap{position:relative;z-index:5}
+  .container{max-width:1180px;margin:0 auto;padding:0 28px}
+  section{position:relative;z-index:5}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 30px;backdrop-filter:blur(6px);transition:.4s}
+  nav.scrolled{background:rgba(6,7,13,.7);border-bottom:1px solid var(--line);padding:14px 30px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600;letter-spacing:.02em}
+  .logo{width:26px;height:26px;border-radius:7px;background:var(--grad);box-shadow:0 0 22px rgba(160,90,255,.6)}
+  .navlinks{display:flex;gap:26px;font-size:14px;color:var(--mut)}
+  .navlinks a{transition:.25s}.navlinks a:hover{color:var(--ink)}
+  .navcta{border:1px solid var(--line);padding:9px 16px;border-radius:30px;font-size:13.5px;color:var(--ink);transition:.3s}
+  .navcta:hover{background:var(--ink);color:#0a0a12;border-color:var(--ink)}
+  @media(max-width:820px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:90px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);
+    border:1px solid var(--line);border-radius:30px;padding:8px 15px;margin-bottom:30px;width:max-content}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g)}
+  .hero h1{font-size:clamp(44px,8.5vw,118px);line-height:.96;letter-spacing:-.03em;font-weight:400}
+  .hero h1 em{font-style:italic}
+  .hero .lede{margin-top:30px;max-width:560px;font-size:clamp(16px,2.1vw,20px);line-height:1.6;color:var(--mut)}
+  .hero .row{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:40px;font-size:15px;font-weight:500;transition:.35s;cursor:pointer;border:1px solid transparent}
+  .btn.p{background:var(--grad);color:#120c1c;box-shadow:0 8px 40px rgba(150,80,255,.35)}
+  .btn.p:hover{transform:translateY(-2px);box-shadow:0 14px 50px rgba(150,80,255,.5)}
+  .btn.s{border-color:var(--line);color:var(--ink)}.btn.s:hover{border-color:var(--ink)}
+  .scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
+  .scrollcue::after{content:"";display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--mut),transparent);animation:cue 2s infinite}
+  @keyframes cue{0%{opacity:.2;transform:scaleY(.4)}50%{opacity:1}100%{opacity:.2;transform:scaleY(.4)}}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* generic section head */
+  .shead{max-width:720px;margin-bottom:56px}
+  .stag{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--g);margin-bottom:18px}
+  .shead h2{font-size:clamp(30px,5vw,60px);line-height:1.02;letter-spacing:-.02em}
+  .shead p{margin-top:20px;color:var(--mut);font-size:17px;line-height:1.6;max-width:600px}
+  .pad{padding:clamp(90px,14vh,170px) 0}
+
+  /* manifesto */
+  .manifesto p{font-family:"Fraunces",serif;font-size:clamp(24px,4vw,46px);line-height:1.28;letter-spacing:-.01em;max-width:960px}
+  .manifesto .muted{color:var(--dim)}
+
+  /* products grid */
+  .pgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .card{position:relative;border:1px solid var(--line);border-radius:22px;padding:30px 28px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));min-height:230px;
+    display:flex;flex-direction:column;justify-content:space-between;transition:.5s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(192,75,255,.4)}
+  .card::before{content:"";position:absolute;inset:0;opacity:0;transition:.5s;
+    background:radial-gradient(120% 90% at 15% 0%,rgba(124,92,255,.16),transparent 55%)}
+  .card:hover::before{opacity:1}
+  .card .k{position:relative;z-index:2}
+  .card .glyph{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;margin-bottom:20px;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:20px}
+  .card h3{font-size:24px;margin-bottom:9px}
+  .card .desc{color:var(--mut);font-size:14.5px;line-height:1.55}
+  .card .tag{position:relative;z-index:2;margin-top:22px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .card .tag b{color:var(--g);font-weight:500}
+  .c6{grid-column:span 6}.c4{grid-column:span 4}.c8{grid-column:span 8}
+  @media(max-width:900px){.c6,.c4,.c8{grid-column:span 12}}
+
+  /* capability marquee */
+  .band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;overflow:hidden;white-space:nowrap}
+  .band .track{display:inline-flex;gap:52px;animation:march 26s linear infinite;font-family:"Fraunces",serif;
+    font-size:clamp(22px,3.4vw,40px);color:var(--dim)}
+  .band .track span{display:inline-flex;align-items:center;gap:52px}
+  .band .track b{color:var(--ink);font-weight:400}
+  .band .track i{color:var(--g);font-style:normal}
+  @keyframes march{to{transform:translateX(-50%)}}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .stat .n{font-family:"Fraunces",serif;font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.02em}
+  .stat .l{margin-top:12px;color:var(--mut);font-size:14px}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr);gap:34px 20px}}
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .step{border-top:1px solid var(--line);padding-top:22px}
+  .step .no{font-family:"Fraunces",serif;font-size:15px;color:var(--g);margin-bottom:16px}
+  .step h4{font-size:19px;margin-bottom:10px}
+  .step p{color:var(--mut);font-size:14px;line-height:1.55}
+  @media(max-width:820px){.steps{grid-template-columns:repeat(2,1fr);gap:34px 20px}}
+
+  /* cta */
+  .cta{text-align:center;padding:clamp(100px,16vh,190px) 0}
+  .cta h2{font-size:clamp(38px,7vw,92px);line-height:.98;letter-spacing:-.03em}
+  .cta p{margin:26px auto 40px;max-width:520px;color:var(--mut);font-size:18px;line-height:1.55}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--dim);font-size:13.5px}
+  .fx{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+  .fx .brand{color:var(--mut)}
+</style>
+</head>
+<body>
+<div id="glfallback"></div>
+<canvas id="gl"></canvas>
+<div class="vign"></div>
+<div class="grain"></div>
+
+<nav id="nav">
+  <div class="brand"><span class="logo"></span> BlackUnicorn</div>
+  <div class="navlinks">
+    <a href="#studio">Studio</a>
+    <a href="#producten">Produkte</a>
+    <a href="#werkwijze">Ansatz</a>
+    <a href="#contact">Kontakt</a>
+  </div>
+  <a href="#contact" class="navcta">Projekt starten</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow"><span class="dot"></span> KI- & Web-Studio · Euphena-Gruppe · AT · NL</span>
+      <h1>Wir bauen das<br><em class="grad">Unmögliche</em> — sichtbar.</h1>
+      <p class="lede">BlackUnicorn ist die Digital- und KI-Agentur der Euphena-Gruppe. Wir entwerfen Websites mit Tiefe, KI-Assistenten, die Kunden gewinnen, und autonome Systeme, die im Hintergrund arbeiten.</p>
+      <div class="row">
+        <a href="#producten" class="btn p">Produkte ansehen →</a>
+        <a href="#contact" class="btn s">Gespräch anfragen</a>
+      </div>
+    </div>
+    <div class="scrollcue">Scroll</div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="pad manifesto">
+    <div class="container">
+      <p class="reveal">Die meisten Agenturen bauen Seiten. <span class="muted">Wir bauen</span> Systeme, die denken, verkaufen und sich weiterentwickeln — von der ersten immersiven 3D-Landingpage bis zum autonomen KI-Betriebssystem dahinter.</p>
+    </div>
+  </section>
+
+  <!-- CAPABILITY BAND -->
+  <div class="band">
+    <div class="track">
+      <span><b>WebGL & 3D</b><i>◆</i><b>KI-Assistenten</b><i>◆</i><b>Immersive Scroll</b><i>◆</i><b>Automatisierung</b><i>◆</i><b>SaaS-MVPs</b><i>◆</i><b>Trading-Systeme</b><i>◆</i></span>
+      <span><b>WebGL & 3D</b><i>◆</i><b>KI-Assistenten</b><i>◆</i><b>Immersive Scroll</b><i>◆</i><b>Automatisierung</b><i>◆</i><b>SaaS-MVPs</b><i>◆</i><b>Trading-Systeme</b><i>◆</i></span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="producten" class="pad">
+    <div class="container">
+      <div class="shead reveal">
+        <div class="stag">Das Portfolio</div>
+        <h2>Ein Studio. <span class="grad">Ein Ökosystem</span> aus Produkten.</h2>
+        <p>Jedes Produkt löst ein echtes Problem — und teilt sich dieselbe KI-Infrastruktur. Das ist der Vorteil: Sie kaufen nicht ein Tool, Sie betreten ein System.</p>
+      </div>
+      <div class="pgrid">
+        <div class="card c6 reveal">
+          <div class="k"><div class="glyph">🧠</div><h3>ATLAS</h3>
+          <div class="desc">Das KI-Betriebssystem der Gruppe — ein Command-Center, das Wissen, Werkzeuge und Automatisierung über alle Projekte hinweg orchestriert. Der Motor hinter allem anderen.</div></div>
+          <div class="tag">Kategorie · <b>KI-Infrastruktur</b></div>
+        </div>
+        <div class="card c6 reveal">
+          <div class="k"><div class="glyph">🌐</div><h3>Dotiva</h3>
+          <div class="desc">Komplette Website plus KI-Assistent für lokale Betriebe — nimmt 24/7 Buchungen an, beantwortet Anfragen und verwaltet Bewertungen. Sales- und CRM-Plattform in einem.</div></div>
+          <div class="tag">Kategorie · <b>Web + KI-Vertrieb</b></div>
+        </div>
+        <div class="card c4 reveal">
+          <div class="k"><div class="glyph">🦅</div><h3>BlackEagle</h3>
+          <div class="desc">Autonomes Krypto-Trading-System mit Regime-Router und Risiko-Guards.</div></div>
+          <div class="tag">Kategorie · <b>Fintech</b></div>
+        </div>
+        <div class="card c4 reveal">
+          <div class="k"><div class="glyph">📱</div><h3>LUMI</h3>
+          <div class="desc">Mobile-first App, App-Store-fertig, international (Europa & Thailand).</div></div>
+          <div class="tag">Kategorie · <b>Consumer App</b></div>
+        </div>
+        <div class="card c4 reveal">
+          <div class="k"><div class="glyph">⚖️</div><h3>LexIQ</h3>
+          <div class="desc">Legal-KI — juristische Arbeit schneller, präziser, nachvollziehbar.</div></div>
+          <div class="tag">Kategorie · <b>Vertical AI</b></div>
+        </div>
+        <div class="card c6 reveal">
+          <div class="k"><div class="glyph">🏠</div><h3>ImmoService</h3>
+          <div class="desc">Werkzeug für die Immobilienbranche — Prozesse, Exposés und Anfragen KI-gestützt gebündelt.</div></div>
+          <div class="tag">Kategorie · <b>PropTech</b></div>
+        </div>
+        <div class="card c6 reveal">
+          <div class="k"><div class="glyph">✨</div><h3>Rondora & mehr</h3>
+          <div class="desc">Erlebnisplattform Rondora, Creator-Video (Ranzig), Bildung (EduSphere), Immobilien-Social (RealTok) — das Studio wächst in Schichten.</div></div>
+          <div class="tag">Status · <b>In Entwicklung</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="pad">
+    <div class="container">
+      <div class="stats">
+        <div class="stat reveal"><div class="n grad">12+</div><div class="l">Produkte & Ventures unter einem Dach</div></div>
+        <div class="stat reveal"><div class="n grad">2</div><div class="l">Märkte aktiv — Österreich & Niederlande</div></div>
+        <div class="stat reveal"><div class="n grad">24/7</div><div class="l">KI-Assistenten, die nie schlafen</div></div>
+        <div class="stat reveal"><div class="n grad">€0</div><div class="l">Einrichtung — erster Monat unverbindlich</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="werkwijze" class="pad">
+    <div class="container">
+      <div class="shead reveal">
+        <div class="stag">Der Ansatz</div>
+        <h2>Von der Idee zum <span class="grad">lebenden System</span>.</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="no">01</div><h4>Verstehen</h4><p>Wir hören zu, kartieren das Ziel und die echten Engpässe — bevor eine Zeile Code entsteht.</p></div>
+        <div class="step reveal"><div class="no">02</div><h4>Entwerfen</h4><p>Immersives Design mit Substanz: schön, schnell, und auf Wirkung gebaut — nicht auf Effekt.</p></div>
+        <div class="step reveal"><div class="no">03</div><h4>Bauen</h4><p>KI-gestützte Entwicklung auf eigener Infrastruktur. Wir bauen, testen und sehen das Ergebnis selbst.</p></div>
+        <div class="step reveal"><div class="no">04</div><h4>Wachsen</h4><p>Das System lernt weiter — Schicht für Schicht, ohne Wildwuchs, mit Ihnen an der Steuerung.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="cta">
+    <div class="container">
+      <h2 class="reveal">Lassen Sie uns<br><span class="grad">etwas Schönes</span> bauen.</h2>
+      <p class="reveal">Eine Website mit Tiefe, ein KI-Assistent, ein ganzes Produkt — erzählen Sie uns, wovon Sie träumen.</p>
+      <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn p" id="mailcta">Projekt starten →</a>
+        <a href="#producten" class="btn s">Nochmal ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container fx">
+      <div class="brand"><span class="logo" style="width:20px;height:20px"></span> BlackUnicorn · Euphena-Gruppe</div>
+      <div>KI- & Web-Studio · Wien · Österreich & Niederlande</div>
+      <div>© 2026 · gebaut mit WebGL & KI</div>
+    </div>
+  </footer>
+</div>
+
+<!-- Smooth scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<!-- Three.js core only (single fetch = robust). importmap swapped for local copy during verification. -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+}}
+</script>
+
+<script type="module">
+/* ---------- Smooth scroll (Lenis) ---------- */
+let lenis;
+try {
+  lenis = new Lenis({ lerp:0.09, wheelMultiplier:1 });
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+} catch(e){ /* fallback: native scroll */ }
+
+/* ---------- Nav + reveals ---------- */
+const nav = document.getElementById('nav');
+addEventListener('scroll', ()=>{ nav.classList.toggle('scrolled', scrollY>40); }, {passive:true});
+
+const io = new IntersectionObserver((es)=>{
+  es.forEach((e,i)=>{ if(e.isIntersecting){ e.target.style.transitionDelay=(Math.min(i,4)*0.06)+'s'; e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* mailto without hardcoding: assembled at runtime */
+const m = document.getElementById('mailcta');
+if(m){ m.setAttribute('href','mailto:hello@blackunicorn.at?subject=Projekt%20mit%20BlackUnicorn'); }
+
+/* ---------- WebGL scene ---------- */
+import * as THREE from 'three';
+
+const canvas = document.getElementById('gl');
+let renderer, scene, camera, points, halo, clock, targetA, targetB, targetC, base, N=3600;
+let mouse = {x:0,y:0}, mt={x:0,y:0};
+
+function fibSphere(i,n,r){ // even points on a sphere
+  const off=2/n, inc=Math.PI*(3-Math.sqrt(5));
+  const y=i*off-1+off/2, rad=Math.sqrt(1-y*y), phi=i*inc;
+  return [Math.cos(phi)*rad*r, y*r, Math.sin(phi)*rad*r];
+}
+
+function init(){
+  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
+  camera.position.set(0,0,15);
+
+  // three morph targets
+  targetA=new Float32Array(N*3); // sphere shell
+  targetB=new Float32Array(N*3); // torus knot-ish ribbon
+  targetC=new Float32Array(N*3); // flowing wave grid
+  const col=new Float32Array(N*3);
+  const cV=new THREE.Color('#7c5cff'), cM=new THREE.Color('#c04bff'), cG=new THREE.Color('#e2b45c');
+
+  for(let i=0;i<N;i++){
+    const s=fibSphere(i,N,6.2);
+    targetA[i*3]=s[0]; targetA[i*3+1]=s[1]; targetA[i*3+2]=s[2];
+
+    // ribbon / knot
+    const t=i/N*Math.PI*2*3;
+    const R=4.4, r=1.8;
+    targetB[i*3]  =(R+r*Math.cos(t*2))*Math.cos(t*3)*0.9;
+    targetB[i*3+1]=(R+r*Math.cos(t*2))*Math.sin(t*3)*0.9;
+    targetB[i*3+2]= r*Math.sin(t*2)*2.2;
+
+    // wave grid
+    const gx=(i%60)/60-0.5, gz=Math.floor(i/60)/(N/60)-0.5;
+    targetC[i*3]=gx*16;
+    targetC[i*3+1]=Math.sin(gx*7)*Math.cos(gz*7)*2.4;
+    targetC[i*3+2]=gz*16;
+
+    // color by index -> gradient
+    const f=i/N; const c=new THREE.Color();
+    if(f<0.5) c.lerpColors(cV,cM,f*2); else c.lerpColors(cM,cG,(f-0.5)*2);
+    col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b;
+  }
+  base=Float32Array.from(targetA);
+
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(base,3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col,3));
+
+  const sprite=makeSprite();
+  const mat=new THREE.PointsMaterial({size:0.13, map:sprite, vertexColors:true, transparent:true,
+    depthWrite:false, blending:THREE.AdditiveBlending, opacity:0.95});
+  points=new THREE.Points(geo,mat);
+  scene.add(points);
+
+  // faked bloom: larger, dim, additive halo sharing the same geometry
+  const haloMat=new THREE.PointsMaterial({size:0.62, map:sprite, vertexColors:true, transparent:true,
+    depthWrite:false, blending:THREE.AdditiveBlending, opacity:0.16});
+  halo=new THREE.Points(geo,haloMat);
+  scene.add(halo);
+
+  clock=new THREE.Clock();
+  addEventListener('resize', onResize);
+  addEventListener('pointermove', (e)=>{ mouse.x=(e.clientX/innerWidth-0.5); mouse.y=(e.clientY/innerHeight-0.5); });
+  animate();
+}
+
+function makeSprite(){
+  const c=document.createElement('canvas'); c.width=c.height=64;
+  const g=c.getContext('2d');
+  const grd=g.createRadialGradient(32,32,0,32,32,32);
+  grd.addColorStop(0,'rgba(255,255,255,1)');
+  grd.addColorStop(0.25,'rgba(255,255,255,.85)');
+  grd.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=grd; g.fillRect(0,0,64,64);
+  const tex=new THREE.CanvasTexture(c); return tex;
+}
+
+function onResize(){
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+}
+
+function docProgress(){
+  const h=document.documentElement;
+  const max=h.scrollHeight-innerHeight;
+  return max>0 ? Math.min(1,Math.max(0, scrollY/max)) : 0;
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
+  const p=docProgress();
+
+  // morph: 0..0.5 A->B , 0.5..1 B->C
+  const pos=points.geometry.attributes.position.array;
+  let seg, from, to;
+  if(p<0.5){ seg=p/0.5; from=targetA; to=targetB; }
+  else{ seg=(p-0.5)/0.5; from=targetB; to=targetC; }
+  seg = seg*seg*(3-2*seg); // smoothstep
+  for(let i=0;i<N*3;i++){ pos[i]+= ((from[i]+(to[i]-from[i])*seg) - pos[i])*0.08; }
+  points.geometry.attributes.position.needsUpdate=true;
+
+  // gentle auto rotate + mouse parallax
+  mt.x+=(mouse.x-mt.x)*0.05; mt.y+=(mouse.y-mt.y)*0.05;
+  points.rotation.y = t*0.06 + mt.x*0.6;
+  points.rotation.x = mt.y*0.4;
+  halo.rotation.copy(points.rotation);
+
+  // camera dolly with scroll
+  camera.position.z = 15 - p*4;
+  camera.position.y = mt.y*-1.2;
+  camera.lookAt(0,0,0);
+
+  // ease the field back over content sections so text stays crisp
+  canvas.style.opacity = String(1 - Math.min(0.62, p*1.15));
+
+  renderer.render(scene,camera);
+}
+
+/* boot with graceful fallback */
+try {
+  const test=document.createElement('canvas').getContext('webgl2')||document.createElement('canvas').getContext('webgl');
+  if(!test) throw new Error('no webgl');
+  init();
+} catch(e){
+  document.getElementById('gl').style.display='none';
+  console.warn('WebGL unavailable, using CSS fallback:', e.message);
+}
+</script>
+</body>
+</html>
