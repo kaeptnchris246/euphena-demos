@@ -529,7 +529,8 @@ const P=PRESETS[CFG.branche]||PRESETS.horeca;
   set('mo_tag',pick(MODULES.tag)); set('mo_h2',pick(MODULES.h2));
   const inclLbl={de:'im Paket enthalten',nl:'inbegrepen in het pakket',en:'included in the package'};
   if(CFG.paket){
-    document.getElementById('mo_sub').innerHTML=`<b style="color:var(--accent)">${CFG.paket.name}</b> — <b class="serif" style="font-size:22px">${CFG.paket.price}</b><span style="color:var(--mut)">${pick(PRICE.per)}, alles inklusive · monatlich kündbar</span>`;
+    const pkNote={de:', alles inklusive · monatlich kündbar',nl:', alles inbegrepen · maandelijks opzegbaar',en:', all included · cancel monthly'};
+    document.getElementById('mo_sub').innerHTML=`<b style="color:var(--accent)">${CFG.paket.name}</b> — <b class="serif" style="font-size:22px">${CFG.paket.price}</b><span style="color:var(--mut)">${pick(PRICE.per)}${pick(pkNote)}</span>`;
   } else { set('mo_sub',pick(MODULES.sub)); }
   document.getElementById('moCards').innerHTML=MODULES.items.map(c=>{
     const pr = CFG.paket ? `<div class="price"><span class="per" style="color:var(--accent);font-weight:600">✓ ${pick(inclLbl)}</span></div>`
