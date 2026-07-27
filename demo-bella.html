@@ -447,7 +447,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}
 
 <!-- smooth scroll -->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script>try{const l=new Lenis({lerp:0.09});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);}catch(e){}</script>
+<script>try{if(matchMedia('(hover:hover) and (pointer:fine)').matches){const l=new Lenis({lerp:0.12,wheelMultiplier:1});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);}}catch(e){}</script>
 
 <!-- 3D background (accent-themed, core three = robust) -->
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" }}</script>
@@ -455,13 +455,14 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}
 import * as THREE from 'three';
 const canvas=document.getElementById('gl');
 const ACC=(JSON.parse(document.getElementById('demo-cfg').textContent).accent)||'#c0432f';
-let renderer,scene,camera,points,halo,clock,base,N=2600;
+let renderer,scene,camera,points,halo,clock,base,N=2600,visible=true;
 const rc=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
 let active=false;
 function fib(i,n,r){const off=2/n,inc=Math.PI*(3-Math.sqrt(5));const y=i*off-1+off/2,rad=Math.sqrt(1-y*y),phi=i*inc;return[Math.cos(phi)*rad*r,y*r,Math.sin(phi)*rad*r];}
 function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.9)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
 function sz(){return [canvas.clientWidth||innerWidth, canvas.clientHeight||Math.round(innerHeight*0.88)];}
 function init(){
+  N = innerWidth<760 ? 1500 : 2600;
   const [w,h]=sz();
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
   renderer.setSize(w,h,false);renderer.setPixelRatio(Math.min(devicePixelRatio,1.9));
@@ -477,10 +478,11 @@ function init(){
   clock=new THREE.Clock();addEventListener('resize',onR);
   canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();ndc.x=((e.clientX-r.left)/r.width)*2-1;ndc.y=-((e.clientY-r.top)/r.height)*2+1;active=true;});
   canvas.addEventListener('pointerleave',()=>active=false);
+  try{new IntersectionObserver(es=>{visible=es[0].isIntersecting;},{threshold:0}).observe(canvas);}catch(e){}
   animate();
 }
 function onR(){const [w,h]=sz();camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);}
-function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();
+function animate(){requestAnimationFrame(animate);if(!visible||document.hidden)return;const t=clock.getElapsedTime();
   camera.position.x=Math.sin(t*0.15)*2.6;camera.position.y=Math.cos(t*0.12)*1.3;camera.lookAt(0,0,0);
   let hv=false;if(active){rc.setFromCamera(ndc,camera);hv=!!rc.ray.intersectPlane(plane,hit);}
   const pos=points.geometry.attributes.position.array,R=3.6,S=3.0;
