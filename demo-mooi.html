@@ -686,7 +686,7 @@ function applyBlend(){ if(canvas) canvas.style.mixBlendMode = themeLight?'normal
 window.__recolor=function(hex){ curAcc=hex; recolorNow(); };
 window.__setLight=function(on){ themeLight=!!on; document.body.classList.toggle('light',themeLight); applyBlend(); recolorNow(); };
 function shapePos(name,i,n){
-  if(name==='line'){return [(i/n-0.5)*16, Math.sin(i*0.35)*0.28, Math.cos(i*0.2)*0.28];}
+  if(name==='line'){return [(i/n-0.5)*16, -4.6 + Math.sin(i*0.35)*0.3, Math.cos(i*0.2)*0.3];}
   if(name==='sphere'){return fib(i,n,6);}
   if(name==='dna'){const t=i/n,strand=i%2,ang=t*Math.PI*2*5+strand*Math.PI,r=2.6;return[Math.cos(ang)*r,(t-0.5)*13,Math.sin(ang)*r];}
   if(name==='wave'){const cols=Math.max(2,Math.round(Math.sqrt(n)));const gx=(i%cols)/cols-0.5,gz=Math.floor(i/cols)/(n/cols)-0.5;return[gx*13,Math.sin(gx*8)*Math.cos(gz*8)*2.2,gz*13];}
