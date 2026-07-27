@@ -22,6 +22,24 @@
   #gl{position:fixed;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none;mix-blend-mode:screen}
   #glfallback{position:fixed;inset:0;z-index:0;background:radial-gradient(60% 55% at 75% 22%,var(--accent-soft),transparent 66%),radial-gradient(45% 45% at 15% 88%,rgba(255,255,255,.04),transparent 60%),#070810}
   .vign2{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 0%,transparent 55%,rgba(4,5,9,.5) 100%)}
+  /* ===== HELL-THEME (Hero bleibt cinematisch dunkel, Rest hell) ===== */
+  body.light{--ink:#1c1e24;--mut:#5b616e;--dim:#8a909c;--line:rgba(20,22,30,.12)}
+  body.light #glfallback{background:radial-gradient(60% 55% at 75% 22%,var(--accent-soft),transparent 66%),radial-gradient(45% 45% at 15% 88%,rgba(0,0,0,.03),transparent 60%),#f4f1ea}
+  body.light .vign2{background:radial-gradient(120% 90% at 50% 100%,transparent 62%,rgba(255,255,255,.55) 100%)}
+  body.light nav{color:#f5f3ef}
+  body.light nav .nlinks{color:rgba(245,243,239,.9)}
+  body.light nav.scrolled{background:rgba(250,248,244,.86);border-bottom-color:rgba(20,22,30,.1)}
+  body.light nav.scrolled,body.light nav.scrolled .nlinks,body.light nav.scrolled .logo{color:#1c1e24}
+  body.light .phone{background:#ffffff;box-shadow:0 40px 90px rgba(30,30,40,.16)}
+  body.light .callme,body.light .c,body.light .info .box{background:rgba(255,255,255,.74)}
+  body.light .c:hover{background:rgba(255,255,255,.92)}
+  body.light .field input{background:#fff;color:#1c1e24;border-color:rgba(20,22,30,.15)}
+  body.light .btn.s{border-color:rgba(20,22,30,.25);color:#1c1e24;background:rgba(20,22,30,.04)}
+  body.light .bu{background:linear-gradient(90deg,#faf8f4,#f1eef8);color:#5b616e;border-top-color:rgba(20,22,30,.1)}
+  body.light .sheet{background:#ffffff}
+  body.light .chat{background:#ffffff}
+  body.light .chat .top{background:#faf8f4;border-bottom-color:rgba(20,22,30,.1)}
+  body.light .showcase .sc-head h2{text-shadow:0 4px 30px rgba(255,255,255,.7)}
   .showcase{position:relative;min-height:74vh;overflow:hidden}
   .showcase .sc-head{position:absolute;top:8%;left:0;right:0;text-align:center;z-index:2;pointer-events:none;padding:0 22px}
   .showcase .sc-head .t{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
@@ -224,6 +242,12 @@
   <div class="cards" id="cards"></div>
 </div></section>
 
+<!-- SMART FEATURES (branchenspezifische KI-Automatik) -->
+<section class="pad" id="smart"><div class="container">
+  <div class="shead reveal"><div class="t" id="sm_tag">Intelligente Automatik</div><h2 id="sm_h2">…</h2><p id="sm_sub" style="color:var(--mut);margin-top:14px;max-width:640px">…</p></div>
+  <div class="cards" id="smCards"></div>
+</div></section>
+
 <!-- INFO -->
 <section class="pad" id="info"><div class="container">
   <div class="info">
@@ -342,6 +366,38 @@ const PRESETS={
     hours:[["Mo–Fr","08:00 – 18:00"],["Sa","09:00 – 18:00"],["So","09:00 – 16:00"]]}
 };
 
+// Intelligente, branchenspezifische KI-Automatik (Showcase der echten Fähigkeiten)
+const SMART={
+  horeca:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI hält das Haus voll — vollautomatisch",nl:"Uw AI houdt de zaak vol — volautomatisch",en:"Your AI keeps the house full — fully automatic"},
+    sub:{de:"Kein leerer Tisch, keine verpasste Reservierung. Die KI denkt mit und handelt selbstständig.",nl:"Geen lege tafel, geen gemiste reservering. De AI denkt mee en handelt zelfstandig.",en:"No empty table, no missed booking. The AI thinks ahead and acts on its own."},
+    items:[
+      {i:"🍷",t:{de:"Freie Tische füllen",nl:"Lege tafels vullen",en:"Fill empty tables"},p:{de:"Erkennt freie Tische für heute Abend und lädt automatisch die passenden Stammgäste per WhatsApp/SMS ein — die Lücke schließt sich von selbst.",nl:"Herkent lege tafels voor vanavond en nodigt automatisch de juiste vaste gasten uit via WhatsApp/SMS — het gat vult zich vanzelf.",en:"Detects empty tables for tonight and automatically invites the right regulars via WhatsApp/SMS — the gap fills itself."}},
+      {i:"🛡",t:{de:"No-Show-Schutz",nl:"No-show-bescherming",en:"No-show protection"},p:{de:"Bestätigt Reservierungen automatisch, erinnert rechtzeitig und gibt abgesagte Tische sofort wieder frei.",nl:"Bevestigt reserveringen automatisch, herinnert op tijd en geeft geannuleerde tafels meteen weer vrij.",en:"Confirms bookings automatically, reminds in time and instantly frees up cancelled tables."}},
+      {i:"💌",t:{de:"KI-Einladungen",nl:"AI-uitnodigingen",en:"AI invitations"},p:{de:"Personalisierte Einladungen zu ruhigen Tagen, Events oder Aktionen — nur an die passenden Gäste, ganz von allein.",nl:"Gepersonaliseerde uitnodigingen voor rustige dagen, events of acties — alleen aan de juiste gasten, helemaal vanzelf.",en:"Personalised invitations for quiet days, events or offers — only to the right guests, all by itself."}}]},
+  kapper:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI füllt den Kalender — vollautomatisch",nl:"Uw AI vult de agenda — volautomatisch",en:"Your AI fills the calendar — fully automatic"},
+    sub:{de:"Keine Lücke im Terminbuch, kein vergessener Kunde. Die KI holt sie aktiv zurück.",nl:"Geen gat in de agenda, geen vergeten klant. De AI haalt ze actief terug.",en:"No gap in the book, no forgotten client. The AI actively brings them back."},
+    items:[
+      {i:"⏰",t:{de:"Wiederkommen-Erinnerung",nl:"Terugkom-herinnering",en:"Return reminder"},p:{de:"Erkennt, wann ein Kunde wieder dran wäre, und fragt automatisch: Zeit für den nächsten Schnitt? — mit direktem Buchungslink.",nl:"Herkent wanneer een klant weer aan de beurt is en vraagt automatisch: tijd voor de volgende knipbeurt? — met directe boekingslink.",en:"Recognises when a client is due again and asks automatically: time for your next cut? — with a direct booking link."}},
+      {i:"🎁",t:{de:"Rabatt-Aktionen",nl:"Kortingsacties",en:"Discount actions"},p:{de:"Füllt ruhige Tage gezielt: automatische Aktionen an genau die Kunden, die gerade dran sind.",nl:"Vult rustige dagen gericht: automatische acties naar precies de klanten die aan de beurt zijn.",en:"Fills quiet days on purpose: automatic offers to exactly the clients who are due."}},
+      {i:"💌",t:{de:"KI-Einladungen",nl:"AI-uitnodigingen",en:"AI invitations"},p:{de:"Reaktiviert inaktive Kunden mit persönlichen Einladungen — bevor sie zur Konkurrenz gehen.",nl:"Reactiveert inactieve klanten met persoonlijke uitnodigingen — voordat ze naar de concurrent gaan.",en:"Reactivates dormant clients with personal invitations — before they go to a competitor."}}]},
+  praktijk:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI hält die Praxis ausgelastet — vollautomatisch",nl:"Uw AI houdt de praktijk vol — volautomatisch",en:"Your AI keeps the practice full — fully automatic"},
+    sub:{de:"Weniger Ausfälle, volle Termine, entlastetes Team. Die KI arbeitet im Hintergrund.",nl:"Minder uitval, volle agenda, ontlast team. De AI werkt op de achtergrond.",en:"Fewer no-shows, full schedule, relieved team. The AI works in the background."},
+    items:[
+      {i:"🔔",t:{de:"Recall-System",nl:"Recall-systeem",en:"Recall system"},p:{de:"Erinnert Patienten automatisch an fällige Kontrollen — der Stuhl bleibt gefüllt, ganz ohne Nachtelefonieren.",nl:"Herinnert patiënten automatisch aan controles — de stoel blijft gevuld, zonder nabellen.",en:"Automatically reminds patients of due check-ups — the chair stays filled, no chasing calls."}},
+      {i:"📅",t:{de:"Lücken-Füller",nl:"Gaten-vuller",en:"Gap filler"},p:{de:"Vergibt frei werdende Termine sofort an Wartende — keine Leerlaufzeit mehr.",nl:"Geeft vrijgekomen afspraken meteen aan wachtenden — geen leegloop meer.",en:"Instantly offers freed slots to those waiting — no idle time."}},
+      {i:"💬",t:{de:"Nachsorge-KI",nl:"Nazorg-AI",en:"Aftercare AI"},p:{de:"Automatische Nachfrage nach der Behandlung — mehr Bindung, bessere Bewertungen.",nl:"Automatische opvolging na de behandeling — meer binding, betere reviews.",en:"Automatic follow-up after treatment — more loyalty, better reviews."}}]},
+  cafe:{tag:{de:"Intelligente Automatik",nl:"Slimme automatisering",en:"Smart automation"},
+    h2:{de:"Ihre KI hält das Café lebendig — vollautomatisch",nl:"Uw AI houdt het café levendig — volautomatisch",en:"Your AI keeps the café buzzing — fully automatic"},
+    sub:{de:"Volle Tische auch in Randzeiten. Die KI bringt Gäste, wenn es ruhig ist.",nl:"Volle tafels ook in daluren. De AI brengt gasten als het rustig is.",en:"Full tables even in off-hours. The AI brings guests when it's quiet."},
+    items:[
+      {i:"☕",t:{de:"Ruhige-Zeiten-Aktionen",nl:"Daluren-acties",en:"Off-peak actions"},p:{de:"Erkennt ruhige Stunden und schickt gezielte Aktionen an Stammgäste in der Nähe.",nl:"Herkent rustige uren en stuurt gerichte acties naar vaste gasten in de buurt.",en:"Detects quiet hours and sends targeted offers to nearby regulars."}},
+      {i:"💌",t:{de:"KI-Einladungen",nl:"AI-uitnodigingen",en:"AI invitations"},p:{de:"Persönliche Einladungen zu Events, Specials oder neuen Karten — automatisch an die richtigen Gäste.",nl:"Persoonlijke uitnodigingen voor events, specials of nieuwe kaarten — automatisch aan de juiste gasten.",en:"Personal invitations to events, specials or new menus — automatically to the right guests."}},
+      {i:"⭐",t:{de:"Feedback-KI",nl:"Feedback-AI",en:"Feedback AI"},p:{de:"Fragt zufriedene Gäste automatisch nach einer Bewertung — mehr Sichtbarkeit, mehr Laufkundschaft.",nl:"Vraagt tevreden gasten automatisch om een review — meer zichtbaarheid, meer aanloop.",en:"Automatically asks happy guests for a review — more visibility, more walk-ins."}}]}
+};
+
 const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
   nav1:{de:"KI-Telefon",nl:"AI-telefoon",en:"AI phone"},nav2:{de:"Angebot",nl:"Aanbod",en:"Offer"},nav3:{de:"Kontakt",nl:"Contact",en:"Contact"},
   as_tag:{de:"Ihr KI-Telefonassistent",nl:"Uw AI-telefoonassistent",en:"Your AI phone assistant"},
@@ -377,6 +433,7 @@ const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
   ed_ai_done:{de:"Erledigt! ✨ Noch etwas?",nl:"Klaar! ✨ Nog iets?",en:"Done! ✨ Anything else?"},
   ed_ai_fail:{de:"Das hab ich nicht ganz erwischt — versuchen Sie z. B. »Farbe grün, Hintergrund Wellen« oder nutzen Sie die Knöpfe.",nl:"Dat begreep ik niet helemaal — probeer bijv. »kleur groen, achtergrond golven« of gebruik de knoppen.",en:"I didn't quite catch that — try e.g. »colour green, background waves« or use the buttons."},
   ed_look:{de:"🪄 Kompletter Look",nl:"🪄 Complete look",en:"🪄 Full look"},
+  ed_theme:{de:"🌗 Hell / Dunkel",nl:"🌗 Licht / Donker",en:"🌗 Light / Dark"},th_light:{de:"☀️ Heller Look",nl:"☀️ Lichte look",en:"☀️ Light look"},th_dark:{de:"🌙 Dunkler Look",nl:"🌙 Donkere look",en:"🌙 Dark look"},th_done:{de:"Look umgestellt. ✨",nl:"Look aangepast. ✨",en:"Look switched. ✨"},
   look_elegant:{de:"Elegant",nl:"Elegant",en:"Elegant"},look_tech:{de:"Modern / Tech",nl:"Modern / Tech",en:"Modern / Tech"},look_frisch:{de:"Frisch",nl:"Fris",en:"Fresh"},look_bold:{de:"Auffällig",nl:"Opvallend",en:"Bold"},
   ed_3d:{de:"✨ 3D-Stil",nl:"✨ 3D-stijl",en:"✨ 3D style"},d3_particles:{de:"Partikel-Kugel",nl:"Deeltjes-bol",en:"Particle sphere"},d3_dna:{de:"DNA-Helix",nl:"DNA-helix",en:"DNA helix"},d3_wave:{de:"Wellen",nl:"Golven",en:"Waves"},d3_torus:{de:"Schleife",nl:"Lus",en:"Loop"},d3_calm:{de:"Ruhig (ohne 3D)",nl:"Rustig (geen 3D)",en:"Calm (no 3D)"},
   ed_font:{de:"🔤 Schrift",nl:"🔤 Lettertype",en:"🔤 Typeface"},font_elegant:{de:"Elegant (Serif)",nl:"Elegant (serif)",en:"Elegant (serif)"},font_modern:{de:"Modern (Sans)",nl:"Modern (sans)",en:"Modern (sans)"},
@@ -404,6 +461,7 @@ const P=PRESETS[CFG.branche]||PRESETS.horeca;
   const h=acc.replace('#','').replace(/(.)(.)(.)/,(m,a,b,c)=>a+a+b+b+c+c);
   const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);
   document.documentElement.style.setProperty('--accent-soft',`rgba(${r},${g},${bl},.18)`);
+  if((CFG.theme||'dark')==='light') document.body.classList.add('light');
   document.documentElement.lang=L;
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
   const short=(CFG.company||'').split(/\s+/)[0]||CFG.company; const city=CFG.city||'';
@@ -422,6 +480,9 @@ const P=PRESETS[CFG.branche]||PRESETS.horeca;
   document.getElementById('as_feat').innerHTML=pick(T.feat).map(f=>`<span>✓ ${f}</span>`).join('');
   set('hl_tag',pick(T.hl_tag)); set('hl_h2',pick(P.hl_h2));
   document.getElementById('cards').innerHTML=P.cards.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p></div>`).join('');
+  const SM=SMART[CFG.branche]||SMART.horeca;
+  set('sm_tag',pick(SM.tag)); set('sm_h2',pick(SM.h2)); set('sm_sub',pick(SM.sub));
+  document.getElementById('smCards').innerHTML=SM.items.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p></div>`).join('');
   set('rv_tag',pick(T.rv_tag)); set('rv_h2',pick(T.rv_h2));
   document.getElementById('rvCards').innerHTML=T.rv.map(r=>`<div class="c reveal"><div style="color:var(--accent);font-size:17px;letter-spacing:2px;margin-bottom:10px">★★★★★</div><p style="color:var(--ink);font-size:15px;line-height:1.5">„${pick(r.q)}"</p><div style="color:var(--mut);font-size:13px;margin-top:12px">— ${r.a}</div></div>`).join('');
   document.getElementById('infoPh').style.backgroundImage=`url("${IMG(P.img[1])}")`;
@@ -479,7 +540,8 @@ const SWATCHES=['#c0432f','#0ea5a3','#8a5cff','#e2b45c','#2f7d4f','#d94f8a','#25
 function qrClear(){const q=document.getElementById('chQr');q.innerHTML='';return q;}
 function qrBtns(items){const q=qrClear();items.forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.onclick=fn;q.appendChild(b);});}
 function mainMenu(){qrBtns([[pick(T.q_edit),()=>pickQ('edit')],[pick(T.q_book),()=>pickQ('book')],[pick(T.q_call),()=>pickQ('call')],[pick(T.q_hours),()=>pickQ('hours')]]);}
-function editMenu(){qrBtns([[pick(T.ed_ai),()=>edit('ai')],[pick(T.ed_look),()=>edit('look')],[pick(T.ed_seg),()=>edit('seg')],[pick(T.ed_color),()=>edit('color')],[pick(T.ed_3d),()=>edit('3d')],[pick(T.ed_font),()=>edit('font')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+function editMenu(){qrBtns([[pick(T.ed_ai),()=>edit('ai')],[pick(T.ed_look),()=>edit('look')],[pick(T.ed_theme),()=>edit('theme')],[pick(T.ed_seg),()=>edit('seg')],[pick(T.ed_color),()=>edit('color')],[pick(T.ed_3d),()=>edit('3d')],[pick(T.ed_font),()=>edit('font')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+function setLight(on){if(window.__setLight)window.__setLight(on);else document.body.classList.toggle('light',on);}
 const SEGMENTS={gallery:'#gallery',d3:'#showcase',phone:'#assist',offer:'#highlights',info:'#info',reviews:'#reviews'};
 function segOn(key){const el=document.querySelector(SEGMENTS[key]);return !!el&&getComputedStyle(el).display!=='none';}
 function setSeg(key,on){const el=document.querySelector(SEGMENTS[key]);if(el)el.style.display=on?'':'none';}
@@ -508,6 +570,8 @@ function aiEdit(text){
   else if(/ruhig|kein\s*3d|ohne\s*3d|clean|calm|rustig|geen\s*3d/.test(s)){setShape('none');did.push('3D');}
   if(/\bmodern|sans|schlicht\b/.test(s)){setFont('modern');did.push('Schrift');}
   else if(/elegant|serif|klassisch/.test(s)){setFont('elegant');did.push('Schrift');}
+  if(/\b(hell|licht|light|bright|weiss|weiß)\b/.test(s)){setLight(true);did.push('Look');}
+  else if(/\b(dunkel|donker|dark|schwarz|nacht)\b/.test(s)){setLight(false);did.push('Look');}
   if((m=text.match(/(?:slogan|tagline|untertitel|subtitel)\s*[:=]\s*([^;\n]+)/i))){setText('sub',m[1].trim());did.push('Slogan');}
   if((m=text.match(/(?:titel|title)\s*[:=]\s*([^;\n]+)/i)) && !/dna|welle|farbe/.test(m[1].toLowerCase())){setText('sub',m[1].trim());did.push('Slogan');}
   if((m=text.match(/(?:firmenname|firma|name|betrieb|bedrijf|business)\s*[:=]\s*([^,;\n]+)/i))){setBusinessName(m[1].trim().replace(/[.。]+$/,''));did.push('Name');}
@@ -533,6 +597,7 @@ function edit(k){
   if(k==='look'){bub(pick(T.ed_intro),'a');qrBtns([[pick(T.look_elegant),()=>{applyLook('elegant');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_tech),()=>{applyLook('tech');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_frisch),()=>{applyLook('frisch');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_bold),()=>{applyLook('bold');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
   if(k==='3d'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.d3_particles),()=>{setShape('sphere');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_dna),()=>{setShape('dna');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_wave),()=>{setShape('wave');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_torus),()=>{setShape('torus');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_calm),()=>{setShape('none');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
   if(k==='font'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.font_elegant),()=>{setFont('elegant');editMenu();}],[pick(T.font_modern),()=>{setFont('modern');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
+  if(k==='theme'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.th_light),()=>{setLight(true);bub(pick(T.th_done),'a');editMenu();}],[pick(T.th_dark),()=>{setLight(false);bub(pick(T.th_done),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
   if(k==='color'){bub(pick(T.ed_pickcolor),'a');const q=qrClear();
     SWATCHES.forEach(hex=>{const b=document.createElement('button');b.style.cssText='width:28px;height:28px;border-radius:50%;padding:0;border:2px solid rgba(255,255,255,.3);cursor:pointer;background:'+hex;b.onclick=()=>{applyAccent(hex);bub(pick(T.ed_more),'a');editMenu();};q.appendChild(b);});
     const back=document.createElement('button');back.textContent=pick(T.ed_back);back.onclick=editMenu;q.appendChild(back);return;}
@@ -560,13 +625,18 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeBk();toggleChat(true);}
 <script type="module">
 import * as THREE from 'three';
 const canvas=document.getElementById('gl');
-const ACC=(JSON.parse(document.getElementById('demo-cfg').textContent).accent)||'#c0432f';
+const __CFG=JSON.parse(document.getElementById('demo-cfg').textContent);
+const ACC=__CFG.accent||'#c0432f';
+let curAcc=ACC, themeLight=(__CFG.theme==='light');
 let renderer,scene,camera,points,halo,clock,base,N=2600,visible=true,geoRef=null;
 const rc=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
 let active=false;
 // Scroll-gesteuerte Morph-Choreografie: Header=Linie (stoert das Bild nicht) -> Kugel -> Welle -> Torus
 let scrollP=0,scrollMorph=true,KF=[];const SEQ=['line','sphere','wave','torus'];
-window.__recolor=function(hex){ if(!geoRef)return; const cA=new THREE.Color(hex),cB=cA.clone().lerp(new THREE.Color('#ffffff'),.65); const col=geoRef.attributes.color.array; for(let i=0;i<N;i++){const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;} geoRef.attributes.color.needsUpdate=true; };
+function recolorNow(){ if(!geoRef)return; const cA=new THREE.Color(curAcc); const cB=themeLight? cA.clone().lerp(new THREE.Color('#15151f'),.35) : cA.clone().lerp(new THREE.Color('#ffffff'),.65); const col=geoRef.attributes.color.array; for(let i=0;i<N;i++){const c=cA.clone().lerp(cB,Math.abs(Math.sin(i/N*Math.PI)));col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;} geoRef.attributes.color.needsUpdate=true; }
+function applyBlend(){ if(canvas) canvas.style.mixBlendMode = themeLight?'normal':'screen'; if(points){points.material.blending=themeLight?THREE.NormalBlending:THREE.AdditiveBlending; points.material.opacity=themeLight?0.92:0.95; points.material.needsUpdate=true;} if(halo){halo.material.opacity=themeLight?0:0.22; halo.material.needsUpdate=true;} }
+window.__recolor=function(hex){ curAcc=hex; recolorNow(); };
+window.__setLight=function(on){ themeLight=!!on; document.body.classList.toggle('light',themeLight); applyBlend(); recolorNow(); };
 function shapePos(name,i,n){
   if(name==='line'){return [(i/n-0.5)*16, Math.sin(i*0.35)*0.28, Math.cos(i*0.2)*0.28];}
   if(name==='sphere'){return fib(i,n,6);}
@@ -598,6 +668,7 @@ function init(){
   addEventListener('pointermove',e=>{ndc.x=(e.clientX/innerWidth)*2-1;ndc.y=-(e.clientY/innerHeight)*2+1;active=true;});
   const upP=()=>{const m=document.documentElement.scrollHeight-innerHeight;scrollP=m>0?Math.min(1,Math.max(0,scrollY/m)):0;};upP();addEventListener('scroll',upP,{passive:true});
   try{new IntersectionObserver(es=>{visible=es[0].isIntersecting;},{threshold:0}).observe(canvas);}catch(e){}
+  if(themeLight){ document.body.classList.add('light'); applyBlend(); recolorNow(); }
   animate();
 }
 function onR(){const [w,h]=sz();camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);}
