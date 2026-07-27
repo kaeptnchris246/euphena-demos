@@ -172,7 +172,7 @@
 </section>
 
 <!-- GALLERY -->
-<section class="pad"><div class="container">
+<section class="pad" id="gallery"><div class="container">
   <div class="gal reveal" id="gal"></div>
 </div></section>
 
@@ -229,6 +229,12 @@
       <button class="btn p" style="margin-top:16px;width:100%;justify-content:center" onclick="book(event)" id="info_cta">Jetzt anfragen</button>
     </div>
   </div>
+</div></section>
+
+<!-- REVIEWS (optional, standardmäßig aus) -->
+<section class="pad" id="reviews" style="display:none"><div class="container">
+  <div class="shead reveal"><div class="t" id="rv_tag">Bewertungen</div><h2 id="rv_h2">Das sagen Ihre Gäste</h2></div>
+  <div class="cards" id="rvCards"></div>
 </div></section>
 
 <footer><div class="container" id="footcopy">© 2026 · Demo</div></footer>
@@ -370,6 +376,14 @@ const T={more:{de:"Mehr entdecken",nl:"Meer ontdekken",en:"Discover more"},
   ed_3d:{de:"✨ 3D-Stil",nl:"✨ 3D-stijl",en:"✨ 3D style"},d3_particles:{de:"Partikel-Kugel",nl:"Deeltjes-bol",en:"Particle sphere"},d3_dna:{de:"DNA-Helix",nl:"DNA-helix",en:"DNA helix"},d3_wave:{de:"Wellen",nl:"Golven",en:"Waves"},d3_torus:{de:"Schleife",nl:"Lus",en:"Loop"},d3_calm:{de:"Ruhig (ohne 3D)",nl:"Rustig (geen 3D)",en:"Calm (no 3D)"},
   ed_font:{de:"🔤 Schrift",nl:"🔤 Lettertype",en:"🔤 Typeface"},font_elegant:{de:"Elegant (Serif)",nl:"Elegant (serif)",en:"Elegant (serif)"},font_modern:{de:"Modern (Sans)",nl:"Modern (sans)",en:"Modern (sans)"},
   ed_looked:{de:"Fertig! Gefällt Ihnen dieser Look? Sie können weiter feintunen.",nl:"Klaar! Bevalt deze look? U kunt verder finetunen.",en:"Done! Like this look? Keep fine-tuning if you want."},
+  rv_tag:{de:"Bewertungen",nl:"Reviews",en:"Reviews"},rv_h2:{de:"Das sagen Ihre Gäste",nl:"Wat uw gasten zeggen",en:"What your guests say"},
+  rv:[{q:{de:"Absolut top — schnell, freundlich, immer wieder gern.",nl:"Absoluut top — snel, vriendelijk, altijd weer.",en:"Absolutely top — fast, friendly, always a pleasure."},a:"Sandra K."},
+      {q:{de:"Online gebucht in 30 Sekunden. So einfach!",nl:"Online geboekt in 30 seconden. Zo simpel!",en:"Booked online in 30 seconds. So easy!"},a:"Michael R."},
+      {q:{de:"Genau wie beschrieben. Klare Empfehlung.",nl:"Precies zoals beschreven. Een aanrader.",en:"Exactly as described. Highly recommended."},a:"Julia B."}],
+  ed_seg:{de:"🧩 Bereiche",nl:"🧩 Secties",en:"🧩 Sections"},
+  seg_hint:{de:"Tippen zum Ein-/Ausblenden:",nl:"Tik om te tonen/verbergen:",en:"Tap to show/hide:"},
+  seg_gallery:{de:"Galerie",nl:"Galerij",en:"Gallery"},seg_d3:{de:"3D-Bereich",nl:"3D-sectie",en:"3D section"},seg_phone:{de:"KI-Telefon",nl:"AI-telefoon",en:"AI phone"},seg_offer:{de:"Angebot",nl:"Aanbod",en:"Offer"},seg_info:{de:"Öffnungszeiten",nl:"Openingstijden",en:"Hours"},seg_reviews:{de:"Bewertungen",nl:"Reviews",en:"Reviews"},
+  seg_done:{de:"Bereich aktualisiert. ✨",nl:"Sectie bijgewerkt. ✨",en:"Section updated. ✨"},
   a_hours:{de:"Sehen Sie unten im Bereich Öffnungszeiten. 🕒",nl:"Zie hieronder bij Openingstijden. 🕒",en:"See the opening hours section below. 🕒"},
   bk_h:{de:"Fast geschafft!",nl:"Bijna klaar!",en:"Almost there!"},
   bk_p:{de:"In der echten Version wählen Sie jetzt Datum & Uhrzeit — die Buchung läuft automatisch, rund um die Uhr.",nl:"In de echte versie kiest u nu datum & tijd — automatisch, 24/7.",en:"In the live version you'd pick date & time — automatic, 24/7."},
@@ -403,6 +417,8 @@ const P=PRESETS[CFG.branche]||PRESETS.horeca;
   document.getElementById('as_feat').innerHTML=pick(T.feat).map(f=>`<span>✓ ${f}</span>`).join('');
   set('hl_tag',pick(T.hl_tag)); set('hl_h2',pick(P.hl_h2));
   document.getElementById('cards').innerHTML=P.cards.map(c=>`<div class="c reveal"><div class="i">${c.i}</div><h3>${pick(c.t)}</h3><p>${pick(c.p)}</p></div>`).join('');
+  set('rv_tag',pick(T.rv_tag)); set('rv_h2',pick(T.rv_h2));
+  document.getElementById('rvCards').innerHTML=T.rv.map(r=>`<div class="c reveal"><div style="color:var(--accent);font-size:17px;letter-spacing:2px;margin-bottom:10px">★★★★★</div><p style="color:var(--ink);font-size:15px;line-height:1.5">„${pick(r.q)}"</p><div style="color:var(--mut);font-size:13px;margin-top:12px">— ${r.a}</div></div>`).join('');
   document.getElementById('infoPh').style.backgroundImage=`url("${IMG(P.img[1])}")`;
   set('info_h1',pick(T.info_h1));
   document.getElementById('hours').innerHTML=P.hours.map(x=>`<div class="row"><span>${x[0]}</span><span>${typeof x[1]==='string'?x[1]:pick(x[1])}</span></div>`).join('');
@@ -458,7 +474,12 @@ const SWATCHES=['#c0432f','#0ea5a3','#8a5cff','#e2b45c','#2f7d4f','#d94f8a','#25
 function qrClear(){const q=document.getElementById('chQr');q.innerHTML='';return q;}
 function qrBtns(items){const q=qrClear();items.forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.onclick=fn;q.appendChild(b);});}
 function mainMenu(){qrBtns([[pick(T.q_edit),()=>pickQ('edit')],[pick(T.q_book),()=>pickQ('book')],[pick(T.q_call),()=>pickQ('call')],[pick(T.q_hours),()=>pickQ('hours')]]);}
-function editMenu(){qrBtns([[pick(T.ed_ai),()=>edit('ai')],[pick(T.ed_look),()=>edit('look')],[pick(T.ed_color),()=>edit('color')],[pick(T.ed_3d),()=>edit('3d')],[pick(T.ed_font),()=>edit('font')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+function editMenu(){qrBtns([[pick(T.ed_ai),()=>edit('ai')],[pick(T.ed_look),()=>edit('look')],[pick(T.ed_seg),()=>edit('seg')],[pick(T.ed_color),()=>edit('color')],[pick(T.ed_3d),()=>edit('3d')],[pick(T.ed_font),()=>edit('font')],[pick(T.ed_slogan),()=>edit('slogan')],[pick(T.ed_name),()=>edit('name')],[pick(T.ed_wish),()=>edit('wish')],[pick(T.ed_done),()=>edit('done')],[pick(T.ed_back),()=>mainMenu()]]);}
+const SEGMENTS={gallery:'#gallery',d3:'#showcase',phone:'#assist',offer:'#highlights',info:'#info',reviews:'#reviews'};
+function segOn(key){const el=document.querySelector(SEGMENTS[key]);return !!el&&getComputedStyle(el).display!=='none';}
+function setSeg(key,on){const el=document.querySelector(SEGMENTS[key]);if(el)el.style.display=on?'':'none';}
+function segMenu(){const keys=['gallery','d3','phone','offer','info','reviews'];
+  qrBtns(keys.map(key=>[(segOn(key)?'✓ ':'○ ')+pick(T['seg_'+key]),()=>{setSeg(key,!segOn(key));segMenu();}]).concat([[pick(T.ed_back),editMenu]]));}
 function chInput(onSend){const q=qrClear();const wrap=document.createElement('div');wrap.style.cssText='display:flex;gap:7px;width:100%';
   const inp=document.createElement('input');inp.style.cssText='flex:1;min-width:0;background:#080a12;border:1px solid var(--line);border-radius:20px;padding:9px 12px;color:var(--ink);font-family:inherit;font-size:13px';
   const snd=document.createElement('button');snd.textContent=pick(T.ed_send);
@@ -485,7 +506,14 @@ function aiEdit(text){
   if((m=text.match(/(?:slogan|tagline|untertitel|subtitel)\s*[:=]\s*([^;\n]+)/i))){setText('sub',m[1].trim());did.push('Slogan');}
   if((m=text.match(/(?:titel|title)\s*[:=]\s*([^;\n]+)/i)) && !/dna|welle|farbe/.test(m[1].toLowerCase())){setText('sub',m[1].trim());did.push('Slogan');}
   if((m=text.match(/(?:firmenname|firma|name|betrieb|bedrijf|business)\s*[:=]\s*([^,;\n]+)/i))){setBusinessName(m[1].trim().replace(/[.。]+$/,''));did.push('Name');}
-  if(did.length){ bub(pick(T.ed_ai_done)+' ('+did.join(', ')+')','a'); }
+  const SEGW={gallery:/galerie|galerij|gallery|fotos?/,d3:/3d|partikel|animation/,phone:/telefon|telefoon|phone|anruf/,offer:/angebot|aanbod|offer|leistung/,info:/öffnung|oeffnung|opening|hours|zeiten/,reviews:/bewertung|reviews?|rezension|sterne/};
+  s.split(/[,;.]| und | en | and | plus /).forEach(cl=>{
+    const h=/ausblenden|verstecken|verbergen|entfernen|\bweg\b|hide|remove|verwijder|verberg/.test(cl);
+    const sh=/hinzu|einblenden|zeig|anzeig|\badd\b|show|toon|tonen/.test(cl);
+    if(!h&&!sh)return;
+    for(const key in SEGW){ if(SEGW[key].test(cl)){ setSeg(key, sh&&!h); did.push('Bereich'); } }
+  });
+  if(did.length){ bub(pick(T.ed_ai_done)+' ('+[...new Set(did)].join(', ')+')','a'); }
   else { bub(pick(T.ed_ai_fail),'a'); sendWish(text); }
   setTimeout(editMenu,300);
 }
@@ -496,6 +524,7 @@ function sendWish(v){const payload={action:'intake',venture:'blackunicorn',compa
   fetch(INTAKE,{method:'POST',headers:{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});}
 function edit(k){
   if(k==='ai'){bub(pick(T.ed_ai_ask),'a');chInput(v=>{bub(v,'u');bub(pick(T.ed_ai_working),'a');setTimeout(()=>aiEdit(v),350);});return;}
+  if(k==='seg'){bub(pick(T.seg_hint),'a');segMenu();return;}
   if(k==='look'){bub(pick(T.ed_intro),'a');qrBtns([[pick(T.look_elegant),()=>{applyLook('elegant');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_tech),()=>{applyLook('tech');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_frisch),()=>{applyLook('frisch');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.look_bold),()=>{applyLook('bold');bub(pick(T.ed_looked),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
   if(k==='3d'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.d3_particles),()=>{setShape('sphere');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_dna),()=>{setShape('dna');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_wave),()=>{setShape('wave');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_torus),()=>{setShape('torus');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.d3_calm),()=>{setShape('none');bub(pick(T.ed_more),'a');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
   if(k==='font'){bub(pick(T.ed_more),'a');qrBtns([[pick(T.font_elegant),()=>{setFont('elegant');editMenu();}],[pick(T.font_modern),()=>{setFont('modern');editMenu();}],[pick(T.ed_back),editMenu]]);return;}
